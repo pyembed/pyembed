@@ -1,7 +1,7 @@
 import pypissh 
 pypissh.monkeypatch()
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='rembed',
@@ -13,5 +13,8 @@ setup(
     long_description=open('README.txt').read(),
 
     provides=['rembed'],
-    py_modules=['rembed']
+    py_modules=['rembed'],
+
+    install_requires=open('requirements/install.txt').readlines(),
+    test_requires=open('requirements/test.txt').readlines(),
 )
