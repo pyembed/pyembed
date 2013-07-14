@@ -1,3 +1,7 @@
+PyHamcrest==1.7.1
 beautifulsoup4==4.2.1
+distribute==0.7.3
+py==1.4.15
 pypissh==1.4
+pytest==2.3.5
 requests==1.2.3
