@@ -2,9 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 
 class REmbedDiscoveryError(Exception):
-    '''Thrown if there is an error discovering an OEmbed URL'''
+    '''Thrown if there is an error discovering an OEmbed URL.'''
 
 def get_oembed_url(url, format='json'):
+    '''Retrieves the OEmbed URL for a given resource.
+
+    :param url: resource URL.
+    :param format: format to use for OEmbed.  One of 'json', 'xml'.
+    :returns: OEmbed URL for the resource.
+    :raises REmbedDiscoveryError: if there is an error getting the OEmbed URL.
+    '''
     type = __get_type(format)
 
     response = requests.get(url)
