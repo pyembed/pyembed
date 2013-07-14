@@ -1,4 +1,4 @@
-import discovery
+from rembed import discovery
 
 from hamcrest import *
 from mock import *
