@@ -8,8 +8,10 @@ setup(
     version='0.1.0',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
-    packages=['rembed',],
     license='MIT',
     description='Python OEmbed consumer library with automatic discovery of producers',
-    long_description=open('README.txt').read()
+    long_description=open('README.txt').read(),
+
+    provides=['rembed'],
+    py_modules=['rembed']
 )
