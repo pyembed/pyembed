@@ -1,27 +1,26 @@
 import requests
 from bs4 import BeautifulSoup
 
-class REmbedError(Exception):
-    pass
+class REmbedDiscoveryError(Exception):
+    '''Thrown if there is an error discovering an OEmbed URL'''
 
-class OEmbedUrlDiscoverer:
-    def get_oembed_url(self, url, format='json'):
-        type = self.get_type(format)
+def get_oembed_url(url, format='json'):
+    type = get_type(format)
 
-        response = requests.get(url)
+    response = requests.get(url)
 
-        if not response.ok:
-            raise REmbedError('Failed to get %s (status code %s)' % (url, response.status_codes))
+    if not response.ok:
+        raise REmbedDiscoveryError('Failed to get %s (status code %s)' % (url, response.status_codes))
 
-        soup = BeautifulSoup(requests.get(url).text)
-        link = soup.find('link', type = type, href = True)
+    soup = BeautifulSoup(requests.get(url).text)
+    link = soup.find('link', type = type, href = True)
 
-        return link['href'] if link else None
+    return link['href'] if link else None
 
-    def get_type(self, format):        
-        if format == 'json':
-            return 'application/json+oembed'
-        elif format == 'xml':
-            return 'text/xml+oembed'
+def get_type(format):        
+    if format == 'json':
+        return 'application/json+oembed'
+    elif format == 'xml':
+        return 'text/xml+oembed'
 
-        raise REmbedError('Invalid format %s specified (must be json or xml)' % format)
+    raise REmbedDiscoveryError('Invalid format %s specified (must be json or xml)' % format)

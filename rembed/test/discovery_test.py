@@ -1,4 +1,4 @@
-from discovery import *
+import discovery
 
 from hamcrest import *
 from mock import *
@@ -24,11 +24,11 @@ def test_should_return_none_for_invalid_html():
     assert_that(get_oembed_url(fixture = 'invalid.html'), none())
 
 def test_should_throw_error_when_invalid_format_specified():
-    with pytest.raises(REmbedError):
+    with pytest.raises(discovery.REmbedDiscoveryError):
         get_oembed_url(format = 'txt')
 
 def test_should_throw_error_on_error_response():
-    with pytest.raises(REmbedError):
+    with pytest.raises(discovery.REmbedDiscoveryError):
         get_oembed_url(ok = False)
 
 def get_oembed_url(fixture = 'valid_oembed.html', format = None, ok = True):
@@ -38,9 +38,7 @@ def get_oembed_url(fixture = 'valid_oembed.html', format = None, ok = True):
         response.text = open('rembed/test/fixtures/discovery/' + fixture).read()
         mock_get.return_value = response
 
-        consumer = OEmbedUrlDiscoverer()
-
         if format:
-            return consumer.get_oembed_url('http://example.com', format)
+            return discovery.get_oembed_url('http://example.com', format)
         else:
-            return consumer.get_oembed_url('http://example.com')
+            return discovery.get_oembed_url('http://example.com')
