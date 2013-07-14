@@ -5,7 +5,7 @@ class REmbedDiscoveryError(Exception):
     '''Thrown if there is an error discovering an OEmbed URL'''
 
 def get_oembed_url(url, format='json'):
-    type = get_type(format)
+    type = __get_type(format)
 
     response = requests.get(url)
 
@@ -17,7 +17,7 @@ def get_oembed_url(url, format='json'):
 
     return link['href'] if link else None
 
-def get_type(format):        
+def __get_type(format):        
     if format == 'json':
         return 'application/json+oembed'
     elif format == 'xml':
