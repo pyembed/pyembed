@@ -2,6 +2,19 @@ import pypissh
 pypissh.monkeypatch()
 
 from setuptools import setup
+from setuptools.command.test import test as TestCommand
+import sys
+
+class PyTest(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+    def run_tests(self):
+        #import here, cause outside the eggs aren't loaded
+        import pytest
+        errno = pytest.main(self.test_args)
+        sys.exit(errno)
 
 setup(
     name='rembed',
@@ -16,5 +29,6 @@ setup(
     py_modules=['rembed'],
 
     install_requires=open('requirements/install.txt').readlines(),
-    test_requires=open('requirements/test.txt').readlines(),
+    tests_require=open('requirements/test.txt').readlines(),
+    cmdclass = {'test': PyTest},
 )
