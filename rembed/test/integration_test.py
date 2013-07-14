@@ -1,5 +1,3 @@
-from rembed import *
-
 from hamcrest import *
 import pytest
 

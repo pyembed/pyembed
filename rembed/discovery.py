@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 class REmbedError(Exception):
     pass
 
-class REmbedConsumer:
+class OEmbedUrlDiscoverer:
     def get_oembed_url(self, url, format='json'):
         type = self.get_type(format)
 

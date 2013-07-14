@@ -26,7 +26,7 @@ setup(
     long_description=open('README.txt').read(),
 
     provides=['rembed'],
-    py_modules=['rembed'],
+    packages=['rembed'],
 
     install_requires=open('requirements/install.txt').readlines(),
     tests_require=open('requirements/test.txt').readlines(),

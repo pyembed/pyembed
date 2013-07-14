@@ -1,4 +1,4 @@
-from rembed import *
+from discovery import *
 
 from hamcrest import *
 from mock import *
@@ -35,10 +35,10 @@ def get_oembed_url(fixture = 'valid_oembed.html', format = None, ok = True):
     with patch('requests.get') as mock_get:
         response = Mock()
         response.ok = ok
-        response.text = open('test/fixtures/' + fixture).read()
+        response.text = open('rembed/test/fixtures/discovery/' + fixture).read()
         mock_get.return_value = response
 
-        consumer = REmbedConsumer()
+        consumer = OEmbedUrlDiscoverer()
 
         if format:
             return consumer.get_oembed_url('http://example.com', format)
