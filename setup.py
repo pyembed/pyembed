@@ -1,6 +1,3 @@
-import pypissh 
-pypissh.monkeypatch()
-
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 import sys
