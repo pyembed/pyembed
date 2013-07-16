@@ -1,6 +1,11 @@
-from response import OEmbedResponse
+from response import *
 
 import json
 
+RESPONSE_CLASSES = {'photo' : OEmbedPhotoResponse}
+
 def parse_oembed_json(value):
-    return OEmbedResponse(json.loads(value))
+    dict = json.loads(value)
+    
+    response_class = RESPONSE_CLASSES[dict['type']]
+    return response_class(dict)

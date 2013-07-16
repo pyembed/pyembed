@@ -37,5 +37,14 @@ def test_should_parse_thumbnail_width_from_json():
 def test_should_parse_thumbnail_height_from_json():
     assert_that(get_response().thumbnail_height, equal_to(240))
 
+def test_should_parse_url_from_photo_json():
+    assert_that(get_response('photo.json').url, equal_to('http://www.example.com/bees.jpg'))
+
+def test_should_parse_width_from_photo_json():
+    assert_that(get_response('photo.json').width, equal_to(600))
+
+def test_should_parse_height_from_photo_json():
+    assert_that(get_response('photo.json').height, equal_to(400))
+
 def get_response(fixture = 'valid_response.json'):
     return parse.parse_oembed_json(open('rembed/test/fixtures/json/' + fixture).read())
