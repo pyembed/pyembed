@@ -1,3 +1,5 @@
+from rembed import REmbedError
+
 from response import *
 
 import json
@@ -7,8 +9,14 @@ RESPONSE_CLASSES = {'photo' : OEmbedPhotoResponse,
                     'link' : OEmbedLinkResponse,
                     'rich' : OEmbedRichResponse}
 
+class REmbedParseError(REmbedError):
+    '''Thrown if there is an error parsing an OEmbed response.'''
+
 def parse_oembed_json(value):
     dict = json.loads(value)
 
-    response_class = RESPONSE_CLASSES[dict['type']]
-    return response_class(dict)
+    type = dict['type']
+    if not RESPONSE_CLASSES.has_key(type):
+        raise REmbedParseError('Unknown type: %s', type)
+
+    return RESPONSE_CLASSES[type](dict)

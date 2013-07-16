@@ -64,5 +64,9 @@ def test_should_parse_width_from_rich_json():
 def test_should_parse_height_from_rich_json():
     assert_that(get_response('rich.json').height, equal_to(400))
 
+def test_should_raise_error_for_unknown_type():
+    with pytest.raises(parse.REmbedParseError):
+        get_response('unknown.json')
+
 def get_response(fixture = 'link.json'):
     return parse.parse_oembed_json(open('rembed/test/fixtures/json/' + fixture).read())

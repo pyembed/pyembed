@@ -1,0 +1,13 @@
+{
+	"type": "unknown",
+	"version": "1.0",
+	"title": "Lots of Bees",
+	"author_name": "Ian Bees",
+	"author_url": "http://www.example.com/ianbees/",
+	"provider_name": "Example",
+	"provider_url": "http://www.example.com/",
+	"cache_age": 3600,
+	"thumbnail_url": "http://www.example.com/bees/thumb.jpg",
+	"thumbnail_width": 360,
+	"thumbnail_height": 240
+}
