@@ -25,3 +25,14 @@ class OEmbedResponse(object):
 class OEmbedPhotoResponse(OEmbedResponse):
     def fields(self):
         return super(OEmbedPhotoResponse, self).fields() + ['url', 'width', 'height']
+
+class OEmbedVideoResponse(OEmbedResponse):
+    def fields(self):
+        return super(OEmbedVideoResponse, self).fields() + ['html', 'width', 'height']
+
+class OEmbedLinkResponse(OEmbedResponse):
+    pass
+
+class OEmbedRichResponse(OEmbedResponse):
+    def fields(self):
+        return super(OEmbedRichResponse, self).fields() + ['html', 'width', 'height']

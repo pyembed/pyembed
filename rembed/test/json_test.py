@@ -5,7 +5,7 @@ from mock import *
 import pytest
 
 def test_should_parse_type_from_json():
-    assert_that(get_response().type, equal_to('photo'))
+    assert_that(get_response().type, equal_to('link'))
 
 def test_should_parse_version_from_json():
     assert_that(get_response().version, equal_to('1.0'))
@@ -46,5 +46,23 @@ def test_should_parse_width_from_photo_json():
 def test_should_parse_height_from_photo_json():
     assert_that(get_response('photo.json').height, equal_to(400))
 
-def get_response(fixture = 'valid_response.json'):
+def test_should_parse_html_from_video_json():
+    assert_that(get_response('video.json').html, contains_string('http://www.example.com/bees.mpg'))
+
+def test_should_parse_width_from_video_json():
+    assert_that(get_response('video.json').width, equal_to(600))
+
+def test_should_parse_height_from_video_json():
+    assert_that(get_response('video.json').height, equal_to(400))
+
+def test_should_parse_html_from_rich_json():
+    assert_that(get_response('rich.json').html, contains_string('Bees!'))
+
+def test_should_parse_width_from_rich_json():
+    assert_that(get_response('rich.json').width, equal_to(600))
+
+def test_should_parse_height_from_rich_json():
+    assert_that(get_response('rich.json').height, equal_to(400))
+
+def get_response(fixture = 'link.json'):
     return parse.parse_oembed_json(open('rembed/test/fixtures/json/' + fixture).read())
