@@ -1,2 +1,0 @@
-distribute==0.7.3
-pypissh==1.4
