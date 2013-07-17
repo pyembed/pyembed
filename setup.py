@@ -27,5 +27,5 @@ setup(
 
     install_requires=open('requirements/install.txt').readlines(),
     tests_require=open('requirements/test.txt').readlines(),
-    cmdclass = {'test': PyTest},
+    cmdclass = {'test': PyTest}
 )
