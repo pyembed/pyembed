@@ -20,7 +20,7 @@ setup(
     author_email='matt.thomson@cantab.net',
     license='MIT',
     description='Python OEmbed consumer library with automatic discovery of producers',
-    long_description=open('README.txt').read(),
+    long_description=open('README.rst').read(),
 
     provides=['rembed'],
     packages=['rembed'],
