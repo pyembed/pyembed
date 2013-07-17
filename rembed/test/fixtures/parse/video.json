@@ -10,7 +10,7 @@
 	"thumbnail_url": "http://www.example.com/bees/thumb.jpg",
 	"thumbnail_width": 360,
 	"thumbnail_height": 240,
-	"html": "<iframe src='http://www.example.com/bees.mpg'></iframe>",
+	"html": "<iframe src=\"http://www.example.com/bees.mpg\"></iframe>",
 	"width": 600,
 	"height": 400
 }

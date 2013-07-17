@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<oembed>
+    <type>rich</type>
+    <version>1.0</version>
+    <title>Lots of Bees</title>
+    <author_name>Ian Bees</author_name>
+    <author_url>http://www.example.com/ianbees/</author_url>
+    <provider_name>Example</provider_name>
+    <provider_url>http://www.example.com/</provider_url>
+    <cache_age>3600</cache_age>
+    <thumbnail_url>http://www.example.com/bees/thumb.jpg</thumbnail_url>
+    <thumbnail_width>360</thumbnail_width>
+    <thumbnail_height>240</thumbnail_height>
+    <html>&lt;h1&gt;Bees!&lt;/h1&gt;</html>
+    <width>600</width>
+    <height>400</height>
+</oembed>
