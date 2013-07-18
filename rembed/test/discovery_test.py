@@ -14,8 +14,8 @@ def test_should_find_oembed_url_using_json_when_specified():
 def test_should_find_oembed_url_using_xml_when_specified():
     assert_that(get_oembed_url(format = 'xml'), equal_to('http://example.com/oembed?format=xml'))
 
-def test_should_return_none_if_link_not_present():
-    assert_that(get_oembed_url(fixture = 'no_json_oembed.html'), none())
+def test_should_return_xml_if_json_not_present():
+    assert_that(get_oembed_url(fixture = 'no_json_oembed.html'), equal_to('http://example.com/oembed?format=xml'))
 
 def test_should_return_none_if_href_not_present():
     assert_that(get_oembed_url(fixture = 'json_oembed_no_href.html'), none())
