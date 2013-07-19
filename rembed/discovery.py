@@ -3,6 +3,13 @@ from rembed import REmbedError
 import requests
 from bs4 import BeautifulSoup
 
+MEDIA_TYPES = {
+    'json' : 'application/json+oembed',
+    'xml' : 'text/xml+oembed'
+}
+
+FORMATS = {v: k for k, v in MEDIA_TYPES.items()}
+
 class REmbedDiscoveryError(REmbedError):
     '''Thrown if there is an error discovering an OEmbed URL.'''
 
@@ -26,14 +33,15 @@ def get_oembed_url(url, format=None):
     soup = BeautifulSoup(requests.get(url).text)
     link = soup.find('link', type = type, href = True)
 
-    return link['href'] if link else None
+    if not link:
+        raise REmbedDiscoveryError('Could not find OEmbed URL for %s' % url)
 
-def __get_type(format):        
-    if format == 'json':
-        return 'application/json+oembed'
-    elif format == 'xml':
-        return 'text/xml+oembed'
-    elif not format:
-        return ['application/json+oembed', 'text/xml+oembed']
+    return (FORMATS[link['type']], link['href'])
+
+def __get_type(format): 
+    if not format:
+        return MEDIA_TYPES.values()
+    elif MEDIA_TYPES.has_key(format):
+        return MEDIA_TYPES[format]
 
     raise REmbedDiscoveryError('Invalid format %s specified (must be json or xml)' % format)
