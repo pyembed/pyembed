@@ -13,6 +13,9 @@ RESPONSE_CLASSES = {'photo' : OEmbedPhotoResponse,
 class REmbedParseError(REmbedError):
     '''Thrown if there is an error parsing an OEmbed response.'''
 
+def parse_oembed(format, response):
+    return PARSE_FUNCTIONS[format](response)
+
 def parse_oembed_json(response):
     value_function = __value_function_json(json.loads(response))
     return __construct_response(value_function)
@@ -50,3 +53,6 @@ def __construct_response(value_function):
         raise REmbedParseError('Unknown type: %s', type)
 
     return RESPONSE_CLASSES[type](value_function)
+
+PARSE_FUNCTIONS = {'json' : parse_oembed_json,
+                   'xml' : parse_oembed_xml}
