@@ -30,7 +30,7 @@ def get_oembed_url(url, format=None):
     if not response.ok:
         raise REmbedDiscoveryError('Failed to get %s (status code %s)' % (url, response.status_codes))
 
-    soup = BeautifulSoup(requests.get(url).text)
+    soup = BeautifulSoup(response.text)
     link = soup.find('link', type = type, href = True)
 
     if not link:
