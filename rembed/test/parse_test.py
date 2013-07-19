@@ -1,7 +1,6 @@
 from rembed import parse
 
 from hamcrest import *
-from mock import *
 import pytest
 
 pytestmark = pytest.mark.parametrize(('format', 'function'), [

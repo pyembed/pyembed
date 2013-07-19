@@ -41,6 +41,9 @@ def get_oembed_url(fixture = 'valid_oembed.html', format = None, ok = True):
         mock_get.return_value = response
 
         if format:
-            return discovery.get_oembed_url('http://example.com', format)
+            result = discovery.get_oembed_url('http://example.com', format)
         else:
-            return discovery.get_oembed_url('http://example.com')
+            result = discovery.get_oembed_url('http://example.com')
+
+        mock_get.assert_called_with('http://example.com')
+        return result
