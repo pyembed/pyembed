@@ -13,6 +13,7 @@ def test_should_discover_and_get_oembed_url():
         mock_get_url.return_value = ('json', 'http://example.com/oembed?format=json')
 
         response = Mock()
+        response.ok = True
         response.text = 'hello, world'
         mock_get.return_value = response
 
@@ -24,6 +25,20 @@ def test_should_discover_and_get_oembed_url():
         mock_get_url.assert_called_with('http://example.com/')
         mock_get.assert_called_with('http://example.com/oembed?format=json')
         mock_parse.assert_called_with('json', 'hello, world')
+
+def test_should_raise_error_on_request_error():
+    with patch('rembed.discovery.get_oembed_url') as mock_get_url, \
+         patch('requests.get') as mock_get, \
+         pytest.raises(consumer.REmbedConsumerError):
+
+        mock_get_url.return_value = ('json', 'http://example.com/oembed?format=json')
+
+        response = Mock()
+        response.ok = False
+        response.text = 'hello, world'
+        mock_get.return_value = response
+
+        consumer.get_oembed_response('http://example.com/')
 
 def test_should_embed():
     with patch('rembed.consumer.get_oembed_response') as mock_get_response:
