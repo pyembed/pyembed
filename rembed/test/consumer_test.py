@@ -24,3 +24,11 @@ def test_should_discover_and_get_oembed_url():
         mock_get_url.assert_called_with('http://example.com/')
         mock_get.assert_called_with('http://example.com/oembed?format=json')
         mock_parse.assert_called_with('json', 'hello, world')
+
+def test_should_embed():
+    with patch('rembed.consumer.get_oembed_response') as mock_get_response:
+        response = Mock()
+        response.embed = lambda : '<h1>hello</h1>'
+        mock_get_response.return_value = response
+
+        assert_that(consumer.embed('http://example.com/'), equal_to('<h1>hello</h1>'))
