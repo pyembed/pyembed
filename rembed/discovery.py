@@ -11,10 +11,10 @@ MEDIA_TYPES = {
 FORMATS = {v: k for k, v in MEDIA_TYPES.items()}
 
 class REmbedDiscoveryError(REmbedError):
-    '''Thrown if there is an error discovering an OEmbed URL.'''
+    """Thrown if there is an error discovering an OEmbed URL."""
 
 def get_oembed_url(url, format=None):
-    '''Retrieves the OEmbed URL for a given resource.
+    """Retrieves the OEmbed URL for a given resource.
 
     :param url: resource URL.
     :param format: if supplied, restricts the format to use for OEmbed.  If 
@@ -22,7 +22,7 @@ def get_oembed_url(url, format=None):
                    'json', 'xml'.
     :returns: OEmbed URL for the resource.
     :raises REmbedDiscoveryError: if there is an error getting the OEmbed URL.
-    '''
+    """
     type = __get_type(format)
 
     response = requests.get(url)
