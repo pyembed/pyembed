@@ -15,4 +15,4 @@ def get_oembed_response(url):
     return parse.parse_oembed(discovered_format, response.text)
 
 def embed(url):
-    return get_oembed_response(url).embed()
+    return get_oembed_response(url).embed(url)

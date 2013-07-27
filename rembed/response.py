@@ -18,7 +18,7 @@ class OEmbedResponse(object):
                 'thumbnail_width',
                 'thumbnail_height']
 
-    def embed(self):
+    def embed(self, embed_url):
         raise NotImplementedError('No embed method for type %s' % type(self).__name__)
 
     def __setattr__(self, *args):
@@ -28,22 +28,23 @@ class OEmbedPhotoResponse(OEmbedResponse):
     def fields(self):
         return super(OEmbedPhotoResponse, self).fields() + ['url', 'width', 'height']
 
-    def embed(self):
+    def embed(self, embed_url):
         return '<img src="%s" width="%s" height="%s" />' % (self.url, self.width, self.height)
 
 class OEmbedVideoResponse(OEmbedResponse):
     def fields(self):
         return super(OEmbedVideoResponse, self).fields() + ['html', 'width', 'height']
 
-    def embed(self):
+    def embed(self, embed_url):
         return self.html
 
 class OEmbedLinkResponse(OEmbedResponse):
-    pass
+    def embed(self, embed_url):
+        return '<a href="%s">%s</a>' % (embed_url, self.title)
 
 class OEmbedRichResponse(OEmbedResponse):
     def fields(self):
         return super(OEmbedRichResponse, self).fields() + ['html', 'width', 'height']
 
-    def embed(self):
+    def embed(self, embed_url):
         return self.html

@@ -43,7 +43,7 @@ def test_should_raise_error_on_request_error():
 def test_should_embed():
     with patch('rembed.consumer.get_oembed_response') as mock_get_response:
         response = Mock()
-        response.embed = lambda : '<h1>hello</h1>'
+        response.embed = lambda embed_url : '<h1>hello</h1>'
         mock_get_response.return_value = response
 
         assert_that(consumer.embed('http://example.com/'), equal_to('<h1>hello</h1>'))
