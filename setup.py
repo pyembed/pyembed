@@ -25,7 +25,15 @@ setup(
     provides=['rembed'],
     packages=['rembed'],
 
-    install_requires=open('requirements/install.txt').readlines(),
-    tests_require=open('requirements/test.txt').readlines(),
+    install_requires=[
+        'beautifulsoup4',
+        'requests'
+    ],
+    tests_require=[
+        'PyHamcrest',
+        'mock',
+        'pytest'
+    ],
+    
     cmdclass = {'test': PyTest}
 )
