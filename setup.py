@@ -15,7 +15,7 @@ class PyTest(TestCommand):
 
 setup(
     name='rembed',
-    version='0.1.0',
+    version='0.1.1',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
     license='MIT',
@@ -25,7 +25,15 @@ setup(
     provides=['rembed'],
     packages=['rembed'],
 
-    install_requires=open('requirements/install.txt').readlines(),
-    tests_require=open('requirements/test.txt').readlines(),
+    install_requires=[
+        'beautifulsoup4',
+        'requests'
+    ],
+    tests_require=[
+        'PyHamcrest',
+        'mock',
+        'pytest'
+    ],
+    
     cmdclass = {'test': PyTest}
 )
