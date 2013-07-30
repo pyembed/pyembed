@@ -22,15 +22,15 @@ def test_should_return_xml_if_json_not_present():
 
 def test_should_add_max_width_when_query_string_present():
     assert_that(get_oembed_url(max_width = 100), 
-        equal_to(('json', 'http://example.com/oembed?maxwidth=100&format=json')))
+        equal_to(('json', 'http://example.com/oembed?format=json&maxwidth=100')))
 
 def test_should_add_max_height_when_query_string_present():
     assert_that(get_oembed_url(max_height = 200), 
-        equal_to(('json', 'http://example.com/oembed?maxheight=200&format=json')))
+        equal_to(('json', 'http://example.com/oembed?format=json&maxheight=200')))
 
 def test_should_add_max_width_and_height_when_query_string_present():
     assert_that(get_oembed_url(max_width = 100, max_height = 200), 
-        equal_to(('json', 'http://example.com/oembed?maxheight=200&maxwidth=100&format=json')))
+        equal_to(('json', 'http://example.com/oembed?format=json&maxwidth=100&maxheight=200')))
 
 def test_should_add_max_width_when_no_query_string_present():
     assert_that(get_oembed_url(fixture = 'no_query_string.html', max_width = 100), 
@@ -42,7 +42,7 @@ def test_should_add_max_height_when_no_query_string_present():
 
 def test_should_add_max_width_and_height_when_no_query_string_present():
     assert_that(get_oembed_url(fixture = 'no_query_string.html', max_width = 100, max_height = 200),
-     equal_to(('json', 'http://example.com/oembed?maxheight=200&maxwidth=100')))
+     equal_to(('json', 'http://example.com/oembed?maxwidth=100&maxheight=200')))
 
 def test_should_throw_error_if_href_not_present():
     with pytest.raises(discovery.REmbedDiscoveryError):

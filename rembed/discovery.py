@@ -2,8 +2,12 @@ from rembed import REmbedError
 
 import requests
 from bs4 import BeautifulSoup
-from urlparse import parse_qs, urlsplit, urlunsplit
-from urllib import urlencode
+
+try:
+    from urlparse import parse_qsl, urlsplit, urlunsplit
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import parse_qsl, urlsplit, urlunsplit, urlencode
 
 MEDIA_TYPES = {
     'json' : 'application/json+oembed',
@@ -55,13 +59,13 @@ def __get_type(format):
 
 def __format_url(url, max_width = None, max_height = None):    
     scheme, netloc, path, query_string, fragment = urlsplit(url)
-    query_params = parse_qs(query_string)
+    query_params = parse_qsl(query_string)
 
     if max_width != None:
-        query_params['maxwidth'] = max_width
+        query_params.append(('maxwidth', max_width))
 
     if max_height:
-        query_params['maxheight'] = max_height
+        query_params.append(('maxheight', max_height))
 
     new_query_string = urlencode(query_params, doseq=True)
     
