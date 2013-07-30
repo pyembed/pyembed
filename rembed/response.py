@@ -9,7 +9,8 @@ class OEmbedResponse(object):
         and returns the value of the field with that name from an OEmbed
         response (or None, if the field is not present).
         """
-        map(lambda field: self.__set_attr_from_dict(value_function, field), self.fields())
+        for field in self.fields():
+            self.__set_attr_from_dict(value_function, field)
 
     def __set_attr_from_dict(self, value_function, field):
         self.__dict__[field] = value_function(field)

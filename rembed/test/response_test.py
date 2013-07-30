@@ -54,4 +54,4 @@ def test_should_embed_link():
         equal_to('<a href="http://www.example.com">Bees!</a>'))
 
 def create_value_function(values):
-    return lambda field : values[field] if values.has_key(field) else None
+    return lambda field : values[field] if field in values else None
