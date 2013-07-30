@@ -22,7 +22,7 @@ setup(
     description='Python OEmbed consumer library with automatic discovery of producers',
     long_description=open('README.rst').read() + '\n\n' + open('CHANGES.rst').read(),
     download_url='https://pypi.python.org/pypi/rembed/',
-    license='MIT',
+    license=open('LICENSE.txt').read(),
 
     provides=['rembed'],
     packages=['rembed'],
