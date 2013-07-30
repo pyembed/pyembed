@@ -18,9 +18,11 @@ setup(
     version='0.1.1',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
-    license='MIT',
+    url='https://github.com/matt-thomson/rembed',
     description='Python OEmbed consumer library with automatic discovery of producers',
-    long_description=open('README.rst').read(),
+    long_description=open('README.rst').read() + '\n\n' + open('CHANGES.rst').read(),
+    download_url='https://pypi.python.org/pypi/rembed/',
+    license=open('LICENSE.txt').read(),
 
     provides=['rembed'],
     packages=['rembed'],
@@ -35,5 +37,18 @@ setup(
         'pytest'
     ],
     
-    cmdclass = {'test': PyTest}
+    cmdclass = {'test': PyTest},
+
+    classifiers = (
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Natural Language :: English',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Topic :: Text Processing'
+    )
 )
