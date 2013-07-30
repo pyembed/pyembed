@@ -12,7 +12,7 @@ script:
 - py.test
 after_success:
 - if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]; then echo "This is a pull request. No deployment will be done."; exit 0; fi
-- if [[ "$TRAVIS_BRANCH" != "stable" ]]; then echo "This is not the 'stable' branch. No deployment will be done."; exit 0; fi
+- if [[ "$TRAVIS_BRANCH" != "master" ]]; then echo "This is not the 'master' branch. No deployment will be done."; exit 0; fi
 - echo "[server-login]" > ~/.pypirc
 - echo "username:" $PYPI_USERNAME >> ~/.pypirc
 - echo "password:" $PYPI_PASSWORD >> ~/.pypirc
