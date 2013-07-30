@@ -15,7 +15,7 @@ class PyTest(TestCommand):
 
 setup(
     name='rembed',
-    version='0.1.1',
+    version='0.2.0',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
     url='https://github.com/matt-thomson/rembed',
