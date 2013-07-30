@@ -8,7 +8,7 @@ MEDIA_TYPES = {
     'xml' : 'text/xml+oembed'
 }
 
-FORMATS = {v: k for k, v in MEDIA_TYPES.items()}
+FORMATS = {MEDIA_TYPES[format]: format for format in MEDIA_TYPES}
 
 class REmbedDiscoveryError(REmbedError):
     """Thrown if there is an error discovering an OEmbed URL."""
@@ -23,7 +23,7 @@ def get_oembed_url(url, format=None):
     :returns: OEmbed URL for the resource.
     :raises REmbedDiscoveryError: if there is an error getting the OEmbed URL.
     """
-    type = __get_type(format)
+    media_type = __get_type(format)
 
     response = requests.get(url)
 
@@ -31,7 +31,7 @@ def get_oembed_url(url, format=None):
         raise REmbedDiscoveryError('Failed to get %s (status code %s)' % (url, response.status_code))
 
     soup = BeautifulSoup(response.text)
-    link = soup.find('link', type = type, href = True)
+    link = soup.find('link', type = media_type, href = True)
 
     if not link:
         raise REmbedDiscoveryError('Could not find OEmbed URL for %s' % url)
@@ -40,8 +40,8 @@ def get_oembed_url(url, format=None):
 
 def __get_type(format): 
     if not format:
-        return MEDIA_TYPES.values()
-    elif MEDIA_TYPES.has_key(format):
+        return list(MEDIA_TYPES.values())
+    elif format in MEDIA_TYPES:
         return MEDIA_TYPES[format]
 
     raise REmbedDiscoveryError('Invalid format %s specified (must be json or xml)' % format)

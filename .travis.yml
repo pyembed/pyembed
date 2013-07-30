@@ -1,16 +1,17 @@
 language: python
 python:
-- '2.7'
+  - '2.7'
+  - '3.3'
 env:
   global:
-  - secure: ZXbwv065E6qac+V0PlfqEhEgQXy5pEE3TjlMtIwszEnob147+0jQTdzurZ8tiDyoNPifO+qa04h3DhzioVLPP1rUuIbmVxIbRk04TphDAujPg57n3QiG6KbjSQR/Bm1sQJrQGyH4m6iaIiQMNE9AehHUXFG7LxMAfXTi9OwZqCc=
-  - secure: MOXFrZVKValmgseeRPqIKEmevlIUjzbkHlxh4Qvs/usaibUzAe9XdQT5LZQGesYeBpXMJk4/9dytH8JpiOC4BdDzeNj1J5ftM7GILrTO93bnHfzCzcPuqwbzytB2SeJVfiLcdmu8fa6DXEk487Oc9VmRRBPQj/l6KtLzXeIK3+U=
+    - secure: ZXbwv065E6qac+V0PlfqEhEgQXy5pEE3TjlMtIwszEnob147+0jQTdzurZ8tiDyoNPifO+qa04h3DhzioVLPP1rUuIbmVxIbRk04TphDAujPg57n3QiG6KbjSQR/Bm1sQJrQGyH4m6iaIiQMNE9AehHUXFG7LxMAfXTi9OwZqCc=
+    - secure: MOXFrZVKValmgseeRPqIKEmevlIUjzbkHlxh4Qvs/usaibUzAe9XdQT5LZQGesYeBpXMJk4/9dytH8JpiOC4BdDzeNj1J5ftM7GILrTO93bnHfzCzcPuqwbzytB2SeJVfiLcdmu8fa6DXEk487Oc9VmRRBPQj/l6KtLzXeIK3+U=
 script:
-- python setup.py test
+  - python setup.py test
 after_success:
-- if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]; then echo "This is a pull request. No deployment will be done."; exit 0; fi
-- if [[ "$TRAVIS_BRANCH" != "master" ]]; then echo "This is not the 'master' branch. No deployment will be done."; exit 0; fi
-- echo "[server-login]" > ~/.pypirc
-- echo "username:" $PYPI_USERNAME >> ~/.pypirc
-- echo "password:" $PYPI_PASSWORD >> ~/.pypirc
-- python setup.py sdist upload
+  - if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]; then echo "This is a pull request. No deployment will be done."; exit 0; fi
+  - if [[ "$TRAVIS_BRANCH" != "master" ]]; then echo "This is not the 'master' branch. No deployment will be done."; exit 0; fi
+  - echo "[server-login]" > ~/.pypirc
+  - echo "username:" $PYPI_USERNAME >> ~/.pypirc
+  - echo "password:" $PYPI_PASSWORD >> ~/.pypirc
+  - python setup.py sdist upload
