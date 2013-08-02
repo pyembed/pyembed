@@ -15,7 +15,7 @@ class PyTest(TestCommand):
 
 setup(
     name='rembed',
-    version='0.2.0',
+    version='0.2.1',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
     url='https://github.com/matt-thomson/rembed',
@@ -39,7 +39,7 @@ setup(
     
     cmdclass = {'test': PyTest},
 
-    classifiers = (
+    classifiers = [
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Natural Language :: English',
@@ -50,5 +50,5 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Topic :: Text Processing'
-    )
+    ]
 )
