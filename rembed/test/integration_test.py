@@ -1,7 +1,6 @@
 from rembed import consumer
 
 from hamcrest import assert_that, contains_string
-import pytest
 
 
 def test_should_get_correct_embedding():
