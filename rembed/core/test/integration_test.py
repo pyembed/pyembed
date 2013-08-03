@@ -1,4 +1,4 @@
-from rembed import consumer
+from rembed.core import consumer
 
 from hamcrest import assert_that, contains_string
 

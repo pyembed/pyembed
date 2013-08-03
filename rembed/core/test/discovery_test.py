@@ -1,4 +1,4 @@
-from rembed import discovery
+from rembed.core import discovery
 
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
@@ -99,7 +99,7 @@ def get_oembed_url(fixture='valid_oembed.html',
         response = Mock()
         response.ok = ok
         response.text = open(
-            'rembed/test/fixtures/discovery/' + fixture).read()
+            'rembed/core/test/fixtures/discovery/' + fixture).read()
         mock_get.return_value = response
 
         result = discovery.get_oembed_url(
