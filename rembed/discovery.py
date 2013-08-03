@@ -3,10 +3,10 @@ from rembed import REmbedError
 import requests
 from bs4 import BeautifulSoup
 
-try:
+try: # pragma: no cover
     from urlparse import parse_qsl, urlsplit, urlunsplit
     from urllib import urlencode
-except ImportError:
+except ImportError: # pragma: no cover
     from urllib.parse import parse_qsl, urlsplit, urlunsplit, urlencode
 
 MEDIA_TYPES = {

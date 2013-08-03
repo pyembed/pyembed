@@ -68,6 +68,9 @@ def test_should_parse_width_from_rich(format, function):
 def test_should_parse_height_from_rich(format, function):
     assert_that(get_response(format, function, 'rich').height, equal_to(400))
 
+def test_should_get_none_for_missing_element(format, function):
+    assert_that(get_response(format, function, 'minimal').title, none())
+
 def test_should_raise_error_for_unknown_type(format, function):
     with pytest.raises(parse.REmbedParseError):
         get_response(format, function, 'unknown')
