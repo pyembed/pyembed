@@ -5,6 +5,10 @@ REmbed
     :target: http://travis-ci.org/matt-thomson/rembed
 .. image:: https://coveralls.io/repos/matt-thomson/rembed/badge.png
     :target: https://coveralls.io/r/matt-thomson/rembed
+.. image:: https://pypip.in/v/rembed/badge.png
+    :target: https://crate.io/packages/rembed/
+.. image:: https://pypip.in/d/rembed/badge.png
+    :target: https://crate.io/packages/rembed/
 
 `OEmbed`_ consumer library for Python with automatic discovery of
 producers.
