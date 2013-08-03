@@ -1,4 +1,4 @@
-from rembed import discovery, parse, REmbedError
+from rembed.core import discovery, parse, REmbedError
 
 import requests
 

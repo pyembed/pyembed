@@ -18,19 +18,20 @@ class PyTest(TestCommand):
 
 setup(
     name='rembed',
-    version='0.2.2',
+    version='0.3.0',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
     url='https://github.com/matt-thomson/rembed',
-    description='Python OEmbed consumer library with automatic discovery of' +
+    description='Python OEmbed consumer library with automatic discovery of ' +
         'producers',
     long_description=open('README.rst').read() + '\n\n' +
         open('CHANGES.rst').read(),
     download_url='https://pypi.python.org/pypi/rembed/',
     license=open('LICENSE.txt').read(),
 
-    provides=['rembed'],
-    packages=['rembed'],
+    provides=['rembed.core'],
+    packages=['rembed.core'],
+    namespace_packages=['rembed'],
 
     install_requires=[
         'beautifulsoup4',

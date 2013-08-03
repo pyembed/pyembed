@@ -25,7 +25,7 @@ HTML, ready for you to include in your page:
 
 ::
 
-    >>> from rembed import consumer
+    >>> from rembed.core import consumer
     >>> consumer.embed('http://www.youtube.com/watch?v=9bZkp7q19f0')
     <iframe width="480" height="270" src="http://www.youtube.com/embed/9bZkp7q19f0?feature=oembed" frameborder="0" allowfullscreen></iframe>
 

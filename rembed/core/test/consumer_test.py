@@ -1,4 +1,4 @@
-from rembed import consumer
+from rembed.core import consumer
 
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
@@ -7,8 +7,8 @@ import pytest
 
 
 def test_should_discover_and_get_oembed_url():
-    with patch('rembed.discovery.get_oembed_url') as mock_get_url, \
-        patch('rembed.parse.parse_oembed') as mock_parse, \
+    with patch('rembed.core.discovery.get_oembed_url') as mock_get_url, \
+        patch('rembed.core.parse.parse_oembed') as mock_parse, \
             patch('requests.get') as mock_get:
 
         mock_get_url.return_value = (
@@ -32,8 +32,8 @@ def test_should_discover_and_get_oembed_url():
 
 
 def test_should_discover_and_get_oembed_url_with_max_width_and_height():
-    with patch('rembed.discovery.get_oembed_url') as mock_get_url, \
-        patch('rembed.parse.parse_oembed') as mock_parse, \
+    with patch('rembed.core.discovery.get_oembed_url') as mock_get_url, \
+        patch('rembed.core.parse.parse_oembed') as mock_parse, \
             patch('requests.get') as mock_get:
 
         mock_get_url.return_value = (
@@ -59,7 +59,7 @@ def test_should_discover_and_get_oembed_url_with_max_width_and_height():
 
 
 def test_should_raise_error_on_request_error():
-    with patch('rembed.discovery.get_oembed_url') as mock_get_url, \
+    with patch('rembed.core.discovery.get_oembed_url') as mock_get_url, \
         patch('requests.get') as mock_get, \
             pytest.raises(consumer.REmbedConsumerError):
 
@@ -75,7 +75,8 @@ def test_should_raise_error_on_request_error():
 
 
 def test_should_embed():
-    with patch('rembed.consumer.get_oembed_response') as mock_get_response:
+    with patch('rembed.core.consumer.get_oembed_response') \
+            as mock_get_response:
         response = Mock()
         response.embed = lambda embed_url: '<h1>hello</h1>'
         mock_get_response.return_value = response
@@ -87,7 +88,8 @@ def test_should_embed():
 
 
 def test_should_embed_with_max_width_and_height():
-    with patch('rembed.consumer.get_oembed_response') as mock_get_response:
+    with patch('rembed.core.consumer.get_oembed_response') \
+            as mock_get_response:
         response = Mock()
         response.embed = lambda embed_url: '<h1>hello</h1>'
         mock_get_response.return_value = response
