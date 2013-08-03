@@ -10,6 +10,7 @@ install:
   - pip install coverage coveralls
 script:
   - coverage run --source=rembed setup.py test
+  - coverage report --fail-under=100
 after_success:
   - coveralls
   - if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]; then echo "This is a pull request.  Skipping deployment."; exit 0; fi
