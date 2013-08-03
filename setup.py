@@ -37,7 +37,6 @@ setup(
         'requests'
     ],
     tests_require=[
-        'coveralls',
         'mock',
         'PyHamcrest',
         'pytest'
