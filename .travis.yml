@@ -10,9 +10,9 @@ install:
   - pip install coverage coveralls
 script:
   - coverage run --source=rembed setup.py test
+  - coveralls
   - coverage report --fail-under=100
 after_success:
-  - coveralls
   - if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]; then echo "This is a pull request.  Skipping deployment."; exit 0; fi
   - if [[ "$TRAVIS_BRANCH" != "master" ]]; then echo "This is not the 'master' branch.  Skipping deployment."; exit 0; fi
   - if [[ "$TRAVIS_PYTHON_VERSION" != "2.7" ]]; then echo "Not on Python 2.7.  Skipping deployment."; exit 0; fi
