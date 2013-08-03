@@ -29,8 +29,9 @@ setup(
     download_url='https://pypi.python.org/pypi/rembed/',
     license=open('LICENSE.txt').read(),
 
-    provides=['rembed'],
-    packages=['rembed'],
+    provides=['rembed.core'],
+    packages=['rembed.core'],
+    namespace_packages=['rembed'],
 
     install_requires=[
         'beautifulsoup4',

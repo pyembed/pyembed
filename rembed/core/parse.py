@@ -1,4 +1,4 @@
-from rembed import REmbedError
+from rembed.core import REmbedError
 from . import response
 
 from bs4 import BeautifulSoup
