@@ -1,14 +1,13 @@
 from rembed import REmbedError
-
-from .response import *
+from . import response
 
 from bs4 import BeautifulSoup
 import json
 
-RESPONSE_CLASSES = {'photo': OEmbedPhotoResponse,
-                    'video': OEmbedVideoResponse,
-                    'link': OEmbedLinkResponse,
-                    'rich': OEmbedRichResponse}
+RESPONSE_CLASSES = {'photo': response.OEmbedPhotoResponse,
+                    'video': response.OEmbedVideoResponse,
+                    'link': response.OEmbedLinkResponse,
+                    'rich': response.OEmbedRichResponse}
 
 
 class REmbedParseError(REmbedError):

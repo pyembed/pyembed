@@ -1,9 +1,9 @@
-from rembed import consumer, discovery, parse
+from rembed import consumer
 
-from hamcrest import *
-from mock import *
+from hamcrest import assert_that, equal_to
+from mock import patch, Mock
+
 import pytest
-import requests
 
 
 def test_should_discover_and_get_oembed_url():
@@ -37,7 +37,8 @@ def test_should_discover_and_get_oembed_url_with_max_width_and_height():
             patch('requests.get') as mock_get:
 
         mock_get_url.return_value = (
-            'json', 'http://example.com/oembed?format=json&maxwidth=100&maxheight=200')
+            'json',
+            'http://example.com/oembed?format=json&maxwidth=100&maxheight=200')
 
         response = Mock()
         response.ok = True

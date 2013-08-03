@@ -1,6 +1,6 @@
 from rembed import consumer
 
-from hamcrest import *
+from hamcrest import assert_that, contains_string
 import pytest
 
 

@@ -1,6 +1,6 @@
 from rembed import parse
 
-from hamcrest import *
+from hamcrest import assert_that, contains_string, equal_to, none
 import pytest
 
 pytestmark = pytest.mark.parametrize(('format', 'function'), [
@@ -107,4 +107,5 @@ def test_should_raise_error_for_unknown_type(format, function):
 
 
 def get_response(format, function, fixture='link'):
-    return function(open('rembed/test/fixtures/parse/%s.%s' % (fixture, format)).read())
+    filename = 'rembed/test/fixtures/parse/%s.%s' % (fixture, format)
+    return function(open(filename).read())

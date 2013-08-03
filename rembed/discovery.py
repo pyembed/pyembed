@@ -68,7 +68,7 @@ def __format_url(url, max_width=None, max_height=None):
     scheme, netloc, path, query_string, fragment = urlsplit(url)
     query_params = parse_qsl(query_string)
 
-    if max_width != None:
+    if max_width is not None:
         query_params.append(('maxwidth', max_width))
 
     if max_height:

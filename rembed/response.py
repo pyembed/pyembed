@@ -52,17 +52,20 @@ class OEmbedPhotoResponse(OEmbedResponse):
 
     """Represents an OEmbed photo response."""
     def fields(self):
-        return super(OEmbedPhotoResponse, self).fields() + ['url', 'width', 'height']
+        return super(OEmbedPhotoResponse, self).fields() + \
+            ['url', 'width', 'height']
 
     def embed(self, content_url):
-        return '<img src="%s" width="%s" height="%s" />' % (self.url, self.width, self.height)
+        return '<img src="%s" width="%s" height="%s" />' % \
+            (self.url, self.width, self.height)
 
 
 class OEmbedVideoResponse(OEmbedResponse):
 
     """Represents an OEmbed video response."""
     def fields(self):
-        return super(OEmbedVideoResponse, self).fields() + ['html', 'width', 'height']
+        return super(OEmbedVideoResponse, self).fields() + \
+            ['html', 'width', 'height']
 
     def embed(self, content_url):
         return self.html
@@ -79,7 +82,8 @@ class OEmbedRichResponse(OEmbedResponse):
 
     """Represents an OEmbed rich response."""
     def fields(self):
-        return super(OEmbedRichResponse, self).fields() + ['html', 'width', 'height']
+        return super(OEmbedRichResponse, self).fields() + \
+            ['html', 'width', 'height']
 
     def embed(self, content_url):
         return self.html
