@@ -3,6 +3,14 @@
 Changes
 =======
 
+v0.2.2, 2013-08-03
+------------------
+
+Enhancements:
+
+- #20: Add code coverage to build
+- #21: Add static analysis to build
+
 v0.2.1, 2013-08-02
 ------------------
 

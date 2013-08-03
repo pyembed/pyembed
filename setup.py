@@ -2,25 +2,30 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 import sys
 
+
 class PyTest(TestCommand):
+
     def finalize_options(self):
         TestCommand.finalize_options(self)
         self.test_args = ['rembed']
         self.test_suite = True
+
     def run_tests(self):
-        #import here, cause outside the eggs aren't loaded
+        # import here, cause outside the eggs aren't loaded
         import pytest
         errno = pytest.main(self.test_args)
         sys.exit(errno)
 
 setup(
     name='rembed',
-    version='0.2.1',
+    version='0.2.2',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
     url='https://github.com/matt-thomson/rembed',
-    description='Python OEmbed consumer library with automatic discovery of producers',
-    long_description=open('README.rst').read() + '\n\n' + open('CHANGES.rst').read(),
+    description='Python OEmbed consumer library with automatic discovery of' +
+        'producers',
+    long_description=open('README.rst').read() + '\n\n' +
+        open('CHANGES.rst').read(),
     download_url='https://pypi.python.org/pypi/rembed/',
     license=open('LICENSE.txt').read(),
 
@@ -32,14 +37,14 @@ setup(
         'requests'
     ],
     tests_require=[
-        'PyHamcrest',
         'mock',
+        'PyHamcrest',
         'pytest'
     ],
-    
-    cmdclass = {'test': PyTest},
 
-    classifiers = [
+    cmdclass={'test': PyTest},
+
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Natural Language :: English',

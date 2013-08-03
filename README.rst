@@ -3,6 +3,14 @@ REmbed
 
 .. image:: https://secure.travis-ci.org/matt-thomson/rembed.png?branch=master
     :target: http://travis-ci.org/matt-thomson/rembed
+.. image:: https://coveralls.io/repos/matt-thomson/rembed/badge.png
+    :target: https://coveralls.io/r/matt-thomson/rembed
+.. image:: https://codeq.io/github/matt-thomson/rembed/badges/master.png
+    :target: https://codeq.io/github/matt-thomson/rembed/branches/master
+.. image:: https://pypip.in/v/rembed/badge.png
+    :target: https://crate.io/packages/rembed/
+.. image:: https://pypip.in/d/rembed/badge.png
+    :target: https://crate.io/packages/rembed/
 
 `OEmbed`_ consumer library for Python with automatic discovery of
 producers.
