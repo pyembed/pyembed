@@ -1,17 +1,19 @@
 from rembed import REmbedError
-
-from .response import *
+from . import response
 
 from bs4 import BeautifulSoup
 import json
 
-RESPONSE_CLASSES = {'photo' : OEmbedPhotoResponse,
-                    'video' : OEmbedVideoResponse,
-                    'link' : OEmbedLinkResponse,
-                    'rich' : OEmbedRichResponse}
+RESPONSE_CLASSES = {'photo': response.OEmbedPhotoResponse,
+                    'video': response.OEmbedVideoResponse,
+                    'link': response.OEmbedLinkResponse,
+                    'rich': response.OEmbedRichResponse}
+
 
 class REmbedParseError(REmbedError):
+
     """Thrown if there is an error parsing an OEmbed response."""
+
 
 def parse_oembed(format, response):
     """Parses an OEmbed response.
@@ -23,6 +25,7 @@ def parse_oembed(format, response):
     """
     return PARSE_FUNCTIONS[format](response)
 
+
 def parse_oembed_json(response):
     """Parses a JSON OEmbed response.
 
@@ -32,6 +35,7 @@ def parse_oembed_json(response):
     """
     value_function = __value_function_json(json.loads(response))
     return __construct_response(value_function)
+
 
 def parse_oembed_xml(response):
     """Parses an XML OEmbed response.
@@ -44,6 +48,7 @@ def parse_oembed_xml(response):
     value_function = __value_function_xml(soup.oembed)
     return __construct_response(value_function)
 
+
 def __value_function_json(value_dict):
     def value_function(field):
         if field in value_dict:
@@ -52,6 +57,7 @@ def __value_function_json(value_dict):
             return None
 
     return value_function
+
 
 def __value_function_xml(oembed):
     def value_function(field):
@@ -66,6 +72,7 @@ def __value_function_xml(oembed):
 
     return value_function
 
+
 def __construct_response(value_function):
     type = value_function('type')
     if type not in RESPONSE_CLASSES:
@@ -73,5 +80,5 @@ def __construct_response(value_function):
 
     return RESPONSE_CLASSES[type](value_function)
 
-PARSE_FUNCTIONS = {'json' : parse_oembed_json,
-                   'xml' : parse_oembed_xml}
+PARSE_FUNCTIONS = {'json': parse_oembed_json,
+                   'xml': parse_oembed_xml}

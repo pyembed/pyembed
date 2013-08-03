@@ -5,6 +5,8 @@ REmbed
     :target: http://travis-ci.org/matt-thomson/rembed
 .. image:: https://coveralls.io/repos/matt-thomson/rembed/badge.png
     :target: https://coveralls.io/r/matt-thomson/rembed
+.. image:: https://codeq.io/github/matt-thomson/rembed/badges/master.png
+    :target: https://codeq.io/github/matt-thomson/rembed/branches/master
 .. image:: https://pypip.in/v/rembed/badge.png
     :target: https://crate.io/packages/rembed/
 .. image:: https://pypip.in/d/rembed/badge.png
