@@ -22,7 +22,7 @@ setup(
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
     url='https://github.com/matt-thomson/rembed',
-    description='Python OEmbed consumer library with automatic discovery of' +
+    description='Python OEmbed consumer library with automatic discovery of ' +
         'producers',
     long_description=open('README.rst').read() + '\n\n' +
         open('CHANGES.rst').read(),
