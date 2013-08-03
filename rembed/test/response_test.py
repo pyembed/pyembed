@@ -16,6 +16,13 @@ def test_response_should_be_immutable():
     with pytest.raises(TypeError):
         oembed_response.type = 'photo'
 
+def test_response_type_must_override_embed():
+    values = {'type': 'link', 'version' : '1.0'}
+    oembed_response = response.OEmbedResponse(create_value_function(values))
+
+    with pytest.raises(NotImplementedError):
+        oembed_response.embed('http://www.example.com')
+
 def test_should_embed_photo():
     values = {'type': 'photo', 
               'version' : '1.0', 
