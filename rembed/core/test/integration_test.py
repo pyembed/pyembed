@@ -11,5 +11,5 @@ def test_should_get_correct_embedding():
 
 def test_should_embed_with_maximum_height():
     embedding = consumer.embed(
-        'http://www.youtube.com/watch?v=9bZkp7q19f0', max_height=100)
-    assert_that(embedding, contains_string('height="100"'))
+        'http://www.youtube.com/watch?v=9bZkp7q19f0', max_height=200)
+    assert_that(embedding, contains_string('height="200"'))
