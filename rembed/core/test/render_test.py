@@ -17,6 +17,17 @@ def test_should_render_response_using_custom_template():
     assert_that(result, equal_to('Bees by Ian Bees from http://example.com'))
 
 
+def test_should_raise_error_on_missing_template():
+    response = Mock()
+    response.title = 'Bees'
+    response.author_name = 'Ian Bees'
+    response.type = 'invalid'
+
+    with pytest.raises(IOError):
+        render.render_response(
+            'http://example.com', response, 'rembed/core/test/fixtures/render')
+
+
 def test_should_embed_photo():
     values = {'type': 'photo',
               'version': '1.0',
