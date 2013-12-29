@@ -3,6 +3,13 @@
 Changes
 =======
 
+v0.4.0, 2013-12-29
+------------------
+
+Enhancements:
+
+- #5: More control over embedding format
+
 v0.3.0, 2013-08-03
 ------------------
 
