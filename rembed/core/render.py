@@ -1,9 +1,21 @@
+from rembed.core import REmbedError
+
 from os import path
 from pkg_resources import resource_string
 from pystache import Renderer
 
 
 def render_response(content_url, response, template_dir=None):
+    """Renders a response using a template.
+
+    :param content_url: the content URL.
+    :param response: the response to render.
+    :param template_dir: (optional) path to the directory containing the
+    Mustache templates to use for rendering.  If this is not supplied, a
+    default template will be used.
+    :returns: an HTML representation of the resource.
+    """
+
     file_name = '%s.mustache' % response.type
 
     if template_dir:
