@@ -12,6 +12,6 @@ def test_should_format_response_using_template():
     response.type = 'test'
 
     result = format.format_response(
-        response, 'rembed/core/test/fixtures/format')
+        'http://example.com', response, 'rembed/core/test/fixtures/format')
 
-    assert_that(result, equal_to('Bees by Ian Bees'))
+    assert_that(result, equal_to('Bees by Ian Bees from http://example.com'))
