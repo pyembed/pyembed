@@ -15,6 +15,6 @@ deploy:
   password:
     secure: KGvWTlI/jG9wr6uUxQHVNzgMBN/da65pjX0UZ7glh+vFSjEXLE+PwfW14Zw7DAJtVuhimAmKwLQ1alHpYmXVJoPAqUoRUdWOtHLDy66AuV0nbVsDfObgORLH2d+LRTpCSYQ5FBwQBF0sDLB6a9OwBv9r347Ea0yUUSPoP5YWa6c=
   on:
-    branch: master
     python: 2.7
     tags: true
+    repo: matt-thomson/rembed
