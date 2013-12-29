@@ -75,26 +75,50 @@ def test_should_raise_error_on_request_error():
 
 
 def test_should_embed():
-    with patch('rembed.core.consumer.get_oembed_response') \
-            as mock_get_response:
+    with patch('rembed.core.consumer.get_oembed_response') as mock_get, \
+            patch('rembed.core.render.render_response') as mock_render:
         response = Mock()
-        response.embed = lambda embed_url: '<h1>hello</h1>'
-        mock_get_response.return_value = response
+        response.title = 'hello'
 
-        assert_that(consumer.embed(
-            'http://example.com/'), equal_to('<h1>hello</h1>'))
+        mock_get.return_value = response
+        mock_render.return_value = '<h1>hello</h1>'
 
-        mock_get_response.assert_called_with('http://example.com/', None, None)
+        result = consumer.embed('http://example.com/')
+        assert_that(result, equal_to('<h1>hello</h1>'))
+
+        mock_get.assert_called_with('http://example.com/', None, None)
+        mock_render.assert_called_with('http://example.com/', response, None)
 
 
 def test_should_embed_with_max_width_and_height():
-    with patch('rembed.core.consumer.get_oembed_response') \
-            as mock_get_response:
+    with patch('rembed.core.consumer.get_oembed_response') as mock_get, \
+            patch('rembed.core.render.render_response') as mock_render:
         response = Mock()
-        response.embed = lambda embed_url: '<h1>hello</h1>'
-        mock_get_response.return_value = response
+        response.title = 'hello'
 
-        assert_that(consumer.embed(
-            'http://example.com/', 100, 200), equal_to('<h1>hello</h1>'))
+        mock_get.return_value = response
+        mock_render.return_value = '<h1>hello</h1>'
 
-        mock_get_response.assert_called_with('http://example.com/', 100, 200)
+        result = consumer.embed('http://example.com/', 100, 200)
+        assert_that(result, equal_to('<h1>hello</h1>'))
+
+        mock_get.assert_called_with('http://example.com/', 100, 200)
+        mock_render.assert_called_with('http://example.com/', response, None)
+
+
+def test_should_embed_with_custom_template_dir():
+    with patch('rembed.core.consumer.get_oembed_response') as mock_get, \
+            patch('rembed.core.render.render_response') as mock_render:
+        response = Mock()
+        response.title = 'hello'
+
+        mock_get.return_value = response
+        mock_render.return_value = '<h1>hello</h1>'
+
+        result = consumer.embed(
+            'http://example.com/', template_dir='templates')
+        assert_that(result, equal_to('<h1>hello</h1>'))
+
+        mock_get.assert_called_with('http://example.com/', None, None)
+        mock_render.assert_called_with(
+            'http://example.com/', response, 'templates')

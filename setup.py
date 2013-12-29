@@ -33,6 +33,12 @@ setup(
     packages=['rembed.core'],
     namespace_packages=['rembed'],
 
+    package_data={
+        "rembed.core": [
+            "templates/*.mustache"
+        ]
+    },
+
     install_requires=[
         'beautifulsoup4',
         'requests',
