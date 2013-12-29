@@ -3,15 +3,20 @@
 Changes
 =======
 
+v0.4.3, 2013-12-29
+------------------
+
+Rebuilt due to error in deployment process.  No functional changes.
+
 v0.4.2, 2013-12-29
 ------------------
 
-Rebuilt due to error in build process.  No functional changes.
+Rebuilt due to error in deployment process.  No functional changes.
 
 v0.4.1, 2013-12-29
 ------------------
 
-Rebuilt due to error in build process.  No functional changes.
+Rebuilt due to error in deployment process.  No functional changes.
 
 v0.4.0, 2013-12-29
 ------------------
