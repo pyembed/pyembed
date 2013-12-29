@@ -3,6 +3,7 @@ class OEmbedResponse(object):
     """Base representation of an OEmbed response.  Each response type is
        represented by a different subclass.
     """
+
     def __init__(self, value_function):
         """Constructor.
 
@@ -36,14 +37,6 @@ class OEmbedResponse(object):
                 'thumbnail_width',
                 'thumbnail_height']
 
-    def embed(self, content_url):
-        """Generate an HTML representation of this response.
-
-        :param content_url: URL of the resource being embedded.
-        """
-        raise NotImplementedError(
-            'No embed method for type %s' % type(self).__name__)
-
     def __setattr__(self, *args):
         raise TypeError('Responses are immutable')
 
@@ -51,39 +44,31 @@ class OEmbedResponse(object):
 class OEmbedPhotoResponse(OEmbedResponse):
 
     """Represents an OEmbed photo response."""
+
     def fields(self):
         return super(OEmbedPhotoResponse, self).fields() + \
             ['url', 'width', 'height']
-
-    def embed(self, content_url):
-        return '<img src="%s" width="%s" height="%s" />' % \
-            (self.url, self.width, self.height)
 
 
 class OEmbedVideoResponse(OEmbedResponse):
 
     """Represents an OEmbed video response."""
+
     def fields(self):
         return super(OEmbedVideoResponse, self).fields() + \
             ['html', 'width', 'height']
-
-    def embed(self, content_url):
-        return self.html
 
 
 class OEmbedLinkResponse(OEmbedResponse):
 
     """Represents an OEmbed link response."""
-    def embed(self, content_url):
-        return '<a href="%s">%s</a>' % (content_url, self.title)
+    pass
 
 
 class OEmbedRichResponse(OEmbedResponse):
 
     """Represents an OEmbed rich response."""
+
     def fields(self):
         return super(OEmbedRichResponse, self).fields() + \
             ['html', 'width', 'height']
-
-    def embed(self, content_url):
-        return self.html
