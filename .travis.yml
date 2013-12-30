@@ -11,10 +11,10 @@ script:
 deploy:
   provider: pypi
   user:
-    secure: mGkSM8L2OsktaK7D3o2oLP3pJirV5VX+zpfZK11lWvOMQDW4q/LWOGmxNE8yTb4nkjrvVd+dHi4qqQ9805fqHl+0du7v/w/dsh9ncfQ/daWjEYaMyYOoOe2WysjDAh5BMqXgUNUTNPvLk9rGZd5r4cMlBKNB3OxNdgKayrNbxMI=
+    secure: cIMONmkxJrI0C5iVSqrar2UJjopGL8eJDtAB8YisvYvE5BMLLcwBWjnFQFEGdroT/oyrD21PtgSgw8Si16x24UCayz/Lnpy2t7dca74QIphXieh5sNwfxhgZi8aeU2T6fLMLvO+eBltaCbVtzoxkw5WLAZ4+RqCiBv8H2fwWCVM=
   password:
-    secure: KGvWTlI/jG9wr6uUxQHVNzgMBN/da65pjX0UZ7glh+vFSjEXLE+PwfW14Zw7DAJtVuhimAmKwLQ1alHpYmXVJoPAqUoRUdWOtHLDy66AuV0nbVsDfObgORLH2d+LRTpCSYQ5FBwQBF0sDLB6a9OwBv9r347Ea0yUUSPoP5YWa6c=
+    secure: km4ODyd6hJ3w3E+yZeb9/iLMjloxryH4n8IGaG9Fg+4VWqYbADKZlul2bmtK4UuF2ZI7xJVgom6NcoioHvVaX/GVvmMIdpYosRwXvkgpBG1sxJteiLGnKWbAECn7J3HPXgGZpXf9YpabgQNgTUwgvK8hrjRQZBSAIKmVLUvRFHw=
   on:
-    python: '2.7'
+    python: 2.7
     tags: true
-    repo: matt-thomson/rembed
+    repo: rembed/rembed

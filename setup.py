@@ -21,7 +21,7 @@ setup(
     version='0.4.3',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
-    url='https://github.com/matt-thomson/rembed',
+    url='https://github.com/rembed/rembed',
     description='Python OEmbed consumer library with automatic discovery of ' +
         'producers',
     long_description=open('README.rst').read() + '\n\n' +

@@ -1,10 +1,10 @@
 REmbed
 ======
 
-.. image:: https://secure.travis-ci.org/matt-thomson/rembed.png?branch=master
-    :target: http://travis-ci.org/matt-thomson/rembed
-.. image:: https://coveralls.io/repos/matt-thomson/rembed/badge.png
-    :target: https://coveralls.io/r/matt-thomson/rembed
+.. image:: https://secure.travis-ci.org/rembed/rembed.png?branch=master
+    :target: http://travis-ci.org/rembed/rembed
+.. image:: https://coveralls.io/repos/rembed/rembed/badge.png
+    :target: https://coveralls.io/r/rembed/rembed
 .. image:: https://pypip.in/v/rembed/badge.png
     :target: https://crate.io/packages/rembed/
 .. image:: https://pypip.in/d/rembed/badge.png
@@ -79,4 +79,4 @@ REmbed is distributed under the MIT license.
 .. _Flickr: http://flickr.com
 .. _Twitter: http://twitter.com
 .. _YouTube: http://youtube.com
-.. _GitHub: https://github.com/matt-thomson/rembed
+.. _GitHub: https://github.com/rembed/rembed
