@@ -20,9 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import consumer
+from pyembed.core import consumer, render
 
 from hamcrest import assert_that, contains_string, equal_to
+import pytest
+
+
+class DummyRenderer(render.PyEmbedRenderer):
+
+    def render(self, content_url, response):
+        return "%s by %s from %s" % \
+            (response.title, response.author_name, content_url)
 
 
 def test_should_get_correct_embedding():
@@ -37,10 +45,10 @@ def test_should_embed_with_maximum_height():
     assert_that(embedding, contains_string('height="200"'))
 
 
-def test_should_embed_with_custom_template():
+def test_should_embed_with_custom_renderer():
     embedding = consumer.embed(
         'http://www.youtube.com/watch?v=qrO4YZeyl0I',
-        template_dir='pyembed/core/test/fixtures/render')
+        renderer=DummyRenderer())
     assert_that(embedding, equal_to(
         'Lady Gaga - Bad Romance by LadyGagaVEVO from ' +
         'http://www.youtube.com/watch?v=qrO4YZeyl0I'))

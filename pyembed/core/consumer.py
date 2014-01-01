@@ -30,20 +30,26 @@ class PyEmbedConsumerError(PyEmbedError):
     """Thrown if there is an error discovering an OEmbed URL."""
 
 
-def embed(url, max_width=None, max_height=None, template_dir=None):
+def embed(url,
+          max_width=None,
+          max_height=None,
+          renderer=None):
     """Returns an HTML representation of a resource, given a URL.  This can be
        directly embedded in a web page.
 
     :param url: the content URL.
     :param max_width: (optional) the maximum width of the embedded resource.
     :param max_height: (optional) the maximum height of the embedded resource.
-    :param template_dir: (optional) path to the directory containing the
-    Mustache templates to use for rendering.
+    :param renderer: (optional) renderer to render the response.
     :returns: an HTML representation of the resource.
     :raises PyEmbedError: if there is an error fetching the response.
     """
     response = get_oembed_response(url, max_width, max_height)
-    return render.render_response(url, response, template_dir)
+
+    if renderer is None:
+        renderer = render.DefaultRenderer()
+
+    return renderer.render(url, response)
 
 
 def get_oembed_response(url, max_width=None, max_height=None):

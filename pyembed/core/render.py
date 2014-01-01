@@ -22,34 +22,37 @@
 
 from pyembed.core import PyEmbedError
 
-from os import path
-from pkg_resources import resource_string
-from pystache import Renderer
+
+class PyEmbedRenderer(object):
+
+    """Base class for rendering OEmbed responses."""
+
+    def render(self, content_url, response):
+        """Generates an HTML representation of an OEmbed response.
+
+        :param content_url: the content URL.
+        :param response: the response to render.
+        :returns: an HTML representation of the resource.
+        """
+        raise NotImplementedError(
+            'No render method for renderer of type %s' % type(self).__name__)
 
 
-def render_response(content_url, response, template_dir=None):
-    """Renders a response using a template.
+class DefaultRenderer(PyEmbedRenderer):
 
-    :param content_url: the content URL.
-    :param response: the response to render.
-    :param template_dir: (optional) path to the directory containing the
-    Mustache templates to use for rendering.  If this is not supplied, a
-    default template will be used.
-    :returns: an HTML representation of the resource.
+    """Default renderer, using a simple representation of each response
+    type.
     """
 
-    file_name = '%s.mustache' % response.type
+    TEMPLATES = {
+        'link': '<a href="%(content_url)s">%(title)s</a>',
+        'photo': '<img src="%(url)s" width="%(width)s" height="%(height)s" />',
+        'rich': '%(html)s',
+        'video': '%(html)s'
+    }
 
-    if template_dir:
-        template = __load_template_from_file(template_dir, file_name)
-    else:
-        template = resource_string(__name__, 'templates/%s' % file_name)
+    def render(self, content_url, response):
+        params = dict(response.__dict__)
+        params['content_url'] = content_url
 
-    return Renderer().render(template, response, {'content_url': content_url})
-
-
-def __load_template_from_file(template_dir, file_name):
-    template_path = path.join(template_dir, file_name)
-
-    with open(template_path) as template_file:
-        return template_file.read()
+        return DefaultRenderer.TEMPLATES[response.type] % params
