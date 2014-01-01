@@ -20,8 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import response
-from pyembed.core.render import DefaultRenderer
+from pyembed.core import render, response
 
 from hamcrest import assert_that, equal_to
 from mock import Mock
@@ -38,7 +37,7 @@ def test_should_embed_photo():
     oembed_response = response.OEmbedPhotoResponse(
         create_value_function(values))
     assert_that(
-        DefaultRenderer().render('http://example.com', oembed_response),
+        render.DefaultRenderer().render('http://example.com', oembed_response),
         equal_to('<img src="http://example.com/bees.jpg" ' +
                  'width="300" height="200" />'))
 
@@ -52,7 +51,7 @@ def test_should_embed_video():
     oembed_response = response.OEmbedVideoResponse(
         create_value_function(values))
     assert_that(
-        DefaultRenderer().render('http://example.com', oembed_response),
+        render.DefaultRenderer().render('http://example.com', oembed_response),
         equal_to(embedding))
 
 
@@ -65,7 +64,7 @@ def test_should_embed_rich():
     oembed_response = response.OEmbedRichResponse(
         create_value_function(values))
     assert_that(
-        DefaultRenderer().render('http://example.com', oembed_response),
+        render.DefaultRenderer().render('http://example.com', oembed_response),
         equal_to(embedding))
 
 
@@ -76,8 +75,13 @@ def test_should_embed_link():
     oembed_response = response.OEmbedLinkResponse(
         create_value_function(values))
     assert_that(
-        DefaultRenderer().render('http://example.com', oembed_response),
+        render.DefaultRenderer().render('http://example.com', oembed_response),
         equal_to('<a href="http://example.com">Bees!</a>'))
+
+
+def test_must_override_render():
+    with pytest.raises(NotImplementedError):
+        render.PyEmbedRenderer().render('http://example.com', None)
 
 
 def create_value_function(values):
