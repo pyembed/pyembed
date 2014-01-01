@@ -3,6 +3,17 @@
 Changes
 =======
 
+v0.5.0, 2014-01-01
+------------------
+
+Breaking changes:
+
+- The ``rembed`` package has been renamed to ``pyembed``.
+
+Enhancements:
+
+- #30: Rename to PyEmbed
+
 v0.4.3, 2013-12-29
 ------------------
 
@@ -30,11 +41,11 @@ v0.3.0, 2013-08-03
 
 Breaking changes:
 
-- The ``pyembed`` package has been renamed to ``pyembed.core``.
+- The ``rembed`` package has been renamed to ``rembed.core``.
 
 Enhancements:
 
-- #19: Make pyembed into a namespace package
+- #19: Make rembed into a namespace package
 
 v0.2.2, 2013-08-03
 ------------------
