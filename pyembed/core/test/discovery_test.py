@@ -1,4 +1,4 @@
-from rembed.core import discovery
+from pyembed.core import discovery
 
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
@@ -71,22 +71,22 @@ def test_should_add_max_width_and_height_when_no_query_string_present():
 
 
 def test_should_throw_error_if_href_not_present():
-    with pytest.raises(discovery.REmbedDiscoveryError):
+    with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(fixture='json_oembed_no_href.html')
 
 
 def test_should_throw_error_for_invalid_html():
-    with pytest.raises(discovery.REmbedDiscoveryError):
+    with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(fixture='invalid.html')
 
 
 def test_should_throw_error_when_invalid_format_specified():
-    with pytest.raises(discovery.REmbedDiscoveryError):
+    with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(format='txt')
 
 
 def test_should_throw_error_on_error_response():
-    with pytest.raises(discovery.REmbedDiscoveryError):
+    with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(ok=False)
 
 
@@ -99,7 +99,7 @@ def get_oembed_url(fixture='valid_oembed.html',
         response = Mock()
         response.ok = ok
         response.text = open(
-            'rembed/core/test/fixtures/discovery/' + fixture).read()
+            'pyembed/core/test/fixtures/discovery/' + fixture).read()
         mock_get.return_value = response
 
         result = discovery.get_oembed_url(

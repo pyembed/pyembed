@@ -1,56 +1,56 @@
-REmbed
+PyEmbed
 ======
 
-.. image:: https://secure.travis-ci.org/rembed/rembed.png?branch=master
-    :target: http://travis-ci.org/rembed/rembed
-.. image:: https://coveralls.io/repos/rembed/rembed/badge.png
-    :target: https://coveralls.io/r/rembed/rembed
-.. image:: https://pypip.in/v/rembed/badge.png
-    :target: https://crate.io/packages/rembed/
-.. image:: https://pypip.in/d/rembed/badge.png
-    :target: https://crate.io/packages/rembed/
+.. image:: https://secure.travis-ci.org/pyembed/pyembed.png?branch=master
+    :target: http://travis-ci.org/pyembed/pyembed
+.. image:: https://coveralls.io/repos/pyembed/pyembed/badge.png
+    :target: https://coveralls.io/r/pyembed/pyembed
+.. image:: https://pypip.in/v/pyembed/badge.png
+    :target: https://crate.io/packages/pyembed/
+.. image:: https://pypip.in/d/pyembed/badge.png
+    :target: https://crate.io/packages/pyembed/
 
 `OEmbed`_ consumer library for Python with automatic discovery of
 producers.
 
-REmbed allows you to easily embed content on your website from a wide
+PyEmbed allows you to easily embed content on your website from a wide
 variety of producers (including `Flickr`_, `Twitter`_ and `YouTube`_).
 Unlike many OEmbed consumers, you don't need to configure each producer
-that you want to use - REmbed discovers the configuration automatically.
+that you want to use - PyEmbed discovers the configuration automatically.
 
-You just need to provide the URL, and REmbed will generate a block of
+You just need to provide the URL, and PyEmbed will generate a block of
 HTML, ready for you to include in your page:
 
 ::
 
-    >>> from rembed.core import consumer
+    >>> from pyembed.core import consumer
     >>> consumer.embed('http://www.youtube.com/watch?v=9bZkp7q19f0')
     <iframe width="480" height="270" src="http://www.youtube.com/embed/9bZkp7q19f0?feature=oembed" frameborder="0" allowfullscreen></iframe>
 
 Compatibility
 -------------
 
-REmbed has been tested with Python 2.7 and 3.3.
+PyEmbed has been tested with Python 2.7 and 3.3.
 
 Installation
 ------------
 
-REmbed can be installed using pip:
+PyEmbed can be installed using pip:
 
 ::
 
-    pip install rembed
+    pip install pyembed
 
 Contributing
 ------------
 
 To report an issue, request an enhancement, or contribute a patch, go to
-the REmbed `GitHub`_ page.
+the PyEmbed `GitHub`_ page.
 
 License
 -------
 
-REmbed is distributed under the MIT license.
+PyEmbed is distributed under the MIT license.
 
 ::
 
@@ -79,4 +79,4 @@ REmbed is distributed under the MIT license.
 .. _Flickr: http://flickr.com
 .. _Twitter: http://twitter.com
 .. _YouTube: http://youtube.com
-.. _GitHub: https://github.com/rembed/rembed
+.. _GitHub: https://github.com/pyembed/pyembed

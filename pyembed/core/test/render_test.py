@@ -1,4 +1,4 @@
-from rembed.core import render, response
+from pyembed.core import render, response
 
 from hamcrest import assert_that, equal_to
 from mock import Mock
@@ -12,7 +12,7 @@ def test_should_render_response_using_custom_template():
     response.type = 'video'
 
     result = render.render_response(
-        'http://example.com', response, 'rembed/core/test/fixtures/render')
+        'http://example.com', response, 'pyembed/core/test/fixtures/render')
 
     assert_that(result, equal_to('Bees by Ian Bees from http://example.com'))
 
@@ -25,7 +25,7 @@ def test_should_raise_error_on_missing_template():
 
     with pytest.raises(IOError):
         render.render_response(
-            'http://example.com', response, 'rembed/core/test/fixtures/render')
+            'http://example.com', response, 'pyembed/core/test/fixtures/render')
 
 
 def test_should_embed_photo():

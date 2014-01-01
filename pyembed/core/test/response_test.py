@@ -1,4 +1,4 @@
-from rembed.core import response
+from pyembed.core import response
 
 from hamcrest import assert_that, equal_to
 import pytest
