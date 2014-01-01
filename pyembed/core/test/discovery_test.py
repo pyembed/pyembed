@@ -1,4 +1,26 @@
-from rembed.core import discovery
+# The MIT License(MIT)
+
+# Copyright (c) 2013-2014 Matt Thomson
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+from pyembed.core import discovery
 
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
@@ -71,22 +93,22 @@ def test_should_add_max_width_and_height_when_no_query_string_present():
 
 
 def test_should_throw_error_if_href_not_present():
-    with pytest.raises(discovery.REmbedDiscoveryError):
+    with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(fixture='json_oembed_no_href.html')
 
 
 def test_should_throw_error_for_invalid_html():
-    with pytest.raises(discovery.REmbedDiscoveryError):
+    with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(fixture='invalid.html')
 
 
 def test_should_throw_error_when_invalid_format_specified():
-    with pytest.raises(discovery.REmbedDiscoveryError):
+    with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(format='txt')
 
 
 def test_should_throw_error_on_error_response():
-    with pytest.raises(discovery.REmbedDiscoveryError):
+    with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(ok=False)
 
 
@@ -99,7 +121,7 @@ def get_oembed_url(fixture='valid_oembed.html',
         response = Mock()
         response.ok = ok
         response.text = open(
-            'rembed/core/test/fixtures/discovery/' + fixture).read()
+            'pyembed/core/test/fixtures/discovery/' + fixture).read()
         mock_get.return_value = response
 
         result = discovery.get_oembed_url(

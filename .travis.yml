@@ -5,16 +5,16 @@ python:
 install:
   - pip install coverage coveralls
 script:
-  - coverage run --source=rembed setup.py test
+  - coverage run --source=pyembed setup.py test
   - coveralls
   - coverage report --fail-under=100
 deploy:
   provider: pypi
   user:
-    secure: cIMONmkxJrI0C5iVSqrar2UJjopGL8eJDtAB8YisvYvE5BMLLcwBWjnFQFEGdroT/oyrD21PtgSgw8Si16x24UCayz/Lnpy2t7dca74QIphXieh5sNwfxhgZi8aeU2T6fLMLvO+eBltaCbVtzoxkw5WLAZ4+RqCiBv8H2fwWCVM=
+    secure: JTZF5j+XNPJpsL2tnzizYLwalu1T27RrfoKQe8ppVseQ166eYxyBWIhMDtXVAmBFL4YaUwbqb6//KrfwVK5NrnWSAQvuxJxcWLqbhkEQQlbfljBGmQESKPOq/KUJAjWcYIPOmTjirpPenTQU59JGaajKfCrSHusU3czhbUfQPM4=
   password:
-    secure: km4ODyd6hJ3w3E+yZeb9/iLMjloxryH4n8IGaG9Fg+4VWqYbADKZlul2bmtK4UuF2ZI7xJVgom6NcoioHvVaX/GVvmMIdpYosRwXvkgpBG1sxJteiLGnKWbAECn7J3HPXgGZpXf9YpabgQNgTUwgvK8hrjRQZBSAIKmVLUvRFHw=
+    secure: XHL8+wO1c62ukRltMR2V1Alo3G2WCO4Bhfol7Y2+WbzH+EVWU71XCRs7zruyr3yEjCerzfkfoMcQYlRW7IyaazXUaD6UNIDhaNhFp6DPd6ornqXUB2clMD4lOUsECD19m9sF2u3+aapCw4JzN/hyBQsNQ8if3MFpo6AE/IHNLhg=
   on:
     python: 2.7
     tags: true
-    repo: rembed/rembed
+    repo: pyembed/pyembed
