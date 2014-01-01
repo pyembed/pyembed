@@ -1,4 +1,4 @@
-from rembed.core import REmbedError
+from pyembed.core import PyEmbedError
 
 from os import path
 from pkg_resources import resource_string

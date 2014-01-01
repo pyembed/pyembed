@@ -7,7 +7,7 @@ class PyTest(TestCommand):
 
     def finalize_options(self):
         TestCommand.finalize_options(self)
-        self.test_args = ['rembed']
+        self.test_args = ['pyembed']
         self.test_suite = True
 
     def run_tests(self):
@@ -17,24 +17,24 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 setup(
-    name='rembed',
+    name='pyembed',
     version='0.4.3',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
-    url='https://github.com/rembed/rembed',
+    url='https://github.com/pyembed/pyembed',
     description='Python OEmbed consumer library with automatic discovery of ' +
         'producers',
     long_description=open('README.rst').read() + '\n\n' +
         open('CHANGES.rst').read(),
-    download_url='https://pypi.python.org/pypi/rembed/',
+    download_url='https://pypi.python.org/pypi/pyembed/',
     license=open('LICENSE.txt').read(),
 
-    provides=['rembed.core'],
-    packages=['rembed.core'],
-    namespace_packages=['rembed'],
+    provides=['pyembed.core'],
+    packages=['pyembed.core'],
+    namespace_packages=['pyembed'],
 
     package_data={
-        "rembed.core": [
+        "pyembed.core": [
             "templates/*.mustache"
         ]
     },

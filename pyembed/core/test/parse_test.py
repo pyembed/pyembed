@@ -1,4 +1,4 @@
-from rembed.core import parse
+from pyembed.core import parse
 
 from hamcrest import assert_that, contains_string, equal_to, none
 import pytest
@@ -102,10 +102,10 @@ def test_should_get_none_for_missing_element(format, function):
 
 
 def test_should_raise_error_for_unknown_type(format, function):
-    with pytest.raises(parse.REmbedParseError):
+    with pytest.raises(parse.PyEmbedParseError):
         get_response(format, function, 'unknown')
 
 
 def get_response(format, function, fixture='link'):
-    filename = 'rembed/core/test/fixtures/parse/%s.%s' % (fixture, format)
+    filename = 'pyembed/core/test/fixtures/parse/%s.%s' % (fixture, format)
     return function(open(filename).read())

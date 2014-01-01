@@ -1,4 +1,4 @@
-from rembed.core import consumer
+from pyembed.core import consumer
 
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
@@ -7,8 +7,8 @@ import pytest
 
 
 def test_should_discover_and_get_oembed_url():
-    with patch('rembed.core.discovery.get_oembed_url') as mock_get_url, \
-        patch('rembed.core.parse.parse_oembed') as mock_parse, \
+    with patch('pyembed.core.discovery.get_oembed_url') as mock_get_url, \
+        patch('pyembed.core.parse.parse_oembed') as mock_parse, \
             patch('requests.get') as mock_get:
 
         mock_get_url.return_value = (
@@ -32,8 +32,8 @@ def test_should_discover_and_get_oembed_url():
 
 
 def test_should_discover_and_get_oembed_url_with_max_width_and_height():
-    with patch('rembed.core.discovery.get_oembed_url') as mock_get_url, \
-        patch('rembed.core.parse.parse_oembed') as mock_parse, \
+    with patch('pyembed.core.discovery.get_oembed_url') as mock_get_url, \
+        patch('pyembed.core.parse.parse_oembed') as mock_parse, \
             patch('requests.get') as mock_get:
 
         mock_get_url.return_value = (
@@ -59,9 +59,9 @@ def test_should_discover_and_get_oembed_url_with_max_width_and_height():
 
 
 def test_should_raise_error_on_request_error():
-    with patch('rembed.core.discovery.get_oembed_url') as mock_get_url, \
+    with patch('pyembed.core.discovery.get_oembed_url') as mock_get_url, \
         patch('requests.get') as mock_get, \
-            pytest.raises(consumer.REmbedConsumerError):
+            pytest.raises(consumer.PyEmbedConsumerError):
 
         mock_get_url.return_value = (
             'json', 'http://example.com/oembed?format=json')
@@ -75,8 +75,8 @@ def test_should_raise_error_on_request_error():
 
 
 def test_should_embed():
-    with patch('rembed.core.consumer.get_oembed_response') as mock_get, \
-            patch('rembed.core.render.render_response') as mock_render:
+    with patch('pyembed.core.consumer.get_oembed_response') as mock_get, \
+            patch('pyembed.core.render.render_response') as mock_render:
         response = Mock()
         response.title = 'hello'
 
@@ -91,8 +91,8 @@ def test_should_embed():
 
 
 def test_should_embed_with_max_width_and_height():
-    with patch('rembed.core.consumer.get_oembed_response') as mock_get, \
-            patch('rembed.core.render.render_response') as mock_render:
+    with patch('pyembed.core.consumer.get_oembed_response') as mock_get, \
+            patch('pyembed.core.render.render_response') as mock_render:
         response = Mock()
         response.title = 'hello'
 
@@ -107,8 +107,8 @@ def test_should_embed_with_max_width_and_height():
 
 
 def test_should_embed_with_custom_template_dir():
-    with patch('rembed.core.consumer.get_oembed_response') as mock_get, \
-            patch('rembed.core.render.render_response') as mock_render:
+    with patch('pyembed.core.consumer.get_oembed_response') as mock_get, \
+            patch('pyembed.core.render.render_response') as mock_render:
         response = Mock()
         response.title = 'hello'
 

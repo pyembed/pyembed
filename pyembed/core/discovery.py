@@ -1,4 +1,4 @@
-from rembed.core import REmbedError
+from pyembed.core import PyEmbedError
 
 import requests
 from bs4 import BeautifulSoup
@@ -17,7 +17,7 @@ MEDIA_TYPES = {
 FORMATS = {MEDIA_TYPES[format]: format for format in MEDIA_TYPES}
 
 
-class REmbedDiscoveryError(REmbedError):
+class PyEmbedDiscoveryError(PyEmbedError):
 
     """Thrown if there is an error discovering an OEmbed URL."""
 
@@ -33,21 +33,21 @@ def get_oembed_url(url, format=None, max_width=None, max_height=None):
     :param max_height: (optional) the maximum height of the embedded resource.
 
     :returns: OEmbed URL for the resource.
-    :raises REmbedDiscoveryError: if there is an error getting the OEmbed URL.
+    :raises PyEmbedDiscoveryError: if there is an error getting the OEmbed URL.
     """
     media_type = __get_type(format)
 
     response = requests.get(url)
 
     if not response.ok:
-        raise REmbedDiscoveryError(
+        raise PyEmbedDiscoveryError(
             'Failed to get %s (status code %s)' % (url, response.status_code))
 
     soup = BeautifulSoup(response.text)
     link = soup.find('link', type=media_type, href=True)
 
     if not link:
-        raise REmbedDiscoveryError('Could not find OEmbed URL for %s' % url)
+        raise PyEmbedDiscoveryError('Could not find OEmbed URL for %s' % url)
 
     discovered_url = __format_url(link['href'], max_width, max_height)
 
@@ -60,7 +60,7 @@ def __get_type(format):
     elif format in MEDIA_TYPES:
         return MEDIA_TYPES[format]
 
-    raise REmbedDiscoveryError(
+    raise PyEmbedDiscoveryError(
         'Invalid format %s specified (must be json or xml)' % format)
 
 

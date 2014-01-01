@@ -1,9 +1,9 @@
-from rembed.core import discovery, parse, render, REmbedError
+from pyembed.core import discovery, parse, render, PyEmbedError
 
 import requests
 
 
-class REmbedConsumerError(REmbedError):
+class PyEmbedConsumerError(PyEmbedError):
 
     """Thrown if there is an error discovering an OEmbed URL."""
 
@@ -18,7 +18,7 @@ def embed(url, max_width=None, max_height=None, template_dir=None):
     :param template_dir: (optional) path to the directory containing the
     Mustache templates to use for rendering.
     :returns: an HTML representation of the resource.
-    :raises REmbedError: if there is an error fetching the response.
+    :raises PyEmbedError: if there is an error fetching the response.
     """
     response = get_oembed_response(url, max_width, max_height)
     return render.render_response(url, response, template_dir)
@@ -30,8 +30,8 @@ def get_oembed_response(url, max_width=None, max_height=None):
     :param url: the content URL.
     :param max_width: (optional) the maximum width of the embedded resource.
     :param max_height: (optional) the maximum height of the embedded resource.
-    :returns: an REmbedResponse, representing the resource to embed.
-    :raises REmbedError: if there is an error fetching the response.
+    :returns: an PyEmbedResponse, representing the resource to embed.
+    :raises PyEmbedError: if there is an error fetching the response.
     """
 
     (discovered_format, oembed_url) = discovery.get_oembed_url(
@@ -39,7 +39,7 @@ def get_oembed_response(url, max_width=None, max_height=None):
     response = requests.get(oembed_url)
 
     if not response.ok:
-        raise REmbedConsumerError('Failed to get %s (status code %s)' % (
+        raise PyEmbedConsumerError('Failed to get %s (status code %s)' % (
             url, response.status_code))
 
     return parse.parse_oembed(discovered_format, response.text)
