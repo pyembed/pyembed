@@ -56,16 +56,9 @@ setup(
     packages=['pyembed.core'],
     namespace_packages=['pyembed'],
 
-    package_data={
-        "pyembed.core": [
-            "templates/*.mustache"
-        ]
-    },
-
     install_requires=[
         'beautifulsoup4',
-        'requests',
-        'pystache'
+        'requests'
     ],
     tests_require=[
         'mock',
