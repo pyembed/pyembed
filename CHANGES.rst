@@ -3,6 +3,18 @@
 Changes
 =======
 
+v0.6.0, 2014-01-01
+------------------
+
+Breaking changes:
+
+- The option to provide Mustache templates for rendering has been removed. It
+  will be restored in a new pyembed-mustache module.
+
+Enhancements:
+
+- #33: Make rendering engines pluggable
+
 v0.5.0, 2014-01-01
 ------------------
 

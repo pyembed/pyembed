@@ -41,7 +41,7 @@ class PyTest(TestCommand):
 
 setup(
     name='pyembed',
-    version='0.5.0',
+    version='0.6.0',
     author='Matt Thomson',
     author_email='matt.thomson@cantab.net',
     url='https://github.com/pyembed/pyembed',
@@ -56,16 +56,9 @@ setup(
     packages=['pyembed.core'],
     namespace_packages=['pyembed'],
 
-    package_data={
-        "pyembed.core": [
-            "templates/*.mustache"
-        ]
-    },
-
     install_requires=[
         'beautifulsoup4',
-        'requests',
-        'pystache'
+        'requests'
     ],
     tests_require=[
         'mock',
