@@ -92,6 +92,18 @@ def test_should_add_max_width_and_height_when_no_query_string_present():
         equal_to(('json', expected_url)))
 
 
+def test_should_find_oembed_url_using_json_with_relative_url():
+    expected_url = 'http://example.com/oembed?format=json'
+    assert_that(get_oembed_url(fixture='relative_url.html', format='json'),
+                equal_to(('json', expected_url)))
+
+
+def test_should_find_oembed_url_using_xml_when_specified():
+    expected_url = 'http://example.com/oembed?format=xml'
+    assert_that(get_oembed_url(fixture='relative_url.html', format='xml'),
+                equal_to(('xml', expected_url)))
+
+
 def test_should_throw_error_if_href_not_present():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
         get_oembed_url(fixture='json_oembed_no_href.html')

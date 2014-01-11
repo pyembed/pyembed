@@ -26,10 +26,10 @@ import requests
 from bs4 import BeautifulSoup
 
 try:  # pragma: no cover
-    from urlparse import parse_qsl, urlsplit, urlunsplit
+    from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
     from urllib import urlencode
 except ImportError:  # pragma: no cover
-    from urllib.parse import parse_qsl, urlsplit, urlunsplit, urlencode
+    from urllib.parse import parse_qsl, urljoin, urlsplit, urlunsplit, urlencode
 
 MEDIA_TYPES = {
     'json': 'application/json+oembed',
@@ -71,7 +71,7 @@ def get_oembed_url(url, format=None, max_width=None, max_height=None):
     if not link:
         raise PyEmbedDiscoveryError('Could not find OEmbed URL for %s' % url)
 
-    discovered_url = __format_url(link['href'], max_width, max_height)
+    discovered_url = __format_url(url, link['href'], max_width, max_height)
 
     return (FORMATS[link['type']], discovered_url)
 
@@ -86,7 +86,8 @@ def __get_type(format):
         'Invalid format %s specified (must be json or xml)' % format)
 
 
-def __format_url(url, max_width=None, max_height=None):
+def __format_url(content_url, embed_url, max_width=None, max_height=None):
+    url = urljoin(content_url, embed_url)
     scheme, netloc, path, query_string, fragment = urlsplit(url)
     query_params = parse_qsl(query_string)
 
