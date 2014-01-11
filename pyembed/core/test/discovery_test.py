@@ -98,7 +98,7 @@ def test_should_find_oembed_url_using_json_with_relative_url():
                 equal_to(('json', expected_url)))
 
 
-def test_should_find_oembed_url_using_xml_when_specified():
+def test_should_find_oembed_url_using_xml_with_relative_url():
     expected_url = 'http://example.com/oembed?format=xml'
     assert_that(get_oembed_url(fixture='relative_url.html', format='xml'),
                 equal_to(('xml', expected_url)))
