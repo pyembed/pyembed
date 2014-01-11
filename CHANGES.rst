@@ -3,6 +3,13 @@
 Changes
 =======
 
+v0.6.1, 2014-01-11
+------------------
+
+Bug fixes:
+
+- #36: Failure to handle relative OEmbed URLs
+
 v0.6.0, 2014-01-01
 ------------------
 
