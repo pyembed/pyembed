@@ -39,6 +39,12 @@ def test_should_get_correct_embedding():
     assert_that(embedding, contains_string('Four more years.'))
 
 
+def test_should_get_another_correct_embedding():
+    embedding = consumer.embed(
+        'http://www.flickr.com/photos/hansjuul/7899334594')
+    assert_that(embedding, contains_string('.jpg'))
+
+
 def test_should_embed_with_maximum_height():
     embedding = consumer.embed(
         'http://www.youtube.com/watch?v=9bZkp7q19f0', max_height=200)
