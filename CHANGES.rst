@@ -3,6 +3,14 @@
 Changes
 =======
 
+v0.7.0, 2014-01-20
+------------------
+
+Breaking changes:
+
+- The `pyembed.core.consumer.embed` method has been removed.  Instead, call
+  `embed` on the `pyembed.core.PyEmbed` class.
+
 v0.6.1, 2014-01-11
 ------------------
 
