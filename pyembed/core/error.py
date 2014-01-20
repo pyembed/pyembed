@@ -20,39 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core.error import PyEmbedError
 
+class PyEmbedError(Exception):
 
-class PyEmbedRenderer(object):
-
-    """Base class for rendering OEmbed responses."""
-
-    def render(self, content_url, response):
-        """Generates an HTML representation of an OEmbed response.
-
-        :param content_url: the content URL.
-        :param response: the response to render.
-        :returns: an HTML representation of the resource.
-        """
-        raise NotImplementedError(
-            'No render method for renderer of type %s' % type(self).__name__)
-
-
-class DefaultRenderer(PyEmbedRenderer):
-
-    """Default renderer, using a simple representation of each response
-    type.
-    """
-
-    TEMPLATES = {
-        'link': '<a href="%(content_url)s">%(title)s</a>',
-        'photo': '<img src="%(url)s" width="%(width)s" height="%(height)s" />',
-        'rich': '%(html)s',
-        'video': '%(html)s'
-    }
-
-    def render(self, content_url, response):
-        params = dict(response.__dict__)
-        params['content_url'] = content_url
-
-        return DefaultRenderer.TEMPLATES[response.type] % params
+    '''Generic error class for PyEmbed.'''

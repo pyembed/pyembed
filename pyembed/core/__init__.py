@@ -20,7 +20,31 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from pyembed.core import consumer
+from pyembed.core.render import DefaultRenderer
 
-class PyEmbedError(Exception):
 
-    '''Generic error class for PyEmbed.'''
+class PyEmbed(object):
+
+    def __init__(self, renderer=DefaultRenderer()):
+        """OEmbed consumer with automatic discovery.
+
+        :param renderer: (optional) renderer to render the response.
+        """
+        self.renderer = renderer
+
+    def embed(self,
+              url,
+              max_width=None,
+              max_height=None):
+        """Returns an HTML representation of a resource, given a URL.  This
+           can be directly embedded in a web page.
+
+        :param url: the content URL.
+        :param max_width: (optional) the maximum width of the embedded resource.
+        :param max_height: (optional) the maximum height of the embedded resource.
+        :returns: an HTML representation of the resource.
+        :raises PyEmbedError: if there is an error fetching the response.
+        """
+        response = consumer.get_oembed_response(url, max_width, max_height)
+        return self.renderer.render(url, response)

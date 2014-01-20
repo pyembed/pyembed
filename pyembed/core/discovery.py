@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import PyEmbedError
+from pyembed.core.error import PyEmbedError
 
 import requests
 from bs4 import BeautifulSoup
