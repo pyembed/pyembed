@@ -34,8 +34,8 @@ HTML, ready for you to include in your page:
     <iframe width="480" height="270" src="http://www.youtube.com/embed/9bZkp7q19f0?feature=oembed" frameborder="0" allowfullscreen></iframe>
 
 There are plugins for embedding content into `Markdown`_ and 
-`reStructuredText` documents, and for customizing embeddings with `Jinja2` 
-and `Mustache` templates.  For more information, see the `PyEmbed`_ website.
+`reStructuredText`_ documents, and for customizing embeddings with `Jinja2`_
+and `Mustache`_ templates.  For more information, see the `PyEmbed`_ website.
 
 Compatibility
 -------------
