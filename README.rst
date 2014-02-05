@@ -5,10 +5,16 @@ PyEmbed
     :target: http://travis-ci.org/pyembed/pyembed
 .. image:: https://coveralls.io/repos/pyembed/pyembed/badge.png
     :target: https://coveralls.io/r/pyembed/pyembed
-.. image:: https://pypip.in/v/pyembed/badge.png
-    :target: https://crate.io/packages/pyembed/
 .. image:: https://pypip.in/d/pyembed/badge.png
-    :target: https://crate.io/packages/pyembed/
+    :target: https://pypi.python.org/pypi/pyembed/
+.. image:: https://pypip.in/v/pyembed/badge.png
+    :target: https://pypi.python.org/pypi/pyembed/
+.. image:: https://pypip.in/wheel/pyembed/badge.png
+    :target: https://pypi.python.org/pypi/pyembed/
+.. image:: https://pypip.in/egg/pyembed/badge.png
+    :target: https://pypi.python.org/pypi/pyembed/
+.. image:: https://pypip.in/license/pyembed/badge.png
+    :target: https://pypi.python.org/pypi/pyembed/    
 
 `OEmbed`_ consumer library for Python with automatic discovery of
 producers.
@@ -23,9 +29,13 @@ HTML, ready for you to include in your page:
 
 ::
 
-    >>> from pyembed.core import consumer
-    >>> consumer.embed('http://www.youtube.com/watch?v=9bZkp7q19f0')
+    >>> from pyembed.core import PyEmbed
+    >>> html = PyEmbed().embed('http://www.youtube.com/watch?v=9bZkp7q19f0')
     <iframe width="480" height="270" src="http://www.youtube.com/embed/9bZkp7q19f0?feature=oembed" frameborder="0" allowfullscreen></iframe>
+
+There are plugins for embedding content into `Markdown`_ and 
+`reStructuredText` documents, and for customizing embeddings with `Jinja2` 
+and `Mustache` templates.  For more information, see the `PyEmbed`_ website.
 
 Compatibility
 -------------
@@ -79,4 +89,9 @@ PyEmbed is distributed under the MIT license.
 .. _Flickr: http://flickr.com
 .. _Twitter: http://twitter.com
 .. _YouTube: http://youtube.com
+.. _Markdown: https://pypi.python.org/pypi/pyembed-markdown
+.. _reStructuredText: https://pypi.python.org/pypi/pyembed-rst
+.. _Jinja2: https://pypi.python.org/pypi/pyembed-jinja2
+.. _Mustache: https://pypi.python.org/pypi/pyembed-mustache
+.. _PyEmbed: http://pyembed.github.io
 .. _GitHub: https://github.com/pyembed/pyembed
