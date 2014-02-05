@@ -69,7 +69,7 @@ setup(
     cmdclass={'test': PyTest},
 
     classifiers=[
-        'Development Status :: 5 - Production / Stable',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'License :: OSI Approved :: MIT License',
