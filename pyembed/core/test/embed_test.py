@@ -30,61 +30,66 @@ import pytest
 
 def test_should_embed():
     with patch('pyembed.core.consumer.get_oembed_response') as mock_get:
-        mock_response = Mock()
-        mock_get.return_value = mock_response
-
         discoverer = Mock()
-        discoverer.get_oembed_url = lambda url, max_width, max_height: \
-            ('json', 'http://example.com/oembed?format=json')
+        discoverer.get_oembed_url.return_value = (
+            'json', 'http://example.com/oembed?format=json')
+
+        response = Mock()
+        mock_get.return_value = response
 
         renderer = Mock()
-        renderer.render = lambda content_url, response: \
-            '<h1>hi</h1>' if (response == mock_response) else pytest.fail('Wrong response')
+        renderer.render.return_value = '<h1>hi</h1>'
 
-        result = PyEmbed(discoverer, renderer).embed(
-            'http://example.com/', 100, 200)
+        result = PyEmbed(discoverer, renderer).embed('http://example.com/')
         assert_that(result, equal_to('<h1>hi</h1>'))
 
+        discoverer.get_oembed_url.assert_called_with(
+            'http://example.com/', max_width=None, max_height=None)
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json', 'json')
+        renderer.render.assert_called_with('http://example.com/', response)
 
 
 def test_should_embed_xml():
     with patch('pyembed.core.consumer.get_oembed_response') as mock_get:
-        mock_response = Mock()
-        mock_get.return_value = mock_response
-
         discoverer = Mock()
-        discoverer.get_oembed_url = lambda url, max_width, max_height: \
-            ('xml', 'http://example.com/oembed?format=xml')
+        discoverer.get_oembed_url.return_value = (
+            'xml', 'http://example.com/oembed?format=xml')
+
+        response = Mock()
+        mock_get.return_value = response
 
         renderer = Mock()
-        renderer.render = lambda content_url, response: \
-            '<h1>hi</h1>' if (response == mock_response) else pytest.fail('Wrong response')
+        renderer.render.return_value = '<h1>hi</h1>'
+
+        result = PyEmbed(discoverer, renderer).embed('http://example.com/')
+        assert_that(result, equal_to('<h1>hi</h1>'))
+
+        discoverer.get_oembed_url.assert_called_with(
+            'http://example.com/', max_width=None, max_height=None)
+        mock_get.assert_called_with(
+            'http://example.com/oembed?format=xml', 'xml')
+        renderer.render.assert_called_with('http://example.com/', response)
+
+
+def test_should_embed_with_max_width_and_height():
+    with patch('pyembed.core.consumer.get_oembed_response') as mock_get:
+        discoverer = Mock()
+        discoverer.get_oembed_url.return_value = (
+            'json', 'http://example.com/oembed?format=json')
+
+        response = Mock()
+        mock_get.return_value = response
+
+        renderer = Mock()
+        renderer.render.return_value = '<h1>hi</h1>'
 
         result = PyEmbed(discoverer, renderer).embed(
             'http://example.com/', 100, 200)
         assert_that(result, equal_to('<h1>hi</h1>'))
 
-        mock_get.assert_called_with(
-            'http://example.com/oembed?format=xml', 'xml')
-
-
-def test_should_embed_with_max_width_and_height():
-    with patch('pyembed.core.consumer.get_oembed_response') as mock_get:
-        mock_response = Mock()
-        mock_get.return_value = mock_response
-
-        discoverer = Mock()
-        discoverer.get_oembed_url = lambda url, max_width, max_height: \
-            ('json', 'http://example.com/oembed?format=json')
-
-        renderer = Mock()
-        renderer.render = lambda content_url, response: \
-            '<h1>hi</h1>' if (response == mock_response) else pytest.fail('Wrong response')
-
-        result = PyEmbed(discoverer, renderer).embed('http://example.com/', 100, 200)
-        assert_that(result, equal_to('<h1>hi</h1>'))
-
+        discoverer.get_oembed_url.assert_called_with(
+            'http://example.com/', max_width=100, max_height=200)
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json', 'json')
+        renderer.render.assert_called_with('http://example.com/', response)
