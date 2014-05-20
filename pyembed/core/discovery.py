@@ -69,12 +69,12 @@ def get_oembed_url(url, format=None, max_width=None, max_height=None):
     link = soup.find('link', type=media_type, href=True)
 
     if not link:
-        raise PyEmbedDiscoveryError('Could not find OEmbed URL for %s' % url)
+        raise PyEmbedDiscoveryError(
+            'Could not find OEmbed URL for %s' % url)
 
     discovered_url = __format_url(url, link['href'], max_width, max_height)
 
     return (FORMATS[link['type']], discovered_url)
-
 
 def __get_type(format):
     if not format:
@@ -84,7 +84,6 @@ def __get_type(format):
 
     raise PyEmbedDiscoveryError(
         'Invalid format %s specified (must be json or xml)' % format)
-
 
 def __format_url(content_url, embed_url, max_width=None, max_height=None):
     url = urljoin(content_url, embed_url)

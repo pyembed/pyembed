@@ -29,12 +29,8 @@ import pytest
 
 
 def test_should_discover_and_get_oembed_url():
-    with patch('pyembed.core.discovery.get_oembed_url') as mock_get_url, \
-        patch('pyembed.core.parse.parse_oembed') as mock_parse, \
-            patch('requests.get') as mock_get:
-
-        mock_get_url.return_value = (
-            'json', 'http://example.com/oembed?format=json')
+    with patch('requests.get') as mock_get, \
+            patch('pyembed.core.parse.parse_oembed') as mock_parse:
 
         response = Mock()
         response.ok = True
@@ -45,52 +41,20 @@ def test_should_discover_and_get_oembed_url():
         mock_parse.return_value = parsed
 
         assert_that(consumer.get_oembed_response(
-            'http://example.com/'), equal_to(parsed))
+            'http://example.com/oembed?format=json', 'json'), equal_to(parsed))
 
-        mock_get_url.assert_called_with(
-            'http://example.com/', max_width=None, max_height=None)
         mock_get.assert_called_with('http://example.com/oembed?format=json')
         mock_parse.assert_called_with('json', 'hello, world')
 
 
-def test_should_discover_and_get_oembed_url_with_max_width_and_height():
-    with patch('pyembed.core.discovery.get_oembed_url') as mock_get_url, \
-        patch('pyembed.core.parse.parse_oembed') as mock_parse, \
-            patch('requests.get') as mock_get:
-
-        mock_get_url.return_value = (
-            'json',
-            'http://example.com/oembed?format=json&maxwidth=100&maxheight=200')
-
-        response = Mock()
-        response.ok = True
-        response.text = 'hello, world'
-        mock_get.return_value = response
-
-        parsed = Mock()
-        mock_parse.return_value = parsed
-
-        assert_that(consumer.get_oembed_response(
-            'http://example.com/', 100, 200), equal_to(parsed))
-
-        mock_get_url.assert_called_with(
-            'http://example.com/', max_width=100, max_height=200)
-        mock_get.assert_called_with(
-            'http://example.com/oembed?format=json&maxwidth=100&maxheight=200')
-        mock_parse.assert_called_with('json', 'hello, world')
-
-
 def test_should_raise_error_on_request_error():
-    with patch('pyembed.core.discovery.get_oembed_url') as mock_get_url, \
-        patch('requests.get') as mock_get, \
+    with patch('requests.get') as mock_get, \
             pytest.raises(consumer.PyEmbedConsumerError):
-
-        mock_get_url.return_value = (
-            'json', 'http://example.com/oembed?format=json')
 
         response = Mock()
         response.ok = False
         response.text = 'hello, world'
         mock_get.return_value = response
 
-        consumer.get_oembed_response('http://example.com/')
+        consumer.get_oembed_response(
+            'http://example.com/oembed?format=json', 'json')

@@ -29,7 +29,11 @@ import pytest
 
 
 def test_should_embed():
-    with patch('pyembed.core.consumer.get_oembed_response') as mock_get:
+    with patch('pyembed.core.discovery.get_oembed_url') as mock_discover, \
+            patch('pyembed.core.consumer.get_oembed_response') as mock_get:
+        mock_discover.return_value = (
+            'json', 'http://example.com/oembed?format=json')
+
         response = Mock()
         response.type = 'rich'
         response.html = '<h1>hello</h1>'
@@ -39,11 +43,39 @@ def test_should_embed():
         result = PyEmbed().embed('http://example.com/')
         assert_that(result, equal_to('<h1>hello</h1>'))
 
-        mock_get.assert_called_with('http://example.com/', None, None)
+        mock_discover.assert_called_with(
+            'http://example.com/', max_width=None, max_height=None)
+        mock_get.assert_called_with(
+            'http://example.com/oembed?format=json', 'json')
+
+
+def test_should_embed_xml():
+    with patch('pyembed.core.discovery.get_oembed_url') as mock_discover, \
+            patch('pyembed.core.consumer.get_oembed_response') as mock_get:
+        mock_discover.return_value = (
+            'xml', 'http://example.com/oembed?format=xml')
+
+        response = Mock()
+        response.type = 'rich'
+        response.html = '<h1>hello</h1>'
+
+        mock_get.return_value = response
+
+        result = PyEmbed().embed('http://example.com/')
+        assert_that(result, equal_to('<h1>hello</h1>'))
+
+        mock_discover.assert_called_with(
+            'http://example.com/', max_width=None, max_height=None)
+        mock_get.assert_called_with(
+            'http://example.com/oembed?format=xml', 'xml')
 
 
 def test_should_embed_with_max_width_and_height():
-    with patch('pyembed.core.consumer.get_oembed_response') as mock_get:
+    with patch('pyembed.core.discovery.get_oembed_url') as mock_discover, \
+            patch('pyembed.core.consumer.get_oembed_response') as mock_get:
+        mock_discover.return_value = (
+            'json', 'http://example.com/oembed?format=json')
+
         response = Mock()
         response.type = 'rich'
         response.html = '<h1>hello</h1>'
@@ -53,11 +85,18 @@ def test_should_embed_with_max_width_and_height():
         result = PyEmbed().embed('http://example.com/', 100, 200)
         assert_that(result, equal_to('<h1>hello</h1>'))
 
-        mock_get.assert_called_with('http://example.com/', 100, 200)
+        mock_discover.assert_called_with(
+            'http://example.com/', max_width=100, max_height=200)
+        mock_get.assert_called_with(
+            'http://example.com/oembed?format=json', 'json')
 
 
 def test_should_embed_with_custom_renderer():
-    with patch('pyembed.core.consumer.get_oembed_response') as mock_get:
+    with patch('pyembed.core.discovery.get_oembed_url') as mock_discover, \
+            patch('pyembed.core.consumer.get_oembed_response') as mock_get:
+        mock_discover.return_value = (
+            'json', 'http://example.com/oembed?format=json')
+
         response = Mock()
         response.type = 'rich'
         response.html = '<h1>hello</h1>'
@@ -70,4 +109,7 @@ def test_should_embed_with_custom_renderer():
         result = PyEmbed(renderer).embed('http://example.com/', 100, 200)
         assert_that(result, equal_to('<h1>hi</h1>'))
 
-        mock_get.assert_called_with('http://example.com/', 100, 200)
+        mock_discover.assert_called_with(
+            'http://example.com/', max_width=100, max_height=200)
+        mock_get.assert_called_with(
+            'http://example.com/oembed?format=json', 'json')
