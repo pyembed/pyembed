@@ -21,16 +21,18 @@
 # THE SOFTWARE.
 
 from pyembed.core import consumer
+from pyembed.core.discovery import AutoDiscoverer
 from pyembed.core.render import DefaultRenderer
 
 
 class PyEmbed(object):
 
-    def __init__(self, renderer=DefaultRenderer()):
+    def __init__(self, discoverer=AutoDiscoverer(), renderer=DefaultRenderer()):
         """OEmbed consumer with automatic discovery.
 
         :param renderer: (optional) renderer to render the response.
         """
+        self.discoverer = discoverer
         self.renderer = renderer
 
     def embed(self,
@@ -46,7 +48,7 @@ class PyEmbed(object):
         :returns: an HTML representation of the resource.
         :raises PyEmbedError: if there is an error fetching the response.
         """
-        (discovered_format, oembed_url) = discovery.get_oembed_url(
+        (discovered_format, oembed_url) = self.discoverer.get_oembed_url(
             url, max_width=max_width, max_height=max_height)
         response = consumer.get_oembed_response(oembed_url, discovered_format)
         return self.renderer.render(url, response)
