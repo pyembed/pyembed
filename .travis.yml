@@ -11,6 +11,7 @@ script:
   - coverage report --fail-under=100
 deploy:
   provider: pypi
+  distributions: "sdist bdist_wheel"
   user:
     secure: JTZF5j+XNPJpsL2tnzizYLwalu1T27RrfoKQe8ppVseQ166eYxyBWIhMDtXVAmBFL4YaUwbqb6//KrfwVK5NrnWSAQvuxJxcWLqbhkEQQlbfljBGmQESKPOq/KUJAjWcYIPOmTjirpPenTQU59JGaajKfCrSHusU3czhbUfQPM4=
   password:
