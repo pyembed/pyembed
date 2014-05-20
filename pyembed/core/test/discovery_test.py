@@ -27,6 +27,11 @@ from mock import patch, Mock
 import pytest
 
 
+def test_must_override_get_oembed_url():
+    with pytest.raises(NotImplementedError):
+        discovery.PyEmbedDiscoverer().get_oembed_url('http://example.com')
+
+
 def test_should_find_oembed_url_using_json_by_default():
     expected_url = 'http://example.com/oembed?format=json'
     assert_that(get_oembed_url(),

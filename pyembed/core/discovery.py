@@ -48,7 +48,7 @@ class PyEmbedDiscoverer(object):
 
     """Base class for discovering OEmbed URLs."""
 
-    def get_oembed_url(url, format=None, max_width=None, max_height=None):
+    def get_oembed_url(self, url, format=None, max_width=None, max_height=None):
         """Retrieves the OEmbed URL for a given resource.
 
         :param url: resource URL.
