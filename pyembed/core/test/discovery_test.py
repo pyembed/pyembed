@@ -56,47 +56,6 @@ def test_should_return_xml_if_json_not_present():
                 equal_to(('xml', expected_url)))
 
 
-def test_should_add_max_width_when_query_string_present():
-    expected_url = 'http://example.com/oembed?format=json&maxwidth=100'
-    assert_that(get_oembed_url(max_width=100),
-                equal_to(('json', expected_url)))
-
-
-def test_should_add_max_height_when_query_string_present():
-    expected_url = 'http://example.com/oembed?format=json&maxheight=200'
-    assert_that(get_oembed_url(max_height=200),
-                equal_to(('json', expected_url)))
-
-
-def test_should_add_max_width_and_height_when_query_string_present():
-    expected_url = \
-        'http://example.com/oembed?format=json&maxwidth=100&maxheight=200'
-    assert_that(get_oembed_url(max_width=100, max_height=200),
-                equal_to(('json', expected_url)))
-
-
-def test_should_add_max_width_when_no_query_string_present():
-    expected_url = 'http://example.com/oembed?maxwidth=100'
-    assert_that(
-        get_oembed_url(fixture='no_query_string.html', max_width=100),
-        equal_to(('json', expected_url)))
-
-
-def test_should_add_max_height_when_no_query_string_present():
-    expected_url = 'http://example.com/oembed?maxheight=200'
-    assert_that(
-        get_oembed_url(fixture='no_query_string.html', max_height=200),
-        equal_to(('json', expected_url)))
-
-
-def test_should_add_max_width_and_height_when_no_query_string_present():
-    expected_url = 'http://example.com/oembed?maxwidth=100&maxheight=200'
-    assert_that(
-        get_oembed_url(
-            fixture='no_query_string.html', max_width=100, max_height=200),
-        equal_to(('json', expected_url)))
-
-
 def test_should_find_oembed_url_using_json_with_relative_url():
     expected_url = 'http://example.com/oembed?format=json'
     assert_that(get_oembed_url(fixture='relative_url.html', format='json'),
@@ -131,8 +90,6 @@ def test_should_throw_error_on_error_response():
 
 def get_oembed_url(fixture='valid_oembed.html',
                    format=None,
-                   max_width=None,
-                   max_height=None,
                    ok=True):
     with patch('requests.get') as mock_get:
         response = Mock()
@@ -142,7 +99,7 @@ def get_oembed_url(fixture='valid_oembed.html',
         mock_get.return_value = response
 
         result = discovery.AutoDiscoverer().get_oembed_url(
-            'http://example.com', format, max_width, max_height)
+            'http://example.com', format)
 
         mock_get.assert_called_with('http://example.com')
         return result

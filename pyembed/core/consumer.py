@@ -25,25 +25,48 @@ from pyembed.core.error import PyEmbedError
 
 import requests
 
+try:  # pragma: no cover
+    from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
+    from urllib import urlencode
+except ImportError:  # pragma: no cover
+    from urllib.parse import parse_qsl, urljoin, urlsplit, urlunsplit, urlencode
+
 
 class PyEmbedConsumerError(PyEmbedError):
 
     """Thrown if there is an error discovering an OEmbed URL."""
 
 
-def get_oembed_response(oembed_url, oembed_format):
+def get_oembed_response(oembed_url, oembed_format, max_width=None, max_height=None):
     """Fetches an OEmbed response for a given URL.
 
     :param oembed_url: the OEmbed URL.
-    :param oembed_format: the OEmbed format (json/xml).
+    :param oembed_format: the OEmbed format.  One of 'json', 'xml'.
+    :param max_width: (optional) the maximum width of the embedded resource.
+    :param max_height: (optional) the maximum height of the embedded resource.
     :returns: an PyEmbedResponse, representing the resource to embed.
     :raises PyEmbedError: if there is an error fetching the response.
     """
 
-    response = requests.get(oembed_url)
+    response = requests.get(__format_url(oembed_url, max_width, max_height))
 
     if not response.ok:
         raise PyEmbedConsumerError('Failed to get %s (status code %s)' % (
             oembed_url, response.status_code))
 
     return parse.parse_oembed(oembed_format, response.text)
+
+
+def __format_url(oembed_url, max_width=None, max_height=None):
+    scheme, netloc, path, query_string, fragment = urlsplit(oembed_url)
+    query_params = parse_qsl(query_string)
+
+    if max_width is not None:
+        query_params.append(('maxwidth', max_width))
+
+    if max_height:
+        query_params.append(('maxheight', max_height))
+
+    new_query_string = urlencode(query_params, doseq=True)
+
+    return urlunsplit((scheme, netloc, path, new_query_string, fragment))

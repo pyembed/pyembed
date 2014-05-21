@@ -48,7 +48,7 @@ class PyEmbed(object):
         :returns: an HTML representation of the resource.
         :raises PyEmbedError: if there is an error fetching the response.
         """
-        (discovered_format, oembed_url) = self.discoverer.get_oembed_url(
-            url, max_width=max_width, max_height=max_height)
-        response = consumer.get_oembed_response(oembed_url, discovered_format)
+        (discovered_format, oembed_url) = self.discoverer.get_oembed_url(url)
+        response = consumer.get_oembed_response(
+            oembed_url, discovered_format, max_width=max_width, max_height=max_height)
         return self.renderer.render(url, response)

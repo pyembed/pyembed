@@ -26,10 +26,9 @@ import requests
 from bs4 import BeautifulSoup
 
 try:  # pragma: no cover
-    from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
-    from urllib import urlencode
+    from urlparse import urljoin
 except ImportError:  # pragma: no cover
-    from urllib.parse import parse_qsl, urljoin, urlsplit, urlunsplit, urlencode
+    from urllib.parse import urljoin
 
 MEDIA_TYPES = {
     'json': 'application/json+oembed',
@@ -48,15 +47,13 @@ class PyEmbedDiscoverer(object):
 
     """Base class for discovering OEmbed URLs."""
 
-    def get_oembed_url(self, url, format=None, max_width=None, max_height=None):
+    def get_oembed_url(self, url, format=None):
         """Retrieves the OEmbed URL for a given resource.
 
         :param url: resource URL.
         :param format: if supplied, restricts the format to use for OEmbed.  If
                        None, then the first URL found will be used.  One of
                        'json', 'xml'.
-        :param max_width: (optional) the maximum width of the embedded resource.
-        :param max_height: (optional) the maximum height of the embedded resource.
 
         :returns: a tuple of the OEmbed format (json/xml), and the OEmbed URL 
         for the resource.
@@ -68,19 +65,11 @@ class PyEmbedDiscoverer(object):
 
 class AutoDiscoverer(PyEmbedDiscoverer):
 
-    def get_oembed_url(self, url, format=None, max_width=None, max_height=None):
-        """Retrieves the OEmbed URL for a given resource.
+    """Discoverer that tries to automatically find the OEmbed URL within the 
+    HTML page.
+    """
 
-        :param url: resource URL.
-        :param format: if supplied, restricts the format to use for OEmbed.  If
-                       None, then the first URL found will be used.  One of
-                       'json', 'xml'.
-        :param max_width: (optional) the maximum width of the embedded resource.
-        :param max_height: (optional) the maximum height of the embedded resource.
-
-        :returns: OEmbed URL for the resource.
-        :raises PyEmbedDiscoveryError: if there is an error getting the OEmbed URL.
-        """
+    def get_oembed_url(self, url, format=None):
         media_type = self.__get_type(format)
 
         response = requests.get(url)
@@ -96,8 +85,7 @@ class AutoDiscoverer(PyEmbedDiscoverer):
             raise PyEmbedDiscoveryError(
                 'Could not find OEmbed URL for %s' % url)
 
-        discovered_url = self.__format_url(
-            url, link['href'], max_width, max_height)
+        discovered_url = urljoin(url, link['href'])
 
         return (FORMATS[link['type']], discovered_url)
 
@@ -109,18 +97,3 @@ class AutoDiscoverer(PyEmbedDiscoverer):
 
         raise PyEmbedDiscoveryError(
             'Invalid format %s specified (must be json or xml)' % format)
-
-    def __format_url(self, content_url, embed_url, max_width=None, max_height=None):
-        url = urljoin(content_url, embed_url)
-        scheme, netloc, path, query_string, fragment = urlsplit(url)
-        query_params = parse_qsl(query_string)
-
-        if max_width is not None:
-            query_params.append(('maxwidth', max_width))
-
-        if max_height:
-            query_params.append(('maxheight', max_height))
-
-        new_query_string = urlencode(query_params, doseq=True)
-
-        return urlunsplit((scheme, netloc, path, new_query_string, fragment))

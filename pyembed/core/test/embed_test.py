@@ -43,10 +43,9 @@ def test_should_embed():
         result = PyEmbed(discoverer, renderer).embed('http://example.com/')
         assert_that(result, equal_to('<h1>hi</h1>'))
 
-        discoverer.get_oembed_url.assert_called_with(
-            'http://example.com/', max_width=None, max_height=None)
+        discoverer.get_oembed_url.assert_called_with('http://example.com/')
         mock_get.assert_called_with(
-            'http://example.com/oembed?format=json', 'json')
+            'http://example.com/oembed?format=json', 'json', max_width=None, max_height=None)
         renderer.render.assert_called_with('http://example.com/', response)
 
 
@@ -65,10 +64,9 @@ def test_should_embed_xml():
         result = PyEmbed(discoverer, renderer).embed('http://example.com/')
         assert_that(result, equal_to('<h1>hi</h1>'))
 
-        discoverer.get_oembed_url.assert_called_with(
-            'http://example.com/', max_width=None, max_height=None)
+        discoverer.get_oembed_url.assert_called_with('http://example.com/')
         mock_get.assert_called_with(
-            'http://example.com/oembed?format=xml', 'xml')
+            'http://example.com/oembed?format=xml', 'xml', max_width = None, max_height = None)
         renderer.render.assert_called_with('http://example.com/', response)
 
 
@@ -88,8 +86,7 @@ def test_should_embed_with_max_width_and_height():
             'http://example.com/', 100, 200)
         assert_that(result, equal_to('<h1>hi</h1>'))
 
-        discoverer.get_oembed_url.assert_called_with(
-            'http://example.com/', max_width=100, max_height=200)
+        discoverer.get_oembed_url.assert_called_with('http://example.com/')
         mock_get.assert_called_with(
-            'http://example.com/oembed?format=json', 'json')
+            'http://example.com/oembed?format=json', 'json', max_width=100, max_height=200)
         renderer.render.assert_called_with('http://example.com/', response)
