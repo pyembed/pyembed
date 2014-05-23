@@ -22,13 +22,16 @@
 
 from pyembed.core.error import PyEmbedError
 
-import requests
 from bs4 import BeautifulSoup
+import re
+import requests
+import yaml
 
 try:  # pragma: no cover
-    from urlparse import urljoin
+    from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
+    from urllib import urlencode
 except ImportError:  # pragma: no cover
-    from urllib.parse import urljoin
+    from urllib.parse import parse_qsl, urljoin, urlsplit, urlunsplit, urlencode
 
 MEDIA_TYPES = {
     'json': 'application/json+oembed',
@@ -55,8 +58,7 @@ class PyEmbedDiscoverer(object):
                        None, then the first URL found will be used.  One of
                        'json', 'xml'.
 
-        :returns: a tuple of the OEmbed format (json/xml), and the OEmbed URL 
-        for the resource.
+        :returns: the OEmbed URL for the resource.
         :raises PyEmbedDiscoveryError: if there is an error getting the OEmbed URL.
         """
         raise NotImplementedError(
@@ -85,9 +87,7 @@ class AutoDiscoverer(PyEmbedDiscoverer):
             raise PyEmbedDiscoveryError(
                 'Could not find OEmbed URL for %s' % url)
 
-        discovered_url = urljoin(url, link['href'])
-
-        return (FORMATS[link['type']], discovered_url)
+        return urljoin(url, link['href'])
 
     def __get_type(self, format):
         if not format:

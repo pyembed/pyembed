@@ -35,10 +35,37 @@ def test_should_discover_and_get_oembed_url():
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
-            'http://example.com/oembed', 'json'), equal_to(result))
+            'http://example.com/oembed'), equal_to(result))
 
         mock_get.assert_called_with('http://example.com/oembed')
-        mock_parse.assert_called_with('json', 'hello, world')
+        mock_parse.assert_called_with('hello, world', 'application/json')
+
+
+def test_should_discover_and_get_oembed_url_for_xml():
+    with patch('requests.get') as mock_get, \
+            patch('pyembed.core.parse.parse_oembed') as mock_parse:
+
+        result = __set_up_mocks(mock_get, mock_parse, 'text/xml')
+
+        assert_that(consumer.get_oembed_response(
+            'http://example.com/oembed'), equal_to(result))
+
+        mock_get.assert_called_with('http://example.com/oembed')
+        mock_parse.assert_called_with('hello, world', 'text/xml')
+
+
+def test_should_discover_and_get_oembed_url_with_charset():
+    with patch('requests.get') as mock_get, \
+            patch('pyembed.core.parse.parse_oembed') as mock_parse:
+
+        result = __set_up_mocks(
+            mock_get, mock_parse, 'application/json;charset=utf-8')
+
+        assert_that(consumer.get_oembed_response(
+            'http://example.com/oembed'), equal_to(result))
+
+        mock_get.assert_called_with('http://example.com/oembed')
+        mock_parse.assert_called_with('hello, world', 'application/json')
 
 
 def test_should_add_max_width():
@@ -48,10 +75,10 @@ def test_should_add_max_width():
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
-            'http://example.com/oembed', 'json', max_width=100), equal_to(result))
+            'http://example.com/oembed', max_width=100), equal_to(result))
 
         mock_get.assert_called_with('http://example.com/oembed?maxwidth=100')
-        mock_parse.assert_called_with('json', 'hello, world')
+        mock_parse.assert_called_with('hello, world', 'application/json')
 
 
 def test_should_add_max_height():
@@ -61,10 +88,10 @@ def test_should_add_max_height():
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
-            'http://example.com/oembed', 'json', max_height=200), equal_to(result))
+            'http://example.com/oembed', max_height=200), equal_to(result))
 
         mock_get.assert_called_with('http://example.com/oembed?maxheight=200')
-        mock_parse.assert_called_with('json', 'hello, world')
+        mock_parse.assert_called_with('hello, world', 'application/json')
 
 
 def test_should_add_max_width_and_height():
@@ -74,11 +101,11 @@ def test_should_add_max_width_and_height():
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
-            'http://example.com/oembed', 'json', max_width=100, max_height=200), equal_to(result))
+            'http://example.com/oembed', max_width=100, max_height=200), equal_to(result))
 
         mock_get.assert_called_with(
             'http://example.com/oembed?maxwidth=100&maxheight=200')
-        mock_parse.assert_called_with('json', 'hello, world')
+        mock_parse.assert_called_with('hello, world', 'application/json')
 
 
 def test_should_add_max_width_when_query_string_present():
@@ -88,11 +115,11 @@ def test_should_add_max_width_when_query_string_present():
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
-            'http://example.com/oembed?format=json', 'json', max_width=100), equal_to(result))
+            'http://example.com/oembed?format=json', max_width=100), equal_to(result))
 
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json&maxwidth=100')
-        mock_parse.assert_called_with('json', 'hello, world')
+        mock_parse.assert_called_with('hello, world', 'application/json')
 
 
 def test_should_add_max_height_when_query_string_present():
@@ -102,11 +129,11 @@ def test_should_add_max_height_when_query_string_present():
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
-            'http://example.com/oembed?format=json', 'json', max_height=200), equal_to(result))
+            'http://example.com/oembed?format=json', max_height=200), equal_to(result))
 
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json&maxheight=200')
-        mock_parse.assert_called_with('json', 'hello, world')
+        mock_parse.assert_called_with('hello, world', 'application/json')
 
 
 def test_should_add_max_width_and_height_when_query_string_present():
@@ -116,11 +143,11 @@ def test_should_add_max_width_and_height_when_query_string_present():
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
-            'http://example.com/oembed?format=json', 'json', max_width=100, max_height=200), equal_to(result))
+            'http://example.com/oembed?format=json', max_width=100, max_height=200), equal_to(result))
 
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json&maxwidth=100&maxheight=200')
-        mock_parse.assert_called_with('json', 'hello, world')
+        mock_parse.assert_called_with('hello, world', 'application/json')
 
 
 def test_should_raise_error_on_request_error():
@@ -132,13 +159,15 @@ def test_should_raise_error_on_request_error():
         response.text = 'hello, world'
         mock_get.return_value = response
 
-        consumer.get_oembed_response('http://example.com/oembed', 'json')
+        consumer.get_oembed_response('http://example.com/oembed')
 
 
-def __set_up_mocks(mock_get, mock_parse):
+def __set_up_mocks(mock_get, mock_parse, content_type='application/json'):
     response = Mock()
     response.ok = True
     response.text = 'hello, world'
+    response.headers = {'content-type': content_type}
+
     mock_get.return_value = response
 
     parsed = Mock()

@@ -37,11 +37,10 @@ class PyEmbedConsumerError(PyEmbedError):
     """Thrown if there is an error discovering an OEmbed URL."""
 
 
-def get_oembed_response(oembed_url, oembed_format, max_width=None, max_height=None):
+def get_oembed_response(oembed_url, max_width=None, max_height=None):
     """Fetches an OEmbed response for a given URL.
 
     :param oembed_url: the OEmbed URL.
-    :param oembed_format: the OEmbed format.  One of 'json', 'xml'.
     :param max_width: (optional) the maximum width of the embedded resource.
     :param max_height: (optional) the maximum height of the embedded resource.
     :returns: an PyEmbedResponse, representing the resource to embed.
@@ -54,7 +53,8 @@ def get_oembed_response(oembed_url, oembed_format, max_width=None, max_height=No
         raise PyEmbedConsumerError('Failed to get %s (status code %s)' % (
             oembed_url, response.status_code))
 
-    return parse.parse_oembed(oembed_format, response.text)
+    content_type = response.headers['content-type'].split(';')[0]
+    return parse.parse_oembed(response.text, content_type)
 
 
 def __format_url(oembed_url, max_width=None, max_height=None):

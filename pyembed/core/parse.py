@@ -37,15 +37,15 @@ class PyEmbedParseError(PyEmbedError):
     """Thrown if there is an error parsing an OEmbed response."""
 
 
-def parse_oembed(format, response):
+def parse_oembed(response, content_type):
     """Parses an OEmbed response.
 
-    :param format: format of the response.  One of 'json', 'xml'.
-    :param response: the OEmbed response, in the given format.
+    :param response: the OEmbed response body.
+    :param content_type: the content type of the response.
     :returns: an PyEmbedResponse for the given response.
     :raises PyEmbedParseError: if there is an error parsing the response.
     """
-    return PARSE_FUNCTIONS[format](response)
+    return PARSE_FUNCTIONS[content_type](response)
 
 
 def parse_oembed_json(response):
@@ -102,5 +102,5 @@ def __construct_response(value_function):
 
     return RESPONSE_CLASSES[type](value_function)
 
-PARSE_FUNCTIONS = {'json': parse_oembed_json,
-                   'xml': parse_oembed_xml}
+PARSE_FUNCTIONS = {'application/json': parse_oembed_json,
+                   'text/xml': parse_oembed_xml}
