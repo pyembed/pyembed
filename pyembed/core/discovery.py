@@ -23,6 +23,7 @@
 from pyembed.core.error import PyEmbedError
 
 from bs4 import BeautifulSoup
+import functools
 import re
 import requests
 import yaml
@@ -97,3 +98,82 @@ class AutoDiscoverer(PyEmbedDiscoverer):
 
         raise PyEmbedDiscoveryError(
             'Invalid format %s specified (must be json or xml)' % format)
+
+
+class StaticDiscoverer(PyEmbedDiscoverer):
+
+    """Discoverer that uses a YAML file to discover the OEmbed URL.
+    """
+
+    def __init__(self, file):
+        with open(file) as f:
+            self.endpoints = [StaticDiscoveryEndpoint(e)
+                              for e in yaml.load(f.read())]
+
+    def get_oembed_url(self, url, oembed_format=None):
+        if oembed_format and oembed_format not in MEDIA_TYPES:
+            raise PyEmbedDiscoveryError(
+                'Invalid format %s specified (must be json or xml)' % oembed_format)
+
+        for endpoint in self.endpoints:
+            if endpoint.matches(url, oembed_format):
+                return endpoint.build_oembed_url(url, oembed_format)
+
+        raise PyEmbedDiscoveryError('Did not find OEmbed URL for %s' % url)
+
+
+class StaticDiscoveryEndpoint(object):
+
+    """Applies static discovery rules for a single endpoint.
+    """
+
+    def __init__(self, endpoint):
+        self.matchers = [self.__create_matcher(s)
+                         for s in self.__extract_schemes(endpoint)]
+        self.endpoint = self.__extract_endpoint(endpoint)
+        self.oembed_format = endpoint.get('format')
+
+    def matches(self, url, oembed_format=None):
+        if not self.__format_matches(oembed_format):
+            return False
+
+        return any((matcher(url) for matcher in self.matchers))
+
+    def build_oembed_url(self, content_url, oembed_format=None):
+        scheme, netloc, path, query_string, fragment = urlsplit(self.endpoint)
+        query_params = parse_qsl(query_string)
+        query_params.append(('url', content_url))
+
+        if (oembed_format):
+            query_params.append(('format', oembed_format))
+
+        new_query_string = urlencode(query_params, doseq=True)
+        return urlunsplit((scheme, netloc, path, new_query_string, fragment))
+
+    def __extract_schemes(self, endpoint):
+        result = endpoint.get('schemes')
+        if not result:
+            raise PyEmbedDiscoveryError(
+                'Malformed discovery config (must specify schemes)')
+
+        return result
+
+    def __extract_endpoint(self, endpoint):
+        result = endpoint.get('endpoint')
+        if not result:
+            raise PyEmbedDiscoveryError(
+                'Malformed discovery config (must specify an endpoint)')
+
+        return result
+
+    def __create_matcher(self, scheme):
+        regex = re.compile(scheme.replace('*', '.*'))
+        return functools.partial(self.__matcher, regex)
+
+    def __matcher(self, regex, url):
+        return regex.match(url)
+
+    def __format_matches(self, oembed_format):
+        return (not oembed_format) or \
+            (not self.oembed_format) or \
+            (oembed_format == self.oembed_format)
