@@ -1,0 +1,4 @@
+- endpoint: http://www.rdio.com/api/oembed/
+  schemes:
+    - http://*.rdio.com/artist/*
+    - http://*.rdio.com/people/*

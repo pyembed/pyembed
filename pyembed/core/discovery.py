@@ -23,6 +23,8 @@
 from pyembed.core.error import PyEmbedError
 
 from bs4 import BeautifulSoup
+from pkg_resources import resource_filename
+
 import functools
 import re
 import requests
@@ -64,25 +66,6 @@ class PyEmbedDiscoverer(object):
         """
         raise NotImplementedError(
             'No get_oembed_url method for discoverer of type %s' % type(self).__name__)
-
-
-class ChainingDiscoverer(PyEmbedDiscoverer):
-
-    """Discoverer that delegates to a sequence of other discoverers, returning
-    the first valid result."""
-
-    def __init__(self, delegates):
-        self.delegates = delegates
-
-    def get_oembed_url(self, url, format=None):
-        for delegate in self.delegates:
-            try:
-                return delegate.get_oembed_url(url, format)
-            except PyEmbedDiscoveryError:
-                continue
-
-        raise PyEmbedDiscoveryError(
-            'Failed to discover OEmbed URL for %s' % url)
 
 
 class AutoDiscoverer(PyEmbedDiscoverer):
@@ -196,3 +179,35 @@ class StaticDiscoveryEndpoint(object):
         return (not oembed_format) or \
             (not self.oembed_format) or \
             (oembed_format == self.oembed_format)
+
+
+class ChainingDiscoverer(PyEmbedDiscoverer):
+
+    """Discoverer that delegates to a sequence of other discoverers, returning
+    the first valid result."""
+
+    def __init__(self, delegates):
+        self.delegates = delegates
+
+    def get_oembed_url(self, url, format=None):
+        for delegate in self.delegates:
+            try:
+                return delegate.get_oembed_url(url, format)
+            except PyEmbedDiscoveryError:
+                continue
+
+        raise PyEmbedDiscoveryError(
+            'Failed to discover OEmbed URL for %s' % url)
+
+
+class DefaultDiscoverer(ChainingDiscoverer):
+
+    """Discoverer that uses auto-discovery, followed by the included config
+    file."""
+
+    def __init__(self):
+        super(DefaultDiscoverer, self).__init__([
+            AutoDiscoverer(),
+            StaticDiscoverer(
+                resource_filename(__name__, 'config/endpoints.yml'))
+        ])

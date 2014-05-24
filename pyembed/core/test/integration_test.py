@@ -60,7 +60,7 @@ def test_should_embed_with_custom_renderer():
         'http://www.youtube.com/watch?v=qrO4YZeyl0I'))
 
 
-@pytest.mark.xfail
 def test_should_embed_when_no_discovery():
-    embedding = PyEmbed(renderer=DummyRenderer()).embed(
+    embedding = PyEmbed().embed(
         'http://www.rdio.com/artist/Mike_Oldfield/album/Amarok/')
+    assert_that(embedding, contains_string('rd.io'))

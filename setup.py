@@ -56,6 +56,12 @@ setup(
     packages=['pyembed.core'],
     namespace_packages=['pyembed'],
 
+    package_data={
+        "pyembed.core": [
+            "config/endpoints.yml"
+        ]
+    },
+
     install_requires=[
         'beautifulsoup4',
         'requests',

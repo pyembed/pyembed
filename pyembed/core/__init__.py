@@ -21,13 +21,13 @@
 # THE SOFTWARE.
 
 from pyembed.core import consumer
-from pyembed.core.discovery import AutoDiscoverer
+from pyembed.core.discovery import DefaultDiscoverer
 from pyembed.core.render import DefaultRenderer
 
 
 class PyEmbed(object):
 
-    def __init__(self, discoverer=AutoDiscoverer(), renderer=DefaultRenderer()):
+    def __init__(self, discoverer=DefaultDiscoverer(), renderer=DefaultRenderer()):
         """OEmbed consumer with automatic discovery.
 
         :param renderer: (optional) renderer to render the response.
