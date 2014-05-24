@@ -66,6 +66,25 @@ class PyEmbedDiscoverer(object):
             'No get_oembed_url method for discoverer of type %s' % type(self).__name__)
 
 
+class ChainingDiscoverer(PyEmbedDiscoverer):
+
+    """Discoverer that delegates to a sequence of other discoverers, returning
+    the first valid result."""
+
+    def __init__(self, delegates):
+        self.delegates = delegates
+
+    def get_oembed_url(self, url, format=None):
+        for delegate in self.delegates:
+            try:
+                return delegate.get_oembed_url(url, format)
+            except PyEmbedDiscoveryError:
+                continue
+
+        raise PyEmbedDiscoveryError(
+            'Failed to discover OEmbed URL for %s' % url)
+
+
 class AutoDiscoverer(PyEmbedDiscoverer):
 
     """Discoverer that tries to automatically find the OEmbed URL within the 
