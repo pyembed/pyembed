@@ -58,7 +58,8 @@ setup(
 
     install_requires=[
         'beautifulsoup4',
-        'requests'
+        'requests',
+        'pyyaml'
     ],
     tests_require=[
         'mock',
