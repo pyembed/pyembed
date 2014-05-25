@@ -17,3 +17,6 @@
   schemes:
     - "http://example.com/split/*"
   format: xml
+- endpoint: http://example.com/format/oembed.{format}
+  schemes:
+    - "http://example.com/format/*"

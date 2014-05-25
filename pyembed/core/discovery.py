@@ -142,7 +142,9 @@ class StaticDiscoveryEndpoint(object):
         return any((matcher(url) for matcher in self.matchers))
 
     def build_oembed_url(self, content_url, oembed_format=None):
-        scheme, netloc, path, query_string, fragment = urlsplit(self.endpoint)
+        format_endpoint = self.__add_format_to_endpoint(oembed_format)
+        scheme, netloc, path, query_string, fragment = urlsplit(
+            format_endpoint)
         query_params = parse_qsl(query_string)
         query_params.append(('url', content_url))
 
@@ -179,6 +181,10 @@ class StaticDiscoveryEndpoint(object):
         return (not oembed_format) or \
             (not self.oembed_format) or \
             (oembed_format == self.oembed_format)
+
+    def __add_format_to_endpoint(self, oembed_format):
+        target_format = oembed_format or 'json'
+        return self.endpoint.replace('{format}', target_format)
 
 
 class ChainingDiscoverer(PyEmbedDiscoverer):

@@ -135,6 +135,29 @@ def test_should_find_oembed_url_for_xml_when_split_by_format():
         'http://example.com/split_xml/oembed?url=http%3A%2F%2Fexample.com%2Fsplit%2F123&format=xml'))
 
 
+def test_should_find_oembed_url_when_format_in_endpoint():
+    discoverer = discovery.StaticDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    result = discoverer.get_oembed_url('http://example.com/format/123')
+    assert_that(result, equal_to(
+        'http://example.com/format/oembed.json?url=http%3A%2F%2Fexample.com%2Fformat%2F123'))
+
+
+def test_should_find_oembed_url_for_json_when_format_in_endpoint():
+    discoverer = discovery.StaticDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    result = discoverer.get_oembed_url('http://example.com/format/123', 'json')
+    assert_that(result, equal_to(
+        'http://example.com/format/oembed.json?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=json'))
+
+
+def test_should_find_oembed_url_for_xml_when_format_in_endpoint():
+    discoverer = discovery.StaticDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    result = discoverer.get_oembed_url('http://example.com/format/123', 'xml')
+    assert_that(result, equal_to(
+        'http://example.com/format/oembed.xml?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=xml'))
+
 def test_should_throw_if_no_endpoint():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
         discovery.StaticDiscoverer(
