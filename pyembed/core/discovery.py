@@ -142,7 +142,7 @@ class StaticDiscoveryEndpoint(object):
         return any((matcher(url) for matcher in self.matchers))
 
     def build_oembed_url(self, content_url, oembed_format=None):
-        selected_format = self.__select_format(oembed_format)
+        selected_format = oembed_format or self.oembed_format
         format_endpoint = self.__add_format_to_endpoint(selected_format)
         scheme, netloc, path, query_string, fragment = urlsplit(
             format_endpoint)
@@ -182,14 +182,6 @@ class StaticDiscoveryEndpoint(object):
         return (not oembed_format) or \
             (not self.oembed_format) or \
             (oembed_format == self.oembed_format)
-
-    def __select_format(self, requested_format):
-        if not self.__format_matches(requested_format):
-            return None
-        elif requested_format:
-            return requested_format
-        else:
-            return self.oembed_format
 
     def __add_format_to_endpoint(self, oembed_format):
         target_format = oembed_format or 'json'
