@@ -70,7 +70,7 @@ def test_should_find_oembed_url_when_only_json_allowed():
         'pyembed/core/test/fixtures/static_discovery/valid.yml')
     result = discoverer.get_oembed_url('http://example.com/json/123')
     assert_that(result, equal_to(
-        'http://example.com/json/oembed?url=http%3A%2F%2Fexample.com%2Fjson%2F123'))
+        'http://example.com/json/oembed?url=http%3A%2F%2Fexample.com%2Fjson%2F123&format=json'))
 
 
 def test_should_find_oembed_url_for_json_when_only_json_allowed():
@@ -93,7 +93,7 @@ def test_should_find_oembed_url_when_only_xml_allowed():
         'pyembed/core/test/fixtures/static_discovery/valid.yml')
     result = discoverer.get_oembed_url('http://example.com/xml/123')
     assert_that(result, equal_to(
-        'http://example.com/xml/oembed?url=http%3A%2F%2Fexample.com%2Fxml%2F123'))
+        'http://example.com/xml/oembed?url=http%3A%2F%2Fexample.com%2Fxml%2F123&format=xml'))
 
 
 def test_should_find_oembed_url_for_xml_when_only_xml_allowed():
@@ -116,7 +116,7 @@ def test_should_find_oembed_url_when_split_by_format():
         'pyembed/core/test/fixtures/static_discovery/valid.yml')
     result = discoverer.get_oembed_url('http://example.com/split/123')
     assert_that(result, equal_to(
-        'http://example.com/split_json/oembed?url=http%3A%2F%2Fexample.com%2Fsplit%2F123'))
+        'http://example.com/split_json/oembed?url=http%3A%2F%2Fexample.com%2Fsplit%2F123&format=json'))
 
 
 def test_should_find_oembed_url_for_json_when_split_by_format():
@@ -158,6 +158,7 @@ def test_should_find_oembed_url_for_xml_when_format_in_endpoint():
     assert_that(result, equal_to(
         'http://example.com/format/oembed.xml?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=xml'))
 
+
 def test_should_throw_if_no_endpoint():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
         discovery.StaticDiscoverer(
@@ -168,6 +169,7 @@ def test_should_throw_if_no_schemes():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
         discovery.StaticDiscoverer(
             'pyembed/core/test/fixtures/static_discovery/no_schemes.yml')
+
 
 def test_should_throw_if_empty_schemes():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
