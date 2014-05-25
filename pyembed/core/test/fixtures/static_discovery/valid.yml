@@ -20,3 +20,6 @@
 - endpoint: http://example.com/format/oembed.{format}
   schemes:
     - "http://example.com/format/*"
+- endpoint: http://example.com/sub/oembed
+  schemes:
+    - "http://*.example.com/sub/*"

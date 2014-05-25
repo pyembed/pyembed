@@ -159,6 +159,22 @@ def test_should_find_oembed_url_for_xml_when_format_in_endpoint():
         'http://example.com/format/oembed.xml?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=xml'))
 
 
+def test_should_find_oembed_url_for_subdomain_wildcard_without_subdomain():
+    discoverer = discovery.StaticDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    result = discoverer.get_oembed_url('http://example.com/sub/123')
+    assert_that(result, equal_to(
+        'http://example.com/sub/oembed?url=http%3A%2F%2Fexample.com%2Fsub%2F123'))
+
+
+def test_should_find_oembed_url_for_subdomain_wildcard_with_subdomain():
+    discoverer = discovery.StaticDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    result = discoverer.get_oembed_url('http://www.example.com/sub/123')
+    assert_that(result, equal_to(
+        'http://example.com/sub/oembed?url=http%3A%2F%2Fwww.example.com%2Fsub%2F123'))
+
+
 def test_should_throw_if_no_endpoint():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
         discovery.StaticDiscoverer(

@@ -171,12 +171,16 @@ class StaticDiscoveryEndpoint(object):
 
         return result
 
-    def __create_matcher(self, scheme):
-        regex = re.compile(scheme.replace('*', '.*'))
-        return functools.partial(self.__matcher, regex)
+    def __create_matcher(self, scheme_url):
+        scheme, netloc, path, query_string, fragment = urlsplit(scheme_url)
+        netloc_regex = re.compile(netloc.replace('*.', '.*\.?'))        
+        path_regex = re.compile(path.replace('*', '.*'))
 
-    def __matcher(self, regex, url):
-        return regex.match(url)
+        return functools.partial(self.__matcher, netloc_regex, path_regex)
+
+    def __matcher(self, netloc_regex, path_regex, url):
+        scheme, netloc, path, query_string, fragment = urlsplit(url)
+        return netloc_regex.match(netloc) and path_regex.match(path)
 
     def __format_matches(self, oembed_format):
         return (not oembed_format) or \
