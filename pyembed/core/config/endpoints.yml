@@ -55,7 +55,8 @@
 
 - endpoint: http://www.ifixit.com/Embed
   schemes:
-    - http://www.ifixit.com/Guide/View/*
+    - http://www.ifixit.com/Guide/*
+    - http://www.ifixit.com/Teardown/*
   example: http://www.ifixit.com/Guide/View/iPhone+1st+Generation+Display+Assembly+Replacement/449
 
 - endpoint: http://api.smugmug.com/services/oembed/
@@ -79,7 +80,6 @@
 - endpoint: http://chirb.it/oembed.{format}
   schemes:
     - http://chirb.it/*
-  format: xml
   example: http://chirb.it/OBnAr1
 
 - endpoint: http://www.nfb.ca/remote/services/oembed/
@@ -187,3 +187,152 @@
     - http://www.23hq.com/*/photo/*
   example: http://www.23hq.com/mprove/photo/13297717
 
+- endpoint: http://cacoo.com/oembed.{format}
+  schemes:
+    - https://cacoo.com/diagrams/*
+  format: xml
+  example: http://cacoo.com/diagrams/m9uZtizE5I2GkFR6/
+
+- endpoint: http://www.dipity.com/oembed/timeline/
+  schemes:
+    - http://www.dipity.com/*/*/
+  example: http://www.dipity.com/ragutier/Historia_de_la_Web/
+
+- endpoint: http://roomshare.jp/en/oembed.{format}
+  schemes:
+    - http://roomshare.jp/post/*
+    - http://roomshare.jp/en/post/*
+  example: http://roomshare.jp/en/post/137167
+
+- endpoint: http://www.dailymotion.com/services/oembed
+  schemes:
+    - http://www.dailymotion.com/video/*
+  example: http://www.dailymotion.com/video/xoxulz_babysitter_animals
+
+- endpoint: http://crowdranking.com/api/oembed.{format}
+  schemes:
+    - http://crowdranking.com/*/*
+  example: http://crowdranking.com/rankings/t470g0--best-tea
+
+- endpoint: https://www.circuitlab.com/circuit/oembed/
+  schemes:
+    - https://www.circuitlab.com/circuit/*
+  example: https://www.circuitlab.com/circuit/e38756/555-timer-as-astable-multivibrator-oscillator/
+
+- endpoint: http://api.geograph.org.uk/api/oembed
+  schemes:
+    - http://*.geograph.org.uk/*
+    - http://*.geograph.co.uk/*
+    - http://*.geograph.ie/*
+    - http://*.wikimedia.org/*_geograph.org.uk_*
+  example: http://www.geograph.org.uk/photo/2928776
+
+- endpoint: http://geo.hlipp.de/restapi.php/api/oembed
+  schemes:
+    - http://geo-en.hlipp.de/*
+    - http://geo.hlipp.de/*
+    - http://germany.geograph.org/*
+  example: http://geo.hlipp.de/photo/20260
+
+- endpoint: http://www.geograph.org.gg/api/oembed
+  schemes:
+    - http://*.geograph.org.gg/*
+    - http://*.geograph.org.je/*
+    - http://channel-islands.geograph.org/*
+    - http://channel-islands.geographs.org/*
+    - http://*.channel.geographs.org/*
+  example: http://www.geograph.org.gg/photo/773
+
+- endpoint: http://www.quiz.biz/api/oembed
+  schemes:
+    - http://www.quiz.biz/quizz-*.html
+  example: http://www.quiz.biz/quizz-182015.html
+
+- endpoint: http://www.quizz.biz/api/oembed
+  schemes:
+    - http://www.quizz.biz/quizz-*.html
+  example: http://www.quizz.biz/quizz-339842.html
+
+- endpoint: http://coub.com/api/oembed.{format}
+  schemes: 
+    - http://coub.com/view/*
+    - http://coub.com/embed/*
+  example: http://coub.com/view/um0um0
+
+- endpoint: https://speakerdeck.com/oembed.{format}
+  schemes:
+    - http://speakerdeck.com/*/*
+    - https://speakerdeck.com/*/*
+  format: json
+  example: https://speakerdeck.com/wallat/why-backbone
+
+- endpoint: https://alpha-api.app.net/oembed
+  schemes:
+    - https://alpha.app.net/*/post/*
+    - https://photos.app.net/*/*
+  format: json
+  example: https://alpha.app.net/breakingnews/post/9153521
+
+- endpoint: http://api.instagram.com/oembed
+  schemes:
+    - http://instagram.com/p/*
+    - http://instagr.am/p/*
+  format: json
+  example: http://instagram.com/p/V8UMy0LjpX/
+
+- endpoint: https://soundcloud.com/oembed
+  schemes:
+    - https://*.soundcloud.com/*
+  format: json
+  example: https://soundcloud.com/flume/holdin-on/
+
+- endpoint: http://on.aol.com/api
+  schemes:
+    - http://on.aol.com/video/*
+  example: http://on.aol.com/video/plans-to-clone-john-lennon-using-one-of-his-teeth-517906689
+
+- endpoint: http://www.kickstarter.com/services/oembed
+  schemes:
+    - http://www.kickstarter.com/projects/*
+  example: http://www.kickstarter.com/projects/1115015686/help-support-the-kiggins-theatre-to-go-digital
+
+- endpoint: http://www.ustream.tv/oembed
+  schemes:
+    - http://*.ustream.tv/*
+    - http://*.ustream.com/*
+  format: json
+  example: http://www.ustream.tv/channel/americatv2oficial
+
+- endpoint: https://gmep.org/oembed.{format}
+  schemes:
+    - https://gmep.org/media/*
+  example: https://gmep.org/media/14769
+
+- endpoint: http://api.dailymile.com/oembed
+  schemes:
+    - http://www.dailymile.com/people/*/entries/*
+  format: json
+  example: http://www.dailymile.com/people/EddieJ3/entries/24776213
+
+- endpoint: http://sketchfab.com/oembed
+  schemes:
+    - http://sketchfab.com/models/*
+    - https://sketchfab.com/models/*
+  format: json
+  example: https://sketchfab.com/models/e7995659092c4d8c92031b0a03887cfa
+
+- endpoint: http://edocr.com/api/oembed
+  schemes:
+    - http://*.edocr.com/doc/*
+  format: json
+  example: http://www.edocr.com/doc/144677/capillary-technologies-corporate-brochure
+
+- endpoint: https://rapidengage.com/api/oembed
+  schemes:
+    - https://rapidengage.com/s/*
+  example: https://rapidengage.com/s/6b1faa05
+
+- endpoint: http://embed.gettyimages.com/oembed
+  schemes:
+    - http://gty.im/*
+  example: http://gty.im/74917285
