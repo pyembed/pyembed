@@ -321,6 +321,11 @@
   format: json
   example: https://sketchfab.com/models/e7995659092c4d8c92031b0a03887cfa
 
+- endpoint: http://audiosnaps.com/service/oembed
+  schemes:
+    - http://audiosnaps.com/k/*
+  example: http://audiosnaps.com/k/d8wi
+
 - endpoint: http://edocr.com/api/oembed
   schemes:
     - http://*.edocr.com/doc/*
