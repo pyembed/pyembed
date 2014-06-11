@@ -273,6 +273,12 @@
   format: json
   example: https://alpha.app.net/breakingnews/post/9153521
 
+- endpoint: http://blip.tv/oembed/
+  schemes:
+    - http://*.blip.tv/*/*
+  format: json
+  example: http://blip.tv/nostalgiacritic/nostalgia-critic-sailor-moon-6625851
+
 - endpoint: http://api.instagram.com/oembed
   schemes:
     - http://instagram.com/p/*
