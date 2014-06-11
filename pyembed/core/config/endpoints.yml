@@ -329,7 +329,6 @@
 - endpoint: http://edocr.com/api/oembed
   schemes:
     - http://*.edocr.com/doc/*
-  format: json
   example: http://www.edocr.com/doc/144677/capillary-technologies-corporate-brochure
 
 - endpoint: https://rapidengage.com/api/oembed
