@@ -20,12 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import PyEmbed
-
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
 
-import pytest
+from pyembed.core import PyEmbed
 
 
 def test_should_embed():
@@ -64,7 +62,7 @@ def test_should_embed_xml():
 
         discoverer.get_oembed_url.assert_called_with('http://example.com/')
         mock_get.assert_called_with(
-            'http://example.com/oembed?format=xml', max_width = None, max_height = None)
+            'http://example.com/oembed?format=xml', max_width=None, max_height=None)
         renderer.render.assert_called_with('http://example.com/', response)
 
 

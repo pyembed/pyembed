@@ -20,11 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import json
+
+from bs4 import BeautifulSoup
+
 from pyembed.core.error import PyEmbedError
 from pyembed.core import response
 
-from bs4 import BeautifulSoup
-import json
 
 RESPONSE_CLASSES = {'photo': response.OEmbedPhotoResponse,
                     'video': response.OEmbedVideoResponse,
@@ -33,7 +35,6 @@ RESPONSE_CLASSES = {'photo': response.OEmbedPhotoResponse,
 
 
 class PyEmbedParseError(PyEmbedError):
-
     """Thrown if there is an error parsing an OEmbed response."""
 
 
@@ -101,6 +102,7 @@ def __construct_response(value_function):
         raise PyEmbedParseError('Unknown type: %s', type)
 
     return RESPONSE_CLASSES[type](value_function)
+
 
 PARSE_FUNCTIONS = {'application/json': parse_oembed_json,
                    'text/xml': parse_oembed_xml}

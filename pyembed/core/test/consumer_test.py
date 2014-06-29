@@ -20,18 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import consumer
-
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
-
 import pytest
+
+from pyembed.core import consumer
 
 
 def test_should_discover_and_get_oembed_url():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
@@ -44,7 +42,6 @@ def test_should_discover_and_get_oembed_url():
 def test_should_discover_and_get_oembed_url_for_xml():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(mock_get, mock_parse, 'text/xml')
 
         assert_that(consumer.get_oembed_response(
@@ -57,7 +54,6 @@ def test_should_discover_and_get_oembed_url_for_xml():
 def test_should_discover_and_get_oembed_url_with_charset():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(
             mock_get, mock_parse, 'application/json;charset=utf-8')
 
@@ -71,7 +67,6 @@ def test_should_discover_and_get_oembed_url_with_charset():
 def test_should_add_max_width():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
@@ -84,7 +79,6 @@ def test_should_add_max_width():
 def test_should_add_max_height():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
@@ -97,7 +91,6 @@ def test_should_add_max_height():
 def test_should_add_max_width_and_height():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
@@ -111,7 +104,6 @@ def test_should_add_max_width_and_height():
 def test_should_add_max_width_when_query_string_present():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
@@ -125,7 +117,6 @@ def test_should_add_max_width_when_query_string_present():
 def test_should_add_max_height_when_query_string_present():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
@@ -139,7 +130,6 @@ def test_should_add_max_height_when_query_string_present():
 def test_should_add_max_width_and_height_when_query_string_present():
     with patch('requests.get') as mock_get, \
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
-
         result = __set_up_mocks(mock_get, mock_parse)
 
         assert_that(consumer.get_oembed_response(
@@ -153,7 +143,6 @@ def test_should_add_max_width_and_height_when_query_string_present():
 def test_should_raise_error_on_request_error():
     with patch('requests.get') as mock_get, \
             pytest.raises(consumer.PyEmbedConsumerError):
-
         response = Mock()
         response.ok = False
         response.text = 'hello, world'

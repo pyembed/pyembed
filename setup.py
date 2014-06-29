@@ -21,13 +21,13 @@
 # THE SOFTWARE.
 
 
+import sys
+
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
-import sys
 
 
 class PyTest(TestCommand):
-
     def finalize_options(self):
         TestCommand.finalize_options(self)
         self.test_args = ['pyembed']
@@ -36,8 +36,10 @@ class PyTest(TestCommand):
     def run_tests(self):
         # import here, cause outside the eggs aren't loaded
         import pytest
+
         errno = pytest.main(self.test_args)
         sys.exit(errno)
+
 
 setup(
     name='pyembed',
@@ -46,9 +48,9 @@ setup(
     author_email='matt.thomson@cantab.net',
     url='http://pyembed.github.io',
     description='Python OEmbed consumer library with automatic discovery of ' +
-        'producers',
+                'producers',
     long_description=open('README.rst').read() + '\n\n' +
-        open('CHANGES.rst').read(),
+                     open('CHANGES.rst').read(),
     download_url='https://pypi.python.org/pypi/pyembed/',
     license=open('LICENSE.txt').read(),
 

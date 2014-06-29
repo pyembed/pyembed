@@ -20,11 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import render, response
-
 from hamcrest import assert_that, equal_to
-from mock import Mock
 import pytest
+
+from pyembed.core import render, response
 
 
 def test_should_embed_photo():

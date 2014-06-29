@@ -20,11 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core.error import PyEmbedError
-
 
 class PyEmbedRenderer(object):
-
     """Base class for rendering OEmbed responses."""
 
     def render(self, content_url, response):
@@ -39,7 +36,6 @@ class PyEmbedRenderer(object):
 
 
 class DefaultRenderer(PyEmbedRenderer):
-
     """Default renderer, using a simple representation of each response
     type.
     """

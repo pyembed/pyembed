@@ -20,15 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core.error import PyEmbedError
+import functools
+import re
 
 from bs4 import BeautifulSoup
 from pkg_resources import resource_filename
-
-import functools
-import re
 import requests
 import yaml
+
+from pyembed.core.error import PyEmbedError
 
 try:  # pragma: no cover
     from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
@@ -45,12 +45,10 @@ FORMATS = {MEDIA_TYPES[format]: format for format in MEDIA_TYPES}
 
 
 class PyEmbedDiscoveryError(PyEmbedError):
-
     """Thrown if there is an error discovering an OEmbed URL."""
 
 
 class PyEmbedDiscoverer(object):
-
     """Base class for discovering OEmbed URLs."""
 
     def get_oembed_url(self, url, format=None):
@@ -69,8 +67,7 @@ class PyEmbedDiscoverer(object):
 
 
 class AutoDiscoverer(PyEmbedDiscoverer):
-
-    """Discoverer that tries to automatically find the OEmbed URL within the 
+    """Discoverer that tries to automatically find the OEmbed URL within the
     HTML page.
     """
 
@@ -103,7 +100,6 @@ class AutoDiscoverer(PyEmbedDiscoverer):
 
 
 class StaticDiscoverer(PyEmbedDiscoverer):
-
     """Discoverer that uses a YAML file to discover the OEmbed URL.
     """
 
@@ -125,7 +121,6 @@ class StaticDiscoverer(PyEmbedDiscoverer):
 
 
 class StaticDiscoveryEndpoint(object):
-
     """Applies static discovery rules for a single endpoint.
     """
 
@@ -173,7 +168,7 @@ class StaticDiscoveryEndpoint(object):
 
     def __create_matcher(self, scheme_url):
         scheme, netloc, path, query_string, fragment = urlsplit(scheme_url)
-        netloc_regex = re.compile(netloc.replace('*.', '.*\.?'))        
+        netloc_regex = re.compile(netloc.replace('*.', '.*\.?'))
         path_regex = re.compile(path.replace('*', '.*'))
 
         return functools.partial(self.__matcher, netloc_regex, path_regex)
@@ -184,8 +179,8 @@ class StaticDiscoveryEndpoint(object):
 
     def __format_matches(self, oembed_format):
         return (not oembed_format) or \
-            (not self.oembed_format) or \
-            (oembed_format == self.oembed_format)
+               (not self.oembed_format) or \
+               (oembed_format == self.oembed_format)
 
     def __add_format_to_endpoint(self, oembed_format):
         target_format = oembed_format or 'json'
@@ -193,7 +188,6 @@ class StaticDiscoveryEndpoint(object):
 
 
 class ChainingDiscoverer(PyEmbedDiscoverer):
-
     """Discoverer that delegates to a sequence of other discoverers, returning
     the first valid result."""
 
@@ -212,7 +206,6 @@ class ChainingDiscoverer(PyEmbedDiscoverer):
 
 
 class DefaultDiscoverer(ChainingDiscoverer):
-
     """Discoverer that uses auto-discovery, followed by the included config
     file."""
 

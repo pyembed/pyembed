@@ -26,7 +26,6 @@ from pyembed.core.render import DefaultRenderer
 
 
 class PyEmbed(object):
-
     def __init__(self, discoverer=DefaultDiscoverer(), renderer=DefaultRenderer()):
         """OEmbed consumer with automatic discovery.
 

@@ -20,10 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import parse
-
 from hamcrest import assert_that, contains_string, equal_to, none
 import pytest
+
+from pyembed.core import parse
 
 pytestmark = pytest.mark.parametrize(('format', 'function'), [
     ('json', parse.parse_oembed_json),

@@ -20,20 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from hamcrest import assert_that, contains_string, equal_to
+import yaml
+
 from pyembed.core import PyEmbed
 from pyembed.core.discovery import StaticDiscoverer
 from pyembed.core.render import PyEmbedRenderer
 
-from hamcrest import assert_that, contains_string, equal_to
-import pytest
-import yaml
-
 
 class DummyRenderer(PyEmbedRenderer):
-
     def render(self, content_url, response):
         return "%s by %s from %s" % \
-            (response.title, response.author_name, content_url)
+               (response.title, response.author_name, content_url)
 
 
 def test_should_get_correct_embedding():
@@ -70,7 +68,7 @@ def test_should_embed_when_no_discovery():
 
 def test_should_process_all_examples():
     config_file = 'pyembed/core/config/endpoints.yml'
-    pyembed = PyEmbed(discoverer = StaticDiscoverer(config_file))
+    pyembed = PyEmbed(discoverer=StaticDiscoverer(config_file))
 
     with open(config_file) as f:
         for endpoint in yaml.load(f.read()):

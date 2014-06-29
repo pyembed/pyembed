@@ -20,11 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import discovery
-
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
 import pytest
+
+from pyembed.core import discovery
 
 
 def test_should_find_oembed_url_using_json_by_default():

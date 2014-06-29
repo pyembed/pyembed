@@ -20,10 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import response
-
 from hamcrest import assert_that, equal_to
 import pytest
+
+from pyembed.core import response
 
 
 def test_should_load_from_dictionary():

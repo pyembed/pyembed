@@ -20,10 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import discovery, parse
+import requests
+
+from pyembed.core import parse
 from pyembed.core.error import PyEmbedError
 
-import requests
 
 try:  # pragma: no cover
     from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
@@ -33,7 +34,6 @@ except ImportError:  # pragma: no cover
 
 
 class PyEmbedConsumerError(PyEmbedError):
-
     """Thrown if there is an error discovering an OEmbed URL."""
 
 

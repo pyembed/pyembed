@@ -20,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import discovery
-
 import pytest
+
+from pyembed.core import discovery
 
 
 def test_must_override_get_oembed_url():

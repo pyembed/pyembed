@@ -20,11 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import discovery
-
 from hamcrest import assert_that, equal_to
-from mock import patch, Mock
+from mock import Mock
 import pytest
+
+from pyembed.core import discovery
 
 
 def test_should_take_first_result_if_valid():
