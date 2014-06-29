@@ -34,12 +34,12 @@ def test_should_find_oembed_url_using_json_by_default():
 
 def test_should_find_oembed_url_using_json_when_specified():
     expected_url = 'http://example.com/oembed?format=json'
-    assert_that(get_oembed_url(format='json'), equal_to(expected_url))
+    assert_that(get_oembed_url(oembed_format='json'), equal_to(expected_url))
 
 
 def test_should_find_oembed_url_using_xml_when_specified():
     expected_url = 'http://example.com/oembed?format=xml'
-    assert_that(get_oembed_url(format='xml'), equal_to(expected_url))
+    assert_that(get_oembed_url(oembed_format='xml'), equal_to(expected_url))
 
 
 def test_should_return_xml_if_json_not_present():
@@ -50,13 +50,13 @@ def test_should_return_xml_if_json_not_present():
 
 def test_should_find_oembed_url_using_json_with_relative_url():
     expected_url = 'http://example.com/oembed?format=json'
-    assert_that(get_oembed_url(fixture='relative_url.html', format='json'),
+    assert_that(get_oembed_url(fixture='relative_url.html', oembed_format='json'),
                 equal_to(expected_url))
 
 
 def test_should_find_oembed_url_using_xml_with_relative_url():
     expected_url = 'http://example.com/oembed?format=xml'
-    assert_that(get_oembed_url(fixture='relative_url.html', format='xml'),
+    assert_that(get_oembed_url(fixture='relative_url.html', oembed_format='xml'),
                 equal_to(expected_url))
 
 
@@ -70,9 +70,9 @@ def test_should_throw_error_for_invalid_html():
         get_oembed_url(fixture='invalid.html')
 
 
-def test_should_throw_error_when_invalid_format_specified():
+def test_should_throw_error_when_invalid_oembed_format_specified():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
-        get_oembed_url(format='txt')
+        get_oembed_url(oembed_format='txt')
 
 
 def test_should_throw_error_on_error_response():
@@ -81,7 +81,7 @@ def test_should_throw_error_on_error_response():
 
 
 def get_oembed_url(fixture='valid_oembed.html',
-                   format=None,
+                   oembed_format=None,
                    ok=True):
     with patch('requests.get') as mock_get:
         response = Mock()
@@ -91,7 +91,7 @@ def get_oembed_url(fixture='valid_oembed.html',
         mock_get.return_value = response
 
         result = discovery.AutoDiscoverer().get_oembed_url(
-            'http://example.com', format)
+            'http://example.com', oembed_format)
 
         mock_get.assert_called_with('http://example.com')
         return result

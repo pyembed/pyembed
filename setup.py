@@ -48,9 +48,9 @@ setup(
     author_email='matt.thomson@cantab.net',
     url='http://pyembed.github.io',
     description='Python OEmbed consumer library with automatic discovery of ' +
-                'producers',
+        'producers',
     long_description=open('README.rst').read() + '\n\n' +
-                     open('CHANGES.rst').read(),
+        open('CHANGES.rst').read(),
     download_url='https://pypi.python.org/pypi/pyembed/',
     license=open('LICENSE.txt').read(),
 

@@ -41,7 +41,7 @@ MEDIA_TYPES = {
     'xml': 'text/xml+oembed'
 }
 
-FORMATS = {MEDIA_TYPES[format]: format for format in MEDIA_TYPES}
+FORMATS = {MEDIA_TYPES[oembed_format]: oembed_format for oembed_format in MEDIA_TYPES}
 
 
 class PyEmbedDiscoveryError(PyEmbedError):
@@ -51,11 +51,11 @@ class PyEmbedDiscoveryError(PyEmbedError):
 class PyEmbedDiscoverer(object):
     """Base class for discovering OEmbed URLs."""
 
-    def get_oembed_url(self, url, format=None):
+    def get_oembed_url(self, url, oembed_format=None):
         """Retrieves the OEmbed URL for a given resource.
 
         :param url: resource URL.
-        :param format: if supplied, restricts the format to use for OEmbed.  If
+        :param oembed_format: if supplied, restricts the format to use for OEmbed.  If
                        None, then the first URL found will be used.  One of
                        'json', 'xml'.
 
@@ -71,8 +71,8 @@ class AutoDiscoverer(PyEmbedDiscoverer):
     HTML page.
     """
 
-    def get_oembed_url(self, url, format=None):
-        media_type = self.__get_type(format)
+    def get_oembed_url(self, url, oembed_format=None):
+        media_type = self.__get_type(oembed_format)
 
         response = requests.get(url)
 
@@ -89,22 +89,23 @@ class AutoDiscoverer(PyEmbedDiscoverer):
 
         return urljoin(url, link['href'])
 
-    def __get_type(self, format):
-        if not format:
+    @staticmethod
+    def __get_type(oembed_format):
+        if not oembed_format:
             return list(MEDIA_TYPES.values())
-        elif format in MEDIA_TYPES:
-            return MEDIA_TYPES[format]
+        elif oembed_format in MEDIA_TYPES:
+            return MEDIA_TYPES[oembed_format]
 
         raise PyEmbedDiscoveryError(
-            'Invalid format %s specified (must be json or xml)' % format)
+            'Invalid format %s specified (must be json or xml)' % oembed_format)
 
 
 class StaticDiscoverer(PyEmbedDiscoverer):
     """Discoverer that uses a YAML file to discover the OEmbed URL.
     """
 
-    def __init__(self, file):
-        with open(file) as f:
+    def __init__(self, config_file):
+        with open(config_file) as f:
             self.endpoints = [StaticDiscoveryEndpoint(e)
                               for e in yaml.load(f.read())]
 
@@ -144,13 +145,14 @@ class StaticDiscoveryEndpoint(object):
         query_params = parse_qsl(query_string)
         query_params.append(('url', content_url))
 
-        if (selected_format):
+        if selected_format:
             query_params.append(('format', selected_format))
 
         new_query_string = urlencode(query_params, doseq=True)
         return urlunsplit((scheme, netloc, path, new_query_string, fragment))
 
-    def __extract_schemes(self, endpoint):
+    @staticmethod
+    def __extract_schemes(endpoint):
         result = endpoint.get('schemes')
         if not result:
             raise PyEmbedDiscoveryError(
@@ -158,7 +160,8 @@ class StaticDiscoveryEndpoint(object):
 
         return result
 
-    def __extract_endpoint(self, endpoint):
+    @staticmethod
+    def __extract_endpoint(endpoint):
         result = endpoint.get('endpoint')
         if not result:
             raise PyEmbedDiscoveryError(
@@ -173,7 +176,8 @@ class StaticDiscoveryEndpoint(object):
 
         return functools.partial(self.__matcher, netloc_regex, path_regex)
 
-    def __matcher(self, netloc_regex, path_regex, url):
+    @staticmethod
+    def __matcher(netloc_regex, path_regex, url):
         scheme, netloc, path, query_string, fragment = urlsplit(url)
         return netloc_regex.match(netloc) and path_regex.match(path)
 
@@ -194,10 +198,10 @@ class ChainingDiscoverer(PyEmbedDiscoverer):
     def __init__(self, delegates):
         self.delegates = delegates
 
-    def get_oembed_url(self, url, format=None):
+    def get_oembed_url(self, url, oembed_format=None):
         for delegate in self.delegates:
             try:
-                return delegate.get_oembed_url(url, format)
+                return delegate.get_oembed_url(url, oembed_format)
             except PyEmbedDiscoveryError:
                 continue
 

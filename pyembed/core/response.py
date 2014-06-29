@@ -68,7 +68,7 @@ class OEmbedPhotoResponse(OEmbedResponse):
 
     def fields(self):
         return super(OEmbedPhotoResponse, self).fields() + \
-               ['url', 'width', 'height']
+            ['url', 'width', 'height']
 
 
 class OEmbedVideoResponse(OEmbedResponse):
@@ -76,7 +76,7 @@ class OEmbedVideoResponse(OEmbedResponse):
 
     def fields(self):
         return super(OEmbedVideoResponse, self).fields() + \
-               ['html', 'width', 'height']
+            ['html', 'width', 'height']
 
 
 class OEmbedLinkResponse(OEmbedResponse):
@@ -89,4 +89,4 @@ class OEmbedRichResponse(OEmbedResponse):
 
     def fields(self):
         return super(OEmbedRichResponse, self).fields() + \
-               ['html', 'width', 'height']
+            ['html', 'width', 'height']
