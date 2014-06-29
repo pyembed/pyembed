@@ -59,11 +59,6 @@
     - http://www.ifixit.com/Teardown/*
   example: http://www.ifixit.com/Guide/View/iPhone+1st+Generation+Display+Assembly+Replacement/449
 
-- endpoint: http://api.smugmug.com/services/oembed/
-  schemes:
-    - http://*.smugmug.com/*
-  example: http://www.smugmug.com/popular/all#125787395_hQSj9
-
 - endpoint: http://backend.deviantart.com/oembed
   schemes:
     - http://*.deviantart.com/art/*
@@ -252,12 +247,6 @@
   schemes:
     - http://www.quizz.biz/quizz-*.html
   example: http://www.quizz.biz/quizz-339842.html
-
-- endpoint: http://coub.com/api/oembed.{format}
-  schemes: 
-    - http://coub.com/view/*
-    - http://coub.com/embed/*
-  example: http://coub.com/view/um0um0
 
 - endpoint: https://speakerdeck.com/oembed.{format}
   schemes:
