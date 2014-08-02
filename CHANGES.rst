@@ -3,6 +3,13 @@
 Changes
 =======
 
+v1.1.0, 2014-08-02
+------------------
+
+Enhancements:
+
+- #40: Add support for providers that do not have discovery enabled.
+
 v1.0.0, 2014-02-05
 ------------------
 
