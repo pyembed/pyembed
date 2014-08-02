@@ -2,19 +2,19 @@ PyEmbed
 =======
 
 .. image:: https://secure.travis-ci.org/pyembed/pyembed.png?branch=master
-:target: http://travis-ci.org/pyembed/pyembed
+  :target: http://travis-ci.org/pyembed/pyembed
 .. image:: https://coveralls.io/repos/pyembed/pyembed/badge.png
-:target: https://coveralls.io/r/pyembed/pyembed
+  :target: https://coveralls.io/r/pyembed/pyembed
 .. image:: https://pypip.in/d/pyembed/badge.png
-:target: https://pypi.python.org/pypi/pyembed/
+  :target: https://pypi.python.org/pypi/pyembed/
 .. image:: https://pypip.in/v/pyembed/badge.png
-:target: https://pypi.python.org/pypi/pyembed/
+  :target: https://pypi.python.org/pypi/pyembed/
 .. image:: https://pypip.in/wheel/pyembed/badge.png
-:target: https://pypi.python.org/pypi/pyembed/
+  :target: https://pypi.python.org/pypi/pyembed/
 .. image:: https://pypip.in/egg/pyembed/badge.png
-:target: https://pypi.python.org/pypi/pyembed/
+  :target: https://pypi.python.org/pypi/pyembed/
 .. image:: https://pypip.in/license/pyembed/badge.png
-:target: https://pypi.python.org/pypi/pyembed/
+  :target: https://pypi.python.org/pypi/pyembed/
 
 `OEmbed`_ consumer library for Python with automatic discovery of
 producers.
