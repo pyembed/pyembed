@@ -21,10 +21,8 @@
 # THE SOFTWARE.
 
 from hamcrest import assert_that, contains_string, equal_to
-import yaml
 
 from pyembed.core import PyEmbed
-from pyembed.core.discovery import StaticDiscoverer
 from pyembed.core.render import PyEmbedRenderer
 
 
@@ -64,12 +62,3 @@ def test_should_embed_when_no_discovery():
     embedding = PyEmbed().embed(
         'http://www.rdio.com/artist/Mike_Oldfield/album/Amarok/')
     assert_that(embedding, contains_string('rd.io'))
-
-
-def test_should_process_all_examples():
-    config_file = 'pyembed/core/config/endpoints.yml'
-    pyembed = PyEmbed(discoverer=StaticDiscoverer(config_file))
-
-    with open(config_file) as f:
-        for endpoint in yaml.load(f.read()):
-            pyembed.embed(endpoint['example'])
