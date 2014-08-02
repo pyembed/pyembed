@@ -20,33 +20,53 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core import discovery, parse
+import requests
+
+from pyembed.core import parse
 from pyembed.core.error import PyEmbedError
 
-import requests
+
+try:  # pragma: no cover
+    from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
+    from urllib import urlencode
+except ImportError:  # pragma: no cover
+    from urllib.parse import parse_qsl, urljoin, urlsplit, urlunsplit, urlencode
 
 
 class PyEmbedConsumerError(PyEmbedError):
-
     """Thrown if there is an error discovering an OEmbed URL."""
 
 
-def get_oembed_response(url, max_width=None, max_height=None):
-    """Fetches an OEmbed response for a given content URL.
+def get_oembed_response(oembed_url, max_width=None, max_height=None):
+    """Fetches an OEmbed response for a given URL.
 
-    :param url: the content URL.
+    :param oembed_url: the OEmbed URL.
     :param max_width: (optional) the maximum width of the embedded resource.
     :param max_height: (optional) the maximum height of the embedded resource.
     :returns: an PyEmbedResponse, representing the resource to embed.
     :raises PyEmbedError: if there is an error fetching the response.
     """
 
-    (discovered_format, oembed_url) = discovery.get_oembed_url(
-        url, max_width=max_width, max_height=max_height)
-    response = requests.get(oembed_url)
+    response = requests.get(__format_url(oembed_url, max_width, max_height))
 
     if not response.ok:
         raise PyEmbedConsumerError('Failed to get %s (status code %s)' % (
-            url, response.status_code))
+            oembed_url, response.status_code))
 
-    return parse.parse_oembed(discovered_format, response.text)
+    content_type = response.headers['content-type'].split(';')[0]
+    return parse.parse_oembed(response.text, content_type)
+
+
+def __format_url(oembed_url, max_width=None, max_height=None):
+    scheme, netloc, path, query_string, fragment = urlsplit(oembed_url)
+    query_params = parse_qsl(query_string)
+
+    if max_width is not None:
+        query_params.append(('maxwidth', max_width))
+
+    if max_height:
+        query_params.append(('maxheight', max_height))
+
+    new_query_string = urlencode(query_params, doseq=True)
+
+    return urlunsplit((scheme, netloc, path, new_query_string, fragment))

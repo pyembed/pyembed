@@ -1,0 +1,337 @@
+- endpoint: http://www.ifttt.com/oembed/
+  schemes:
+    - http://ifttt.com/recipes/*
+  example: http://ifttt.com/recipes/107745-make-a-list-of-new-books-for-your-kindle
+
+- endpoint: http://www.youtube.com/oembed/
+  schemes:
+    - http://www.youtube.com/watch
+  example: http://www.youtube.com/watch?v=-UUx10KOWIE
+
+- endpoint: http://www.flickr.com/services/oembed/
+  schemes:
+    - http://*.flickr.com/photos/*
+    - http://flic.kr/p/*
+  example: http://flickr.com/photos/bees/2362225867/
+
+- endpoint: http://www.viddler.com/oembed/
+  schemes:
+    - http://www.viddler.com/v/*
+  example: http://www.viddler.com/v/1646c55
+
+- endpoint: http://revision3.com/api/oembed/
+  schemes: 
+    - http://revision3.com/*
+  example: http://revision3.com/diggnation/2008-04-17xsanned/
+
+- endpoint: http://www.hulu.com/api/oembed.{format}
+  schemes:
+    - http://www.hulu.com/watch/*
+  example: http://www.hulu.com/watch/20807/late-night-with-conan-obrien-wed-may-21-2008
+
+- endpoint: http://vimeo.com/api/oembed.{format}
+  schemes:
+    - http://vimeo.com/*
+    - http://vimeo.com/groups/*/videos/*
+  example: http://vimeo.com/7100569
+
+- endpoint: http://www.collegehumor.com/oembed.{format}
+  schemes:
+    - http://www.collegehumor.com/video/*
+  example: http://www.collegehumor.com/video/3922232/prank-war-7-the-half-million-dollar-shot
+
+- endpoint: http://www.jest.com/oembed.{format}
+  schemes: 
+    - http://www.jest.com/video/*
+    - http://www.jest.com/embed/*
+  example: http://www.jest.com/video/197394/paul-ryan-rap
+
+- endpoint: http://www.polleverywhere.com/services/oembed/
+  schemes:
+    - http://www.polleverywhere.com/polls/*
+    - http://www.polleverywhere.com/multiple_choice_polls/*
+    - http://www.polleverywhere.com/free_text_polls/*
+  example: http://www.polleverywhere.com/multiple_choice_polls/LTIwNzM1NTczNTE
+
+- endpoint: http://www.ifixit.com/Embed
+  schemes:
+    - http://www.ifixit.com/Guide/*
+    - http://www.ifixit.com/Teardown/*
+  example: http://www.ifixit.com/Guide/View/iPhone+1st+Generation+Display+Assembly+Replacement/449
+
+- endpoint: http://backend.deviantart.com/oembed
+  schemes:
+    - http://*.deviantart.com/art/*
+    - http://*.deviantart.com/*#/d*
+    - http://fav.me/*
+    - http://sta.sh/*
+  example: http://browse.deviantart.com/art/Vita-Brevis-379998342
+
+- endpoint: http://www.slideshare.net/api/oembed/2
+  schemes:
+    - http://www.slideshare.net/*/*
+  example: http://www.slideshare.net/haraldf/business-quotes-for-2011
+
+- endpoint: http://chirb.it/oembed.{format}
+  schemes:
+    - http://chirb.it/*
+  example: http://chirb.it/OBnAr1
+
+- endpoint: http://www.nfb.ca/remote/services/oembed/
+  schemes:
+    - http://*.nfb.ca/film/*
+  example: http://www.nfb.ca/film/aboriginality
+
+- endpoint: http://www.scribd.com/services/oembed/
+  schemes:
+    - http://www.scribd.com/doc/*
+  example: http://www.scribd.com/doc/110799637/Synthesis-of-Knowledge-Effects-of-Fire-and-Thinning-Treatments-on-Understory-Vegetation-in-Dry-U-S-Forests
+
+- endpoint: http://dotsub.com/services/oembed
+  schemes: 
+    - http://dotsub.com/view/*
+  example: http://dotsub.com/view/665bd0d5-a9f4-4a07-9d9e-b31ba926ca78
+
+- endpoint: http://animoto.com/oembeds/create
+  schemes:
+    - http://animoto.com/play/*
+  format: xml
+  example: http://animoto.com/play/JzwsBn5FRVxS0qoqcBP5zA
+
+- endpoint: http://www.rdio.com/api/oembed/
+  schemes:
+    - http://*.rdio.com/artist/*
+    - http://*.rdio.com/people/*
+  example: http://www.rdio.com/artist/The_Black_Keys/album/Brothers/
+
+- endpoint: http://www.mixcloud.com/oembed/
+  schemes:
+    - http://www.mixcloud.com/*/*/
+  example: http://www.mixcloud.com/TechnoLiveSets/jon_rundell-live-electrobeach-festival-benidorm-16-08-2013/
+
+- endpoint: http://api.clyp.it/oembed/
+  schemes:
+    - http://clyp.it/*
+    - http://clyp.it/playlist/*
+  example: http://clyp.it/zhwuptos
+
+- endpoint: http://www.screenr.com/api/oembed.{format}
+  schemes:
+    - http://*.screenr.com/*
+  example: http://screenr.com/3jns
+
+- endpoint: http://www.funnyordie.com/oembed.{format}
+  schemes:
+    - http://www.funnyordie.com/videos/*
+  example: http://www.funnyordie.com/videos/a7311134ac/patton-oswalt-in-heavy-metal
+
+- endpoint: http://polldaddy.com/oembed/
+  schemes:
+    - http://*.polldaddy.com/s/*
+    - http://*.polldaddy.com/poll/*
+    - http://*.polldaddy.com/ratings/*
+  example: http://polldaddy.com/ratings/39
+
+- endpoint: http://www.ted.com/talks/oembed.{format}
+  schemes:
+    - http://*.ted.com/talks/*
+  example: http://www.ted.com/talks/jill_bolte_taylor_s_powerful_stroke_of_insight.html
+
+- endpoint: http://www.videojug.com/oembed.{format}
+  schemes:
+    - http://www.videojug.com/film/*
+    - http://www.videojug.com/interview/*
+  example: http://www.videojug.com/film/how-to-tie-a-knot-braid
+
+- endpoint: http://videos.sapo.pt/oembed
+  schemes:
+    - http://videos.sapo.pt/*
+  example: http://videos.sapo.pt/dNbiosGa9YZHfLrhkA88
+
+- endpoint: http://api.justin.tv/api/embed/from_url.{format}
+  schemes:
+    - http://www.justin.tv/*
+  example: http://www.justin.tv/deepellumonair
+
+- endpoint: http://official.fm/services/oembed.{format}
+  schemes:
+    - http://official.fm/tracks/*
+    - http://official.fm/playlists/*
+  example: http://official.fm/tracks/npTR
+
+- endpoint: http://huffduffer.com/oembed
+  schemes:
+    - http://huffduffer.com/*/*
+  example: http://huffduffer.com/jxpx777/125342
+
+- endpoint: http://shoudio.com/api/oembed
+  schemes:
+    - http://shoudio.com/*
+    - http://shoud.io/*
+  format: json
+  example: http://shoudio.com/user/shoister/status/8122
+
+- endpoint: http://api.mobypicture.com/oEmbed
+  schemes:
+    - http://*.mobypicture.com/user/*/view/*
+    - http://moby.to/*
+  example: http://mobypicture.com/user/Henk_Voermans/view/15880044
+
+- endpoint: http://www.23hq.com/23/oembed
+  schemes:
+    - http://www.23hq.com/*/photo/*
+  example: http://www.23hq.com/mprove/photo/13297717
+
+- endpoint: http://cacoo.com/oembed.{format}
+  schemes:
+    - https://cacoo.com/diagrams/*
+  format: xml
+  example: http://cacoo.com/diagrams/m9uZtizE5I2GkFR6/
+
+- endpoint: http://www.dipity.com/oembed/timeline/
+  schemes:
+    - http://www.dipity.com/*/*/
+  example: http://www.dipity.com/ragutier/Historia_de_la_Web/
+
+- endpoint: http://roomshare.jp/en/oembed.{format}
+  schemes:
+    - http://roomshare.jp/post/*
+    - http://roomshare.jp/en/post/*
+  example: http://roomshare.jp/en/post/137167
+
+- endpoint: http://www.dailymotion.com/services/oembed
+  schemes:
+    - http://www.dailymotion.com/video/*
+  example: http://www.dailymotion.com/video/xoxulz_babysitter_animals
+
+- endpoint: http://crowdranking.com/api/oembed.{format}
+  schemes:
+    - http://crowdranking.com/*/*
+  example: http://crowdranking.com/rankings/t470g0--best-tea
+
+- endpoint: https://www.circuitlab.com/circuit/oembed/
+  schemes:
+    - https://www.circuitlab.com/circuit/*
+  example: https://www.circuitlab.com/circuit/e38756/555-timer-as-astable-multivibrator-oscillator/
+
+- endpoint: http://api.geograph.org.uk/api/oembed
+  schemes:
+    - http://*.geograph.org.uk/*
+    - http://*.geograph.co.uk/*
+    - http://*.geograph.ie/*
+    - http://*.wikimedia.org/*_geograph.org.uk_*
+  example: http://www.geograph.org.uk/photo/2928776
+
+- endpoint: http://geo.hlipp.de/restapi.php/api/oembed
+  schemes:
+    - http://geo-en.hlipp.de/*
+    - http://geo.hlipp.de/*
+    - http://germany.geograph.org/*
+  example: http://geo.hlipp.de/photo/20260
+
+- endpoint: http://www.geograph.org.gg/api/oembed
+  schemes:
+    - http://*.geograph.org.gg/*
+    - http://*.geograph.org.je/*
+    - http://channel-islands.geograph.org/*
+    - http://channel-islands.geographs.org/*
+    - http://*.channel.geographs.org/*
+  example: http://www.geograph.org.gg/photo/773
+
+- endpoint: http://www.quiz.biz/api/oembed
+  schemes:
+    - http://www.quiz.biz/quizz-*.html
+  example: http://www.quiz.biz/quizz-182015.html
+
+- endpoint: http://www.quizz.biz/api/oembed
+  schemes:
+    - http://www.quizz.biz/quizz-*.html
+  example: http://www.quizz.biz/quizz-339842.html
+
+- endpoint: https://speakerdeck.com/oembed.{format}
+  schemes:
+    - http://speakerdeck.com/*/*
+    - https://speakerdeck.com/*/*
+  format: json
+  example: https://speakerdeck.com/wallat/why-backbone
+
+- endpoint: https://alpha-api.app.net/oembed
+  schemes:
+    - https://alpha.app.net/*/post/*
+    - https://photos.app.net/*/*
+  format: json
+  example: https://alpha.app.net/breakingnews/post/9153521
+
+- endpoint: http://blip.tv/oembed/
+  schemes:
+    - http://*.blip.tv/*/*
+  format: json
+  example: http://blip.tv/nostalgiacritic/nostalgia-critic-sailor-moon-6625851
+
+- endpoint: http://api.instagram.com/oembed
+  schemes:
+    - http://instagram.com/p/*
+    - http://instagr.am/p/*
+  format: json
+  example: http://instagram.com/p/V8UMy0LjpX/
+
+- endpoint: https://soundcloud.com/oembed
+  schemes:
+    - https://*.soundcloud.com/*
+  format: json
+  example: https://soundcloud.com/flume/holdin-on/
+
+- endpoint: http://on.aol.com/api
+  schemes:
+    - http://on.aol.com/video/*
+  example: http://on.aol.com/video/plans-to-clone-john-lennon-using-one-of-his-teeth-517906689
+
+- endpoint: http://www.kickstarter.com/services/oembed
+  schemes:
+    - http://www.kickstarter.com/projects/*
+  example: http://www.kickstarter.com/projects/1115015686/help-support-the-kiggins-theatre-to-go-digital
+
+- endpoint: http://www.ustream.tv/oembed
+  schemes:
+    - http://*.ustream.tv/*
+    - http://*.ustream.com/*
+  format: json
+  example: http://www.ustream.tv/channel/americatv2oficial
+
+- endpoint: https://gmep.org/oembed.{format}
+  schemes:
+    - https://gmep.org/media/*
+  example: https://gmep.org/media/14769
+
+- endpoint: http://api.dailymile.com/oembed
+  schemes:
+    - http://www.dailymile.com/people/*/entries/*
+  format: json
+  example: http://www.dailymile.com/people/EddieJ3/entries/24776213
+
+- endpoint: http://sketchfab.com/oembed
+  schemes:
+    - http://sketchfab.com/models/*
+    - https://sketchfab.com/models/*
+  format: json
+  example: https://sketchfab.com/models/e7995659092c4d8c92031b0a03887cfa
+
+- endpoint: http://audiosnaps.com/service/oembed
+  schemes:
+    - http://audiosnaps.com/k/*
+  example: http://audiosnaps.com/k/d8wi
+
+- endpoint: http://edocr.com/api/oembed
+  schemes:
+    - http://*.edocr.com/doc/*
+  example: http://www.edocr.com/doc/144677/capillary-technologies-corporate-brochure
+
+- endpoint: https://rapidengage.com/api/oembed
+  schemes:
+    - https://rapidengage.com/s/*
+  example: https://rapidengage.com/s/6b1faa05
+
+- endpoint: http://embed.gettyimages.com/oembed
+  schemes:
+    - http://gty.im/*
+  example: http://gty.im/74917285

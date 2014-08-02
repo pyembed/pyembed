@@ -20,10 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from pyembed.core.error import PyEmbedError
+import functools
+import re
 
-import requests
 from bs4 import BeautifulSoup
+from pkg_resources import resource_filename
+import requests
+import yaml
+
+from pyembed.core.error import PyEmbedError
 
 try:  # pragma: no cover
     from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
@@ -36,67 +41,181 @@ MEDIA_TYPES = {
     'xml': 'text/xml+oembed'
 }
 
-FORMATS = {MEDIA_TYPES[format]: format for format in MEDIA_TYPES}
+FORMATS = {MEDIA_TYPES[oembed_format]: oembed_format for oembed_format in MEDIA_TYPES}
 
 
 class PyEmbedDiscoveryError(PyEmbedError):
-
     """Thrown if there is an error discovering an OEmbed URL."""
 
 
-def get_oembed_url(url, format=None, max_width=None, max_height=None):
-    """Retrieves the OEmbed URL for a given resource.
+class PyEmbedDiscoverer(object):
+    """Base class for discovering OEmbed URLs."""
 
-    :param url: resource URL.
-    :param format: if supplied, restricts the format to use for OEmbed.  If
-                   None, then the first URL found will be used.  One of
-                   'json', 'xml'.
-    :param max_width: (optional) the maximum width of the embedded resource.
-    :param max_height: (optional) the maximum height of the embedded resource.
+    def get_oembed_url(self, url, oembed_format=None):
+        """Retrieves the OEmbed URL for a given resource.
 
-    :returns: OEmbed URL for the resource.
-    :raises PyEmbedDiscoveryError: if there is an error getting the OEmbed URL.
+        :param url: resource URL.
+        :param oembed_format: if supplied, restricts the format to use for OEmbed.  If
+                       None, then the first URL found will be used.  One of
+                       'json', 'xml'.
+
+        :returns: the OEmbed URL for the resource.
+        :raises PyEmbedDiscoveryError: if there is an error getting the OEmbed URL.
+        """
+        raise NotImplementedError(
+            'No get_oembed_url method for discoverer of type %s' % type(self).__name__)
+
+
+class AutoDiscoverer(PyEmbedDiscoverer):
+    """Discoverer that tries to automatically find the OEmbed URL within the
+    HTML page.
     """
-    media_type = __get_type(format)
 
-    response = requests.get(url)
+    def get_oembed_url(self, url, oembed_format=None):
+        media_type = self.__get_type(oembed_format)
 
-    if not response.ok:
+        response = requests.get(url)
+
+        if not response.ok:
+            raise PyEmbedDiscoveryError(
+                'Failed to get %s (status code %s)' % (url, response.status_code))
+
+        soup = BeautifulSoup(response.text)
+        link = soup.find('link', type=media_type, href=True)
+
+        if not link:
+            raise PyEmbedDiscoveryError(
+                'Could not find OEmbed URL for %s' % url)
+
+        return urljoin(url, link['href'])
+
+    @staticmethod
+    def __get_type(oembed_format):
+        if not oembed_format:
+            return list(MEDIA_TYPES.values())
+        elif oembed_format in MEDIA_TYPES:
+            return MEDIA_TYPES[oembed_format]
+
         raise PyEmbedDiscoveryError(
-            'Failed to get %s (status code %s)' % (url, response.status_code))
-
-    soup = BeautifulSoup(response.text)
-    link = soup.find('link', type=media_type, href=True)
-
-    if not link:
-        raise PyEmbedDiscoveryError('Could not find OEmbed URL for %s' % url)
-
-    discovered_url = __format_url(url, link['href'], max_width, max_height)
-
-    return (FORMATS[link['type']], discovered_url)
+            'Invalid format %s specified (must be json or xml)' % oembed_format)
 
 
-def __get_type(format):
-    if not format:
-        return list(MEDIA_TYPES.values())
-    elif format in MEDIA_TYPES:
-        return MEDIA_TYPES[format]
+class StaticDiscoverer(PyEmbedDiscoverer):
+    """Discoverer that uses a YAML file to discover the OEmbed URL.
+    """
 
-    raise PyEmbedDiscoveryError(
-        'Invalid format %s specified (must be json or xml)' % format)
+    def __init__(self, config_file):
+        with open(config_file) as f:
+            self.endpoints = [StaticDiscoveryEndpoint(e)
+                              for e in yaml.load(f.read())]
+
+    def get_oembed_url(self, url, oembed_format=None):
+        if oembed_format and oembed_format not in MEDIA_TYPES:
+            raise PyEmbedDiscoveryError(
+                'Invalid format %s specified (must be json or xml)' % oembed_format)
+
+        for endpoint in self.endpoints:
+            if endpoint.matches(url, oembed_format):
+                return endpoint.build_oembed_url(url, oembed_format)
+
+        raise PyEmbedDiscoveryError('Did not find OEmbed URL for %s' % url)
 
 
-def __format_url(content_url, embed_url, max_width=None, max_height=None):
-    url = urljoin(content_url, embed_url)
-    scheme, netloc, path, query_string, fragment = urlsplit(url)
-    query_params = parse_qsl(query_string)
+class StaticDiscoveryEndpoint(object):
+    """Applies static discovery rules for a single endpoint.
+    """
 
-    if max_width is not None:
-        query_params.append(('maxwidth', max_width))
+    def __init__(self, endpoint):
+        self.matchers = [self.__create_matcher(s)
+                         for s in self.__extract_schemes(endpoint)]
+        self.endpoint = self.__extract_endpoint(endpoint)
+        self.oembed_format = endpoint.get('format')
 
-    if max_height:
-        query_params.append(('maxheight', max_height))
+    def matches(self, url, oembed_format=None):
+        if not self.__format_matches(oembed_format):
+            return False
 
-    new_query_string = urlencode(query_params, doseq=True)
+        return any((matcher(url) for matcher in self.matchers))
 
-    return urlunsplit((scheme, netloc, path, new_query_string, fragment))
+    def build_oembed_url(self, content_url, oembed_format=None):
+        selected_format = oembed_format or self.oembed_format
+        format_endpoint = self.__add_format_to_endpoint(selected_format)
+        scheme, netloc, path, query_string, fragment = urlsplit(
+            format_endpoint)
+        query_params = parse_qsl(query_string)
+        query_params.append(('url', content_url))
+
+        if selected_format:
+            query_params.append(('format', selected_format))
+
+        new_query_string = urlencode(query_params, doseq=True)
+        return urlunsplit((scheme, netloc, path, new_query_string, fragment))
+
+    @staticmethod
+    def __extract_schemes(endpoint):
+        result = endpoint.get('schemes')
+        if not result:
+            raise PyEmbedDiscoveryError(
+                'Malformed discovery config (must specify schemes)')
+
+        return result
+
+    @staticmethod
+    def __extract_endpoint(endpoint):
+        result = endpoint.get('endpoint')
+        if not result:
+            raise PyEmbedDiscoveryError(
+                'Malformed discovery config (must specify an endpoint)')
+
+        return result
+
+    def __create_matcher(self, scheme_url):
+        scheme, netloc, path, query_string, fragment = urlsplit(scheme_url)
+        netloc_regex = re.compile(netloc.replace('*.', '.*\.?'))
+        path_regex = re.compile(path.replace('*', '.*'))
+
+        return functools.partial(self.__matcher, netloc_regex, path_regex)
+
+    @staticmethod
+    def __matcher(netloc_regex, path_regex, url):
+        scheme, netloc, path, query_string, fragment = urlsplit(url)
+        return netloc_regex.match(netloc) and path_regex.match(path)
+
+    def __format_matches(self, oembed_format):
+        return (not oembed_format) or \
+               (not self.oembed_format) or \
+               (oembed_format == self.oembed_format)
+
+    def __add_format_to_endpoint(self, oembed_format):
+        target_format = oembed_format or 'json'
+        return self.endpoint.replace('{format}', target_format)
+
+
+class ChainingDiscoverer(PyEmbedDiscoverer):
+    """Discoverer that delegates to a sequence of other discoverers, returning
+    the first valid result."""
+
+    def __init__(self, delegates):
+        self.delegates = delegates
+
+    def get_oembed_url(self, url, oembed_format=None):
+        for delegate in self.delegates:
+            try:
+                return delegate.get_oembed_url(url, oembed_format)
+            except PyEmbedDiscoveryError:
+                continue
+
+        raise PyEmbedDiscoveryError(
+            'Failed to discover OEmbed URL for %s' % url)
+
+
+class DefaultDiscoverer(ChainingDiscoverer):
+    """Discoverer that uses auto-discovery, followed by the included config
+    file."""
+
+    def __init__(self):
+        super(DefaultDiscoverer, self).__init__([
+            AutoDiscoverer(),
+            StaticDiscoverer(
+                resource_filename(__name__, 'config/endpoints.yml'))
+        ])

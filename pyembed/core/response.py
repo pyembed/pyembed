@@ -22,7 +22,6 @@
 
 
 class OEmbedResponse(object):
-
     """Base representation of an OEmbed response.  Each response type is
        represented by a different subclass.
     """
@@ -65,7 +64,6 @@ class OEmbedResponse(object):
 
 
 class OEmbedPhotoResponse(OEmbedResponse):
-
     """Represents an OEmbed photo response."""
 
     def fields(self):
@@ -74,7 +72,6 @@ class OEmbedPhotoResponse(OEmbedResponse):
 
 
 class OEmbedVideoResponse(OEmbedResponse):
-
     """Represents an OEmbed video response."""
 
     def fields(self):
@@ -83,13 +80,11 @@ class OEmbedVideoResponse(OEmbedResponse):
 
 
 class OEmbedLinkResponse(OEmbedResponse):
-
     """Represents an OEmbed link response."""
     pass
 
 
 class OEmbedRichResponse(OEmbedResponse):
-
     """Represents an OEmbed rich response."""
 
     def fields(self):

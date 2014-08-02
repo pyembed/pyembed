@@ -20,11 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import json
+
+from bs4 import BeautifulSoup
+
 from pyembed.core.error import PyEmbedError
 from pyembed.core import response
 
-from bs4 import BeautifulSoup
-import json
 
 RESPONSE_CLASSES = {'photo': response.OEmbedPhotoResponse,
                     'video': response.OEmbedVideoResponse,
@@ -33,40 +35,39 @@ RESPONSE_CLASSES = {'photo': response.OEmbedPhotoResponse,
 
 
 class PyEmbedParseError(PyEmbedError):
-
     """Thrown if there is an error parsing an OEmbed response."""
 
 
-def parse_oembed(format, response):
+def parse_oembed(oembed_response, content_type):
     """Parses an OEmbed response.
 
-    :param format: format of the response.  One of 'json', 'xml'.
-    :param response: the OEmbed response, in the given format.
+    :param oembed_response: the OEmbed response body.
+    :param content_type: the content type of the response.
     :returns: an PyEmbedResponse for the given response.
     :raises PyEmbedParseError: if there is an error parsing the response.
     """
-    return PARSE_FUNCTIONS[format](response)
+    return PARSE_FUNCTIONS[content_type](oembed_response)
 
 
-def parse_oembed_json(response):
+def parse_oembed_json(oembed_response):
     """Parses a JSON OEmbed response.
 
-    :param response: the OEmbed response, as JSON.
+    :param oembed_response: the OEmbed response, as JSON.
     :returns: an PyEmbedResponse for the given JSON.
     :raises PyEmbedParseError: if there is an error parsing the response.
     """
-    value_function = __value_function_json(json.loads(response))
+    value_function = __value_function_json(json.loads(oembed_response))
     return __construct_response(value_function)
 
 
-def parse_oembed_xml(response):
+def parse_oembed_xml(oembed_response):
     """Parses an XML OEmbed response.
 
-    :param response: the OEmbed response, as XML.
+    :param oembed_response: the OEmbed response, as XML.
     :returns: an PyEmbedResponse for the given XML.
     :raises PyEmbedParseError: if there is an error parsing the response.
     """
-    soup = BeautifulSoup(response)
+    soup = BeautifulSoup(oembed_response)
     value_function = __value_function_xml(soup.oembed)
     return __construct_response(value_function)
 
@@ -96,11 +97,12 @@ def __value_function_xml(oembed):
 
 
 def __construct_response(value_function):
-    type = value_function('type')
-    if type not in RESPONSE_CLASSES:
-        raise PyEmbedParseError('Unknown type: %s', type)
+    oembed_type = value_function('type')
+    if oembed_type not in RESPONSE_CLASSES:
+        raise PyEmbedParseError('Unknown type: %s', oembed_type)
 
-    return RESPONSE_CLASSES[type](value_function)
+    return RESPONSE_CLASSES[oembed_type](value_function)
 
-PARSE_FUNCTIONS = {'json': parse_oembed_json,
-                   'xml': parse_oembed_xml}
+
+PARSE_FUNCTIONS = {'application/json': parse_oembed_json,
+                   'text/xml': parse_oembed_xml}

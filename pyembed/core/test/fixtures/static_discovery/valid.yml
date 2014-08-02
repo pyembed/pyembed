@@ -1,0 +1,25 @@
+- endpoint: http://example.com/simple/oembed
+  schemes:
+    - "http://example.com/simple/*"
+- endpoint: http://example.com/json/oembed
+  schemes:
+    - "http://example.com/json/*"
+  format: json
+- endpoint: http://example.com/xml/oembed
+  schemes:
+    - "http://example.com/xml/*"
+  format: xml
+- endpoint: http://example.com/split_json/oembed
+  schemes:
+    - "http://example.com/split/*"
+  format: json
+- endpoint: http://example.com/split_xml/oembed
+  schemes:
+    - "http://example.com/split/*"
+  format: xml
+- endpoint: http://example.com/format/oembed.{format}
+  schemes:
+    - "http://example.com/format/*"
+- endpoint: http://example.com/sub/oembed
+  schemes:
+    - "http://*.example.com/sub/*"
