@@ -20,11 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import logging
+
 import requests
 
 from pyembed.core import parse
 from pyembed.core.error import PyEmbedError
-
 
 try:  # pragma: no cover
     from urlparse import parse_qsl, urljoin, urlsplit, urlunsplit
@@ -37,8 +38,29 @@ class PyEmbedConsumerError(PyEmbedError):
     """Thrown if there is an error discovering an OEmbed URL."""
 
 
+def get_first_oembed_response(oembed_urls, max_width=None, max_height=None):
+    """Fetches an OEmbed response from a list of OEmbed URLs.  The URLs will be
+    tried in turn until one returns successfully.
+
+    :param oembed_urls: a list of OEmbed URLs.
+    :param max_width: (optional) the maximum width of the embedded resource.
+    :param max_height: (optional) the maximum height of the embedded resource.
+    :returns: an PyEmbedResponse, representing the resource to embed.
+    :raises PyEmbedError: if there is an error fetching the response.
+    """
+    for oembed_url in oembed_urls:
+        try:
+            return get_oembed_response(oembed_url, max_width=max_width, max_height=max_height)
+        except PyEmbedError:
+            logging.warn('Error consuming URL %s' % oembed_url, exc_info=True)
+
+    raise PyEmbedConsumerError('No valid OEmbed responses for URLs %s' % oembed_urls)
+
+
 def get_oembed_response(oembed_url, max_width=None, max_height=None):
     """Fetches an OEmbed response for a given URL.
+
+    Deprecated: use get_first_oembed_response.
 
     :param oembed_url: the OEmbed URL.
     :param max_width: (optional) the maximum width of the embedded resource.

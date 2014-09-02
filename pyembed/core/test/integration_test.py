@@ -21,6 +21,7 @@
 # THE SOFTWARE.
 
 from hamcrest import assert_that, contains_string, equal_to
+import pytest
 
 from pyembed.core import PyEmbed
 from pyembed.core.render import PyEmbedRenderer
@@ -62,3 +63,9 @@ def test_should_embed_when_no_discovery():
     embedding = PyEmbed().embed(
         'http://www.rdio.com/artist/Mike_Oldfield/album/Amarok/')
     assert_that(embedding, contains_string('rd.io'))
+
+
+def test_should_embed_when_text_xml_returned():
+    embedding = PyEmbed().embed('https://soundcloud.com/coltonprovias/rush')
+    assert_that(embedding, contains_string('soundcloud.com'))
+

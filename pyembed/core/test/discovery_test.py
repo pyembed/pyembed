@@ -27,4 +27,4 @@ from pyembed.core import discovery
 
 def test_must_override_get_oembed_url():
     with pytest.raises(NotImplementedError):
-        discovery.PyEmbedDiscoverer().get_oembed_url('http://example.com')
+        discovery.PyEmbedDiscoverer().get_oembed_urls('http://example.com')

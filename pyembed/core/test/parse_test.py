@@ -25,6 +25,7 @@ import pytest
 
 from pyembed.core import parse
 
+
 pytestmark = pytest.mark.parametrize(('oembed_format', 'function'), [
     ('json', parse.parse_oembed_json),
     ('xml', parse.parse_oembed_xml)
@@ -126,6 +127,21 @@ def test_should_get_none_for_missing_element(oembed_format, function):
 def test_should_raise_error_for_unknown_type(oembed_format, function):
     with pytest.raises(parse.PyEmbedParseError):
         get_response(oembed_format, function, 'unknown')
+
+
+def test_should_select_parse_function(oembed_format, function):
+    filename = 'pyembed/core/test/fixtures/parse/link.%s' % oembed_format
+    content_type = {'json': 'application/json', 'xml': 'text/xml'}.get(oembed_format)
+
+    assert_that(parse.parse_oembed(open(filename).read(), content_type).title, equal_to('Lots of Bees'))
+
+
+def test_should_raise_on_invalid_format(oembed_format, function):
+    filename = 'pyembed/core/test/fixtures/parse/link.%s' % oembed_format
+    content_type = {'json': 'text/json', 'xml': 'application/xml'}.get(oembed_format)
+
+    with pytest.raises(parse.PyEmbedParseError):
+        parse.parse_oembed(open(filename).read(), content_type)
 
 
 def get_response(oembed_format, function, fixture='link'):
