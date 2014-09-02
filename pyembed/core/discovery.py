@@ -55,7 +55,7 @@ class PyEmbedDiscoveryError(PyEmbedError):
 class PyEmbedDiscoverer(object):
     """Base class for discovering OEmbed URLs."""
 
-    def get_oembed_url(self, url, oembed_format=None):
+    def get_oembed_url(self, url, oembed_format=None):  # pragma: no cover
         """Retrieves the OEmbed URL for a given resource.
 
         Deprecated - use get_oembed_urls instead.

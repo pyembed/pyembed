@@ -68,4 +68,3 @@ def test_should_embed_when_no_discovery():
 def test_should_embed_when_text_xml_returned():
     embedding = PyEmbed().embed('https://soundcloud.com/coltonprovias/rush')
     assert_that(embedding, contains_string('soundcloud.com'))
-
