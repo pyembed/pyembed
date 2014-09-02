@@ -3,6 +3,13 @@
 Changes
 =======
 
+v1.1.1, 2014-09-02
+------------------
+
+Bug fixes:
+
+- #42: Error embedding from SoundCloud.
+
 v1.1.0, 2014-08-02
 ------------------
 

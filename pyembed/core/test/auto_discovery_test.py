@@ -27,60 +27,61 @@ import pytest
 from pyembed.core import discovery
 
 
-def test_should_find_oembed_url_using_json_by_default():
+def test_should_find_oembed_urls():
+    expected_urls = [
+        'http://example.com/oembed?format=json',
+        'http://example.com/oembed?format=xml'
+    ]
+
+    assert_that(get_oembed_urls(), equal_to(expected_urls))
+
+
+def test_should_find_oembed_urls_using_json_when_specified():
     expected_url = 'http://example.com/oembed?format=json'
-    assert_that(get_oembed_url(), equal_to(expected_url))
+    assert_that(get_oembed_urls(oembed_format='json'), equal_to([expected_url]))
 
 
-def test_should_find_oembed_url_using_json_when_specified():
-    expected_url = 'http://example.com/oembed?format=json'
-    assert_that(get_oembed_url(oembed_format='json'), equal_to(expected_url))
-
-
-def test_should_find_oembed_url_using_xml_when_specified():
+def test_should_find_oembed_urls_using_xml_when_specified():
     expected_url = 'http://example.com/oembed?format=xml'
-    assert_that(get_oembed_url(oembed_format='xml'), equal_to(expected_url))
+    assert_that(get_oembed_urls(oembed_format='xml'), equal_to([expected_url]))
 
 
 def test_should_return_xml_if_json_not_present():
     expected_url = 'http://example.com/oembed?format=xml'
-    assert_that(get_oembed_url(fixture='no_json_oembed.html'),
-                equal_to(expected_url))
+    assert_that(get_oembed_urls(fixture='no_json_oembed.html'),
+                equal_to([expected_url]))
 
 
-def test_should_find_oembed_url_using_json_with_relative_url():
+def test_should_find_oembed_urls_using_json_with_relative_url():
     expected_url = 'http://example.com/oembed?format=json'
-    assert_that(get_oembed_url(fixture='relative_url.html', oembed_format='json'),
-                equal_to(expected_url))
+    assert_that(get_oembed_urls(fixture='relative_url.html', oembed_format='json'),
+                equal_to([expected_url]))
 
 
-def test_should_find_oembed_url_using_xml_with_relative_url():
+def test_should_find_oembed_urls_using_xml_with_relative_url():
     expected_url = 'http://example.com/oembed?format=xml'
-    assert_that(get_oembed_url(fixture='relative_url.html', oembed_format='xml'),
-                equal_to(expected_url))
+    assert_that(get_oembed_urls(fixture='relative_url.html', oembed_format='xml'),
+                equal_to([expected_url]))
 
 
-def test_should_throw_error_if_href_not_present():
-    with pytest.raises(discovery.PyEmbedDiscoveryError):
-        get_oembed_url(fixture='json_oembed_no_href.html')
+def test_should_return_empty_if_href_not_present():
+    assert_that(get_oembed_urls(fixture='json_oembed_no_href.html'), equal_to([]))
 
 
-def test_should_throw_error_for_invalid_html():
-    with pytest.raises(discovery.PyEmbedDiscoveryError):
-        get_oembed_url(fixture='invalid.html')
+def test_should_return_empty_for_invalid_html():
+    assert_that(get_oembed_urls(fixture='invalid.html'), equal_to([]))
+
+
+def test_should_return_empty_on_error_response():
+    assert_that(get_oembed_urls(ok=False), equal_to([]))
 
 
 def test_should_throw_error_when_invalid_oembed_format_specified():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
-        get_oembed_url(oembed_format='txt')
+        get_oembed_urls(oembed_format='txt')
 
 
-def test_should_throw_error_on_error_response():
-    with pytest.raises(discovery.PyEmbedDiscoveryError):
-        get_oembed_url(ok=False)
-
-
-def get_oembed_url(fixture='valid_oembed.html',
+def get_oembed_urls(fixture='valid_oembed.html',
                    oembed_format=None,
                    ok=True):
     with patch('requests.get') as mock_get:
@@ -90,7 +91,7 @@ def get_oembed_url(fixture='valid_oembed.html',
             'pyembed/core/test/fixtures/auto_discovery/' + fixture).read()
         mock_get.return_value = response
 
-        result = discovery.AutoDiscoverer().get_oembed_url(
+        result = discovery.AutoDiscoverer().get_oembed_urls(
             'http://example.com', oembed_format)
 
         mock_get.assert_called_with('http://example.com')

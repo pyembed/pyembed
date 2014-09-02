@@ -46,6 +46,9 @@ def parse_oembed(oembed_response, content_type):
     :returns: an PyEmbedResponse for the given response.
     :raises PyEmbedParseError: if there is an error parsing the response.
     """
+    if content_type not in PARSE_FUNCTIONS:
+        raise PyEmbedParseError('Invalid content type: %s' % content_type)
+
     return PARSE_FUNCTIONS[content_type](oembed_response)
 
 

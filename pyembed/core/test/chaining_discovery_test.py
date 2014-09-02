@@ -22,50 +22,82 @@
 
 from hamcrest import assert_that, equal_to
 from mock import Mock
-import pytest
 
 from pyembed.core import discovery
 
 
-def test_should_take_first_result_if_valid():
+def test_should_return_both_if_valid():
     discoverer1 = Mock()
-    discoverer1.get_oembed_url.return_value = 'http://example.com/oembed?format=json'
+    discoverer1.get_oembed_urls.return_value = ['http://example.com/oembed1?format=json']
 
     discoverer2 = Mock()
+    discoverer2.get_oembed_urls.return_value = [
+        'http://example.com/oembed2?format=json',
+        'http://example.com/oembed2?format=xml'
+    ]
 
     discoverer = discovery.ChainingDiscoverer([discoverer1, discoverer2])
 
-    result = discoverer.get_oembed_url('http://example.com')
-    assert_that(result, equal_to('http://example.com/oembed?format=json'))
+    result = discoverer.get_oembed_urls('http://example.com')
+    assert_that(result, equal_to([
+        'http://example.com/oembed1?format=json',
+        'http://example.com/oembed2?format=json',
+        'http://example.com/oembed2?format=xml'
+    ]))
 
-    discoverer1.get_oembed_url.assert_called_with('http://example.com', None)
-    assert_that(discoverer2.get_oembed_url.called, equal_to(False))
+    discoverer1.get_oembed_urls.assert_called_with('http://example.com', None)
+    discoverer2.get_oembed_urls.assert_called_with('http://example.com', None)
+
+
+def test_should_remove_duplicates():
+    discoverer1 = Mock()
+    discoverer1.get_oembed_urls.return_value = ['http://example.com/oembed?format=json']
+
+    discoverer2 = Mock()
+    discoverer2.get_oembed_urls.return_value = [
+        'http://example.com/oembed?format=json',
+        'http://example.com/oembed?format=xml'
+    ]
+
+    discoverer = discovery.ChainingDiscoverer([discoverer1, discoverer2])
+
+    result = discoverer.get_oembed_urls('http://example.com')
+    assert_that(result, equal_to([
+        'http://example.com/oembed?format=json',
+        'http://example.com/oembed?format=xml'
+    ]))
+
+    discoverer1.get_oembed_urls.assert_called_with('http://example.com', None)
+    discoverer2.get_oembed_urls.assert_called_with('http://example.com', None)
 
 
 def test_should_continue_if_first_throws():
     discoverer1 = Mock()
-    discoverer1.get_oembed_url.side_effect = discovery.PyEmbedDiscoveryError
+    discoverer1.get_oembed_urls.side_effect = discovery.PyEmbedDiscoveryError
 
     discoverer2 = Mock()
-    discoverer2.get_oembed_url.return_value = 'http://example.com/oembed?format=json'
+    discoverer2.get_oembed_urls.return_value = ['http://example.com/oembed?format=json']
 
     discoverer = discovery.ChainingDiscoverer([discoverer1, discoverer2])
 
-    result = discoverer.get_oembed_url('http://example.com')
-    assert_that(result, equal_to('http://example.com/oembed?format=json'))
+    result = discoverer.get_oembed_urls('http://example.com')
+    assert_that(result, equal_to(['http://example.com/oembed?format=json']))
 
-    discoverer1.get_oembed_url.assert_called_with('http://example.com', None)
-    discoverer2.get_oembed_url.assert_called_with('http://example.com', None)
+    discoverer1.get_oembed_urls.assert_called_with('http://example.com', None)
+    discoverer2.get_oembed_urls.assert_called_with('http://example.com', None)
 
 
-def test_should_throw_if_all_throw():
+def test_should_return_empty_if_all_throw():
     discoverer1 = Mock()
-    discoverer1.get_oembed_url.side_effect = discovery.PyEmbedDiscoveryError
+    discoverer1.get_oembed_urls.side_effect = discovery.PyEmbedDiscoveryError
 
     discoverer2 = Mock()
-    discoverer2.get_oembed_url.side_effect = discovery.PyEmbedDiscoveryError
+    discoverer2.get_oembed_urls.side_effect = discovery.PyEmbedDiscoveryError
 
     discoverer = discovery.ChainingDiscoverer([discoverer1, discoverer2])
 
-    with pytest.raises(discovery.PyEmbedDiscoveryError):
-        discoverer.get_oembed_url('http://example.com')
+    result = discoverer.get_oembed_urls('http://example.com')
+    assert_that(result, equal_to([]))
+
+    discoverer1.get_oembed_urls.assert_called_with('http://example.com', None)
+    discoverer2.get_oembed_urls.assert_called_with('http://example.com', None)
