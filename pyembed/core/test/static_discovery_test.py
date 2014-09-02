@@ -26,14 +26,14 @@ import pytest
 from pyembed.core import discovery
 
 
-def test_should_find_oembed_url():
+def test_should_find_oembed_urls():
     discoverer = discovery.StaticDiscoverer(
         'pyembed/core/test/fixtures/static_discovery/valid.yml')
     result = discoverer.get_oembed_urls('http://example.com/simple/123')
-    assert_that(result, equal_to([
+    assert_that(set(result), equal_to({
         'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=xml',
         'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=json'
-    ]))
+    }))
 
 
 def test_should_find_oembed_urls_for_json():
@@ -109,10 +109,10 @@ def test_should_find_oembed_urls_when_split_by_format():
     discoverer = discovery.StaticDiscoverer(
         'pyembed/core/test/fixtures/static_discovery/valid.yml')
     result = discoverer.get_oembed_urls('http://example.com/split/123')
-    assert_that(result, equal_to([
+    assert_that(set(result), equal_to({
         'http://example.com/split_json/oembed?url=http%3A%2F%2Fexample.com%2Fsplit%2F123&format=json',
         'http://example.com/split_xml/oembed?url=http%3A%2F%2Fexample.com%2Fsplit%2F123&format=xml'
-    ]))
+    }))
 
 
 def test_should_find_oembed_urls_for_json_when_split_by_format():
@@ -136,10 +136,10 @@ def test_should_find_oembed_urls_when_format_in_endpoint():
     discoverer = discovery.StaticDiscoverer(
         'pyembed/core/test/fixtures/static_discovery/valid.yml')
     result = discoverer.get_oembed_urls('http://example.com/format/123')
-    assert_that(result, equal_to([
+    assert_that(set(result), equal_to({
         'http://example.com/format/oembed.xml?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=xml',
         'http://example.com/format/oembed.json?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=json'
-    ]))
+    }))
 
 
 def test_should_find_oembed_urls_for_json_when_format_in_endpoint():
@@ -162,18 +162,20 @@ def test_should_find_oembed_urls_for_subdomain_wildcard_without_subdomain():
     discoverer = discovery.StaticDiscoverer(
         'pyembed/core/test/fixtures/static_discovery/valid.yml')
     result = discoverer.get_oembed_urls('http://example.com/sub/123')
-    assert_that(result, equal_to([
+    assert_that(set(result), equal_to({
         'http://example.com/sub/oembed?url=http%3A%2F%2Fexample.com%2Fsub%2F123&format=xml',
-        'http://example.com/sub/oembed?url=http%3A%2F%2Fexample.com%2Fsub%2F123&format=json']))
+        'http://example.com/sub/oembed?url=http%3A%2F%2Fexample.com%2Fsub%2F123&format=json'
+    }))
 
 
 def test_should_find_oembed_urls_for_subdomain_wildcard_with_subdomain():
     discoverer = discovery.StaticDiscoverer(
         'pyembed/core/test/fixtures/static_discovery/valid.yml')
     result = discoverer.get_oembed_urls('http://www.example.com/sub/123')
-    assert_that(result, equal_to([
+    assert_that(set(result), equal_to({
         'http://example.com/sub/oembed?url=http%3A%2F%2Fwww.example.com%2Fsub%2F123&format=xml',
-        'http://example.com/sub/oembed?url=http%3A%2F%2Fwww.example.com%2Fsub%2F123&format=json']))
+        'http://example.com/sub/oembed?url=http%3A%2F%2Fwww.example.com%2Fsub%2F123&format=json'
+    }))
 
 
 def test_should_not_find_oembed_urls_for_bad_format():
