@@ -51,4 +51,4 @@ class DefaultRenderer(PyEmbedRenderer):
         params = dict(response.__dict__)
         params['content_url'] = content_url
 
-        return DefaultRenderer.TEMPLATES[response.type] % params
+        return self.TEMPLATES[response.type] % params
