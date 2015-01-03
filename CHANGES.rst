@@ -3,6 +3,13 @@
 Changes
 =======
 
+v1.1.2, 2015-01-03
+------------------
+
+Enhancements:
+
+- #44: Allow overriding of default templates by subclassing.
+
 v1.1.1, 2014-09-02
 ------------------
 
