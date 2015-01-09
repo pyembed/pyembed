@@ -20,8 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import requests
+
 from pyembed.core import consumer
 from pyembed.core.discovery import DefaultDiscoverer
+from pyembed.core.error import PyEmbedError
 from pyembed.core.render import DefaultRenderer
 
 
@@ -47,7 +50,11 @@ class PyEmbed(object):
         :returns: an HTML representation of the resource.
         :raises PyEmbedError: if there is an error fetching the response.
         """
-        oembed_urls = self.discoverer.get_oembed_urls(url)
-        response = consumer.get_first_oembed_response(
-            oembed_urls, max_width=max_width, max_height=max_height)
+        try:
+            oembed_urls = self.discoverer.get_oembed_urls(url)
+            response = consumer.get_first_oembed_response(
+                oembed_urls, max_width=max_width, max_height=max_height)
+        except requests.exceptions.RequestException as e:
+            raise PyEmbedError(e)
+
         return self.renderer.render(url, response)
