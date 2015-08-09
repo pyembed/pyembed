@@ -201,6 +201,7 @@ sdist/
 develop-eggs/
 .installed.cfg
 MANIFEST
+.eggs/
 
 # Installer logs
 pip-log.txt
