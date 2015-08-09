@@ -22,8 +22,12 @@
 
 from hamcrest import assert_that, equal_to
 from mock import patch, Mock
+import pytest
+
+from requests.exceptions import RequestException
 
 from pyembed.core import PyEmbed
+from pyembed.core.error import PyEmbedError
 
 
 def test_should_embed():
@@ -85,3 +89,11 @@ def test_should_embed_with_max_width_and_height():
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json', max_width=100, max_height=200)
         renderer.render.assert_called_with('http://example.com/', response)
+
+
+def test_should_throw_error_on_request_error():
+    with pytest.raises(PyEmbedError):
+        discoverer = Mock()
+        discoverer.get_oembed_urls.side_effect = RequestException()
+
+        PyEmbed(discoverer, None).embed('http://example.com/', 100, 200)
