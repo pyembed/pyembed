@@ -21,13 +21,13 @@
 # THE SOFTWARE.
 
 import functools
+import json
 import re
 from collections import OrderedDict
 
 from bs4 import BeautifulSoup
 from pkg_resources import resource_filename
 import requests
-import yaml
 
 from pyembed.core.error import PyEmbedError
 
@@ -121,13 +121,12 @@ class AutoDiscoverer(PyEmbedDiscoverer):
 
 
 class StaticDiscoverer(PyEmbedDiscoverer):
-    """Discoverer that uses a YAML file to discover the OEmbed URL.
+    """Discoverer that uses a static list of endpoints to discover the OEmbed
+       URL.
     """
 
-    def __init__(self, config_file):
-        with open(config_file) as f:
-            self.endpoints = [StaticDiscoveryEndpoint(e)
-                              for e in yaml.load(f.read())]
+    def __init__(self, endpoints):
+        self.endpoints = endpoints
 
     def get_oembed_urls(self, url, oembed_format=None):
         if oembed_format and oembed_format not in MEDIA_TYPES:
@@ -140,6 +139,17 @@ class StaticDiscoverer(PyEmbedDiscoverer):
                 for (e, f) in product(self.endpoints, formats)
                 if e.matches(url, f)]
 
+    @staticmethod
+    def _build_endpoints_from_providers(providers):
+        endpoints = []
+
+        for provider in providers:
+            for endpoint in provider["endpoints"]:
+                if 'schemes' in endpoint and 'url' in endpoint:
+                    endpoints.append(StaticDiscoveryEndpoint(endpoint))
+
+        return endpoints
+
 
 class StaticDiscoveryEndpoint(object):
     """Applies static discovery rules for a single endpoint.
@@ -147,9 +157,9 @@ class StaticDiscoveryEndpoint(object):
 
     def __init__(self, endpoint):
         self.matchers = [self.__create_matcher(s)
-                         for s in self.__extract_schemes(endpoint)]
-        self.endpoint = self.__extract_endpoint(endpoint)
-        self.oembed_format = endpoint.get('format')
+                         for s in endpoint.get('schemes')]
+        self.endpoint = endpoint.get('url')
+        self.oembed_formats = endpoint.get('formats')
 
     def matches(self, url, oembed_format=None):
         if not self.__format_matches(oembed_format):
@@ -157,37 +167,18 @@ class StaticDiscoveryEndpoint(object):
 
         return any((matcher(url) for matcher in self.matchers))
 
-    def build_oembed_url(self, content_url, oembed_format=None):
-        selected_format = oembed_format or self.oembed_format
-        format_endpoint = self.__add_format_to_endpoint(selected_format)
+    def build_oembed_url(self, content_url, oembed_format):
+        format_endpoint = self.__add_format_to_endpoint(oembed_format)
         scheme, netloc, path, query_string, fragment = urlsplit(
             format_endpoint)
         query_params = parse_qsl(query_string)
         query_params.append(('url', content_url))
 
-        if selected_format:
-            query_params.append(('format', selected_format))
+        if oembed_format:
+            query_params.append(('format', oembed_format))
 
         new_query_string = urlencode(query_params, doseq=True)
         return urlunsplit((scheme, netloc, path, new_query_string, fragment))
-
-    @staticmethod
-    def __extract_schemes(endpoint):
-        result = endpoint.get('schemes')
-        if not result:
-            raise PyEmbedDiscoveryError(
-                'Malformed discovery config (must specify schemes)')
-
-        return result
-
-    @staticmethod
-    def __extract_endpoint(endpoint):
-        result = endpoint.get('endpoint')
-        if not result:
-            raise PyEmbedDiscoveryError(
-                'Malformed discovery config (must specify an endpoint)')
-
-        return result
 
     def __create_matcher(self, scheme_url):
         scheme, netloc, path, query_string, fragment = urlsplit(scheme_url)
@@ -203,12 +194,36 @@ class StaticDiscoveryEndpoint(object):
 
     def __format_matches(self, oembed_format):
         return (not oembed_format) or \
-               (not self.oembed_format) or \
-               (oembed_format == self.oembed_format)
+               (not self.oembed_formats) or \
+               (oembed_format in self.oembed_formats)
 
     def __add_format_to_endpoint(self, oembed_format):
-        target_format = oembed_format or 'json'
-        return self.endpoint.replace('{format}', target_format)
+        return self.endpoint.replace('{format}', oembed_format)
+
+
+class FileDiscoverer(StaticDiscoverer):
+    """Discoverer that uses a JSON file to discover the OEmbed URL.
+    """
+    def __init__(self, config_file):
+        with open(config_file) as f:
+            endpoints = StaticDiscoverer._build_endpoints_from_providers(json.load(f))
+
+        super(FileDiscoverer, self).__init__(endpoints)
+
+
+class UrlDiscoverer(StaticDiscoverer):
+    """Discoverer that uses JSON from a URL to discover the OEmbed URL.
+    """
+    def __init__(self, url):
+        response = requests.get(url)
+
+        if not response.ok:
+            raise PyEmbedDiscoveryError('Failed to get %s (status code %s)' % (
+                url, response.status_code))
+
+        endpoints = StaticDiscoverer._build_endpoints_from_providers(response.json())
+
+        super(UrlDiscoverer, self).__init__(endpoints)
 
 
 class ChainingDiscoverer(PyEmbedDiscoverer):
@@ -237,6 +252,7 @@ class DefaultDiscoverer(ChainingDiscoverer):
     def __init__(self):
         super(DefaultDiscoverer, self).__init__([
             AutoDiscoverer(),
-            StaticDiscoverer(
-                resource_filename(__name__, 'config/endpoints.yml'))
+            UrlDiscoverer('http://oembed.com/providers.json'),
+            FileDiscoverer(
+                resource_filename(__name__, 'config/providers.json'))
         ])

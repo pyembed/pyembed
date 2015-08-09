@@ -1,0 +1,92 @@
+[
+    {
+        "provider_name": "provider1",
+        "provider_url": "http:\/\/example.com\/simple",
+        "endpoints": [
+            {
+                "schemes": [
+                    "http:\/\/example.com\/simple\/*"
+                ],
+                "url": "http:\/\/example.com\/simple\/oembed"
+            }
+        ]
+    },
+    {
+        "provider_name": "provider2",
+        "provider_url": "http:\/\/example.com\/json",
+        "endpoints": [
+            {
+                "schemes": [
+                    "http:\/\/example.com\/json\/*"
+                ],
+                "url": "http:\/\/example.com\/json\/oembed",
+                "formats": [
+                    "json"
+                ]
+            }
+        ]
+    },
+    {
+        "provider_name": "provider3",
+        "provider_url": "http:\/\/example.com\/xml",
+        "endpoints": [
+            {
+                "schemes": [
+                    "http:\/\/example.com\/xml\/*"
+                ],
+                "url": "http:\/\/example.com\/xml\/oembed",
+                "formats": [
+                    "xml"
+                ]
+            }
+        ]
+    },
+    {
+        "provider_name": "provider4",
+        "provider_url": "http:\/\/example.com\/split",
+        "endpoints": [
+            {
+                "schemes": [
+                    "http:\/\/example.com\/split\/*"
+                ],
+                "url": "http:\/\/example.com\/split_xml\/oembed",
+                "formats": [
+                    "xml"
+                ]
+            },
+            {
+                "schemes": [
+                    "http:\/\/example.com\/split\/*"
+                ],
+                "url": "http:\/\/example.com\/split_json\/oembed",
+                "formats": [
+                    "json"
+                ]
+            }
+        ]
+    },
+    {
+        "provider_name": "provider5",
+        "provider_url": "http:\/\/example.com\/fprmat",
+        "endpoints": [
+            {
+                "schemes": [
+                    "http:\/\/example.com\/format\/*"
+                ],
+                "url": "http:\/\/example.com\/format\/oembed.{format}"
+            }
+        ]
+    },
+    {
+        "provider_name": "provider6",
+        "provider_url": "http:\/\/example.com\/sub",
+        "endpoints": [
+            {
+                "schemes": [
+                    "http:\/\/*.example.com\/sub\/*"
+                ],
+                "url": "http:\/\/example.com\/sub\/oembed"
+            }
+        ]
+    }
+]

@@ -1,0 +1,11 @@
+[
+    {
+        "provider_name": "provider",
+        "provider_url": "http:\/\/example.com",
+        "endpoints": [
+            {
+                "url": "http:\/\/example.com\/oembed"
+            }
+        ]
+    }
+]

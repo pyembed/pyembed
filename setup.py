@@ -60,14 +60,13 @@ setup(
 
     package_data={
         "pyembed.core": [
-            "config/endpoints.yml"
+            "config/providers.json"
         ]
     },
 
     install_requires=[
         'beautifulsoup4',
-        'requests',
-        'pyyaml'
+        'requests'
     ],
     tests_require=[
         'mock',
