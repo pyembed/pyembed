@@ -1,0 +1,13 @@
+[
+    {
+        "provider_name": "provider",
+        "provider_url": "http:\/\/example.com",
+        "endpoints": [
+            {
+                "schemes": [
+                    "http:\/\/example.com\/simple\/*"
+                ]
+            }
+        ]
+    }
+]

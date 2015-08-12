@@ -27,8 +27,8 @@ from pyembed.core import discovery
 
 
 def test_should_find_oembed_urls():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/simple/123')
     assert_that(set(result), equal_to({
         'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=xml',
@@ -37,77 +37,77 @@ def test_should_find_oembed_urls():
 
 
 def test_should_find_oembed_urls_for_json():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/simple/123', 'json')
     assert_that(result, equal_to(
         ['http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=json']))
 
 
 def test_should_find_oembed_urls_for_xml():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/simple/123', 'xml')
     assert_that(result, equal_to(
         ['http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=xml']))
 
 
 def test_should_not_find_oembed_urls_for_unknown_url():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/rubbish/123')
     assert_that(result, equal_to([]))
 
 
 def test_should_find_oembed_urls_when_only_json_allowed():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/json/123')
     assert_that(result, equal_to(
         ['http://example.com/json/oembed?url=http%3A%2F%2Fexample.com%2Fjson%2F123&format=json']))
 
 
 def test_should_find_oembed_urls_for_json_when_only_json_allowed():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/json/123', 'json')
     assert_that(result, equal_to(
         ['http://example.com/json/oembed?url=http%3A%2F%2Fexample.com%2Fjson%2F123&format=json']))
 
 
 def test_should_not_find_oembed_urls_for_xml_when_only_json_allowed():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/json/123', 'xml')
     assert_that(result, equal_to([]))
 
 
 def test_should_find_oembed_urls_when_only_xml_allowed():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/xml/123')
     assert_that(result, equal_to(
         ['http://example.com/xml/oembed?url=http%3A%2F%2Fexample.com%2Fxml%2F123&format=xml']))
 
 
 def test_should_find_oembed_urls_for_xml_when_only_xml_allowed():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/xml/123', 'xml')
     assert_that(result, equal_to(
         ['http://example.com/xml/oembed?url=http%3A%2F%2Fexample.com%2Fxml%2F123&format=xml']))
 
 
 def test_should_not_find_oembed_urls_for_json_when_only_xml_allowed():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/xml/123', 'json')
     assert_that(result, equal_to([]))
 
 
 def test_should_find_oembed_urls_when_split_by_format():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/split/123')
     assert_that(set(result), equal_to({
         'http://example.com/split_json/oembed?url=http%3A%2F%2Fexample.com%2Fsplit%2F123&format=json',
@@ -116,8 +116,8 @@ def test_should_find_oembed_urls_when_split_by_format():
 
 
 def test_should_find_oembed_urls_for_json_when_split_by_format():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/split/123', 'json')
     assert_that(result, equal_to([
         'http://example.com/split_json/oembed?url=http%3A%2F%2Fexample.com%2Fsplit%2F123&format=json'
@@ -125,16 +125,16 @@ def test_should_find_oembed_urls_for_json_when_split_by_format():
 
 
 def test_should_find_oembed_urls_for_xml_when_split_by_format():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/split/123', 'xml')
     assert_that(result, equal_to(
         ['http://example.com/split_xml/oembed?url=http%3A%2F%2Fexample.com%2Fsplit%2F123&format=xml']))
 
 
 def test_should_find_oembed_urls_when_format_in_endpoint():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/format/123')
     assert_that(set(result), equal_to({
         'http://example.com/format/oembed.xml?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=xml',
@@ -143,24 +143,24 @@ def test_should_find_oembed_urls_when_format_in_endpoint():
 
 
 def test_should_find_oembed_urls_for_json_when_format_in_endpoint():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/format/123', 'json')
     assert_that(result, equal_to(
         ['http://example.com/format/oembed.json?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=json']))
 
 
 def test_should_find_oembed_urls_for_xml_when_format_in_endpoint():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/format/123', 'xml')
     assert_that(result, equal_to(
         ['http://example.com/format/oembed.xml?url=http%3A%2F%2Fexample.com%2Fformat%2F123&format=xml']))
 
 
 def test_should_find_oembed_urls_for_subdomain_wildcard_without_subdomain():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://example.com/sub/123')
     assert_that(set(result), equal_to({
         'http://example.com/sub/oembed?url=http%3A%2F%2Fexample.com%2Fsub%2F123&format=xml',
@@ -169,8 +169,8 @@ def test_should_find_oembed_urls_for_subdomain_wildcard_without_subdomain():
 
 
 def test_should_find_oembed_urls_for_subdomain_wildcard_with_subdomain():
-    discoverer = discovery.StaticDiscoverer(
-        'pyembed/core/test/fixtures/static_discovery/valid.yml')
+    discoverer = discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/valid.json')
     result = discoverer.get_oembed_urls('http://www.example.com/sub/123')
     assert_that(set(result), equal_to({
         'http://example.com/sub/oembed?url=http%3A%2F%2Fwww.example.com%2Fsub%2F123&format=xml',
@@ -180,24 +180,21 @@ def test_should_find_oembed_urls_for_subdomain_wildcard_with_subdomain():
 
 def test_should_not_find_oembed_urls_for_bad_format():
     with pytest.raises(discovery.PyEmbedDiscoveryError):
-        discoverer = discovery.StaticDiscoverer(
-            'pyembed/core/test/fixtures/static_discovery/valid.yml')
+        discoverer = discovery.FileDiscoverer(
+            'pyembed/core/test/fixtures/static_discovery/valid.json')
         discoverer.get_oembed_urls('http://example.com/simple/123', 'yaml')
 
 
-def test_should_throw_if_no_endpoint():
-    with pytest.raises(discovery.PyEmbedDiscoveryError):
-        discovery.StaticDiscoverer(
-            'pyembed/core/test/fixtures/static_discovery/no_endpoint.yml')
+def test_should_cope_with_no_endpoint():
+    discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/no_endpoint.json')
 
 
 def test_should_throw_if_no_schemes():
-    with pytest.raises(discovery.PyEmbedDiscoveryError):
-        discovery.StaticDiscoverer(
-            'pyembed/core/test/fixtures/static_discovery/no_schemes.yml')
+    discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/no_schemes.json')
 
 
 def test_should_throw_if_empty_schemes():
-    with pytest.raises(discovery.PyEmbedDiscoveryError):
-        discovery.StaticDiscoverer(
-            'pyembed/core/test/fixtures/static_discovery/empty_schemes.yml')
+    discovery.FileDiscoverer(
+        'pyembed/core/test/fixtures/static_discovery/empty_schemes.json')
