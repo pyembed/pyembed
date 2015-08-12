@@ -3,6 +3,13 @@
 Changes
 =======
 
+v1.2.0, 2015-08-12
+------------------
+
+Enhancements:
+
+- #48: Use official list of providers
+
 v1.1.2, 2015-01-03
 ------------------
 
