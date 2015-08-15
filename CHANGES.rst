@@ -3,6 +3,13 @@
 Changes
 =======
 
+v1.2.2, 2015-08-15
+------------------
+
+Bug fixes:
+
+- #51: Fix other Beautiful Soup warning
+
 v1.2.1, 2015-08-15
 ------------------
 
