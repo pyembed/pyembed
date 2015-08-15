@@ -70,7 +70,7 @@ def parse_oembed_xml(oembed_response):
     :returns: an PyEmbedResponse for the given XML.
     :raises PyEmbedParseError: if there is an error parsing the response.
     """
-    soup = BeautifulSoup(oembed_response)
+    soup = BeautifulSoup(oembed_response, 'html.parser')
     value_function = __value_function_xml(soup.oembed)
     return __construct_response(value_function)
 
