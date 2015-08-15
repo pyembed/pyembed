@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, contains_string, equal_to
 import pytest
 
 from pyembed.core import PyEmbed
@@ -36,35 +35,35 @@ class DummyRenderer(PyEmbedRenderer):
 def test_should_get_correct_embedding():
     embedding = PyEmbed().embed(
         'https://twitter.com/BarackObama/status/266031293945503744')
-    assert_that(embedding, contains_string('Four more years.'))
+    assert 'Four more years.' in embedding
 
 
 def test_should_get_another_correct_embedding():
     embedding = PyEmbed().embed(
         'http://www.flickr.com/photos/hansjuul/7899334594')
-    assert_that(embedding, contains_string('.jpg'))
+    assert '.jpg' in embedding
 
 
 def test_should_embed_with_maximum_height():
     embedding = PyEmbed().embed(
         'http://www.youtube.com/watch?v=9bZkp7q19f0', max_height=200)
-    assert_that(embedding, contains_string('height="200"'))
+    assert 'height="200"' in embedding
 
 
 def test_should_embed_with_custom_renderer():
     embedding = PyEmbed(renderer=DummyRenderer()).embed(
         'http://www.youtube.com/watch?v=qrO4YZeyl0I')
-    assert_that(embedding, equal_to(
-        'Lady Gaga - Bad Romance by LadyGagaVEVO from ' +
-        'http://www.youtube.com/watch?v=qrO4YZeyl0I'))
+    assert embedding == \
+        'Lady Gaga - Bad Romance by LadyGagaVEVO from ' + \
+        'http://www.youtube.com/watch?v=qrO4YZeyl0I'
 
 
 def test_should_embed_when_no_discovery():
     embedding = PyEmbed().embed(
         'http://www.rdio.com/artist/Mike_Oldfield/album/Amarok/')
-    assert_that(embedding, contains_string('rd.io'))
+    assert 'rd.io' in embedding
 
 
 def test_should_embed_when_text_xml_returned():
     embedding = PyEmbed().embed('https://soundcloud.com/coltonprovias/rush')
-    assert_that(embedding, contains_string('soundcloud.com'))
+    assert 'soundcloud.com' in embedding

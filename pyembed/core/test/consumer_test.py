@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, equal_to
 from mock import call, patch, Mock
 import pytest
 
@@ -32,8 +31,8 @@ def test_should_discover_and_get_oembed_url():
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
         result = __set_up_mocks(mock_get, mock_parse)
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed']), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed']) == result
 
         mock_get.assert_called_with('http://example.com/oembed')
         mock_parse.assert_called_with('hello, world', 'application/json')
@@ -44,8 +43,8 @@ def test_should_discover_and_get_oembed_url_for_xml():
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
         result = __set_up_mocks(mock_get, mock_parse, 'text/xml')
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed']), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed']) == result
 
         mock_get.assert_called_with('http://example.com/oembed')
         mock_parse.assert_called_with('hello, world', 'text/xml')
@@ -57,8 +56,8 @@ def test_should_discover_and_get_oembed_url_with_charset():
         result = __set_up_mocks(
             mock_get, mock_parse, 'application/json;charset=utf-8')
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed']), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed']) == result
 
         mock_get.assert_called_with('http://example.com/oembed')
         mock_parse.assert_called_with('hello, world', 'application/json')
@@ -69,8 +68,8 @@ def test_should_add_max_width():
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
         result = __set_up_mocks(mock_get, mock_parse)
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed'], max_width=100), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed'], max_width=100) == result
 
         mock_get.assert_called_with('http://example.com/oembed?maxwidth=100')
         mock_parse.assert_called_with('hello, world', 'application/json')
@@ -81,8 +80,8 @@ def test_should_add_max_height():
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
         result = __set_up_mocks(mock_get, mock_parse)
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed'], max_height=200), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed'], max_height=200) == result
 
         mock_get.assert_called_with('http://example.com/oembed?maxheight=200')
         mock_parse.assert_called_with('hello, world', 'application/json')
@@ -93,8 +92,8 @@ def test_should_add_max_width_and_height():
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
         result = __set_up_mocks(mock_get, mock_parse)
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed'], max_width=100, max_height=200), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed'], max_width=100, max_height=200) == result
 
         mock_get.assert_called_with(
             'http://example.com/oembed?maxwidth=100&maxheight=200')
@@ -106,8 +105,8 @@ def test_should_add_max_width_when_query_string_present():
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
         result = __set_up_mocks(mock_get, mock_parse)
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed?format=json'], max_width=100), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed?format=json'], max_width=100) == result
 
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json&maxwidth=100')
@@ -119,8 +118,8 @@ def test_should_add_max_height_when_query_string_present():
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
         result = __set_up_mocks(mock_get, mock_parse)
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed?format=json'], max_height=200), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed?format=json'], max_height=200) == result
 
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json&maxheight=200')
@@ -132,8 +131,8 @@ def test_should_add_max_width_and_height_when_query_string_present():
             patch('pyembed.core.parse.parse_oembed') as mock_parse:
         result = __set_up_mocks(mock_get, mock_parse)
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed?format=json'], max_width=100, max_height=200), equal_to(result))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed?format=json'], max_width=100, max_height=200) == result
 
         mock_get.assert_called_with(
             'http://example.com/oembed?format=json&maxwidth=100&maxheight=200')
@@ -148,8 +147,8 @@ def test_should_try_next_on_request_error():
         parsed = Mock()
         mock_parse.return_value = parsed
 
-        assert_that(consumer.get_first_oembed_response(
-            ['http://example.com/oembed1', 'http://example.com/oembed2']), equal_to(parsed))
+        assert consumer.get_first_oembed_response(
+            ['http://example.com/oembed1', 'http://example.com/oembed2']) == parsed
 
         mock_get.assert_has_calls([call('http://example.com/oembed1'), call('http://example.com/oembed2')])
         mock_parse.assert_called_with('hello, world', 'application/json')

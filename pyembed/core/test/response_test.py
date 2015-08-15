@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, equal_to
 import pytest
 
 from pyembed.core import response
@@ -30,7 +29,7 @@ def test_should_load_from_dictionary():
     values = {'type': 'link', 'version': '1.0'}
     oembed_response = response.OEmbedResponse(create_value_function(values))
 
-    assert_that(oembed_response.type, equal_to('link'))
+    assert oembed_response.type == 'link'
 
 
 def test_response_should_be_immutable():

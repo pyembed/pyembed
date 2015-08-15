@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, equal_to
 from mock import Mock
 
 from pyembed.core import discovery
@@ -39,11 +38,11 @@ def test_should_return_both_if_valid():
     discoverer = discovery.ChainingDiscoverer([discoverer1, discoverer2])
 
     result = discoverer.get_oembed_urls('http://example.com')
-    assert_that(result, equal_to([
+    assert result == [
         'http://example.com/oembed1?format=json',
         'http://example.com/oembed2?format=json',
         'http://example.com/oembed2?format=xml'
-    ]))
+    ]
 
     discoverer1.get_oembed_urls.assert_called_with('http://example.com', None)
     discoverer2.get_oembed_urls.assert_called_with('http://example.com', None)
@@ -62,10 +61,10 @@ def test_should_remove_duplicates():
     discoverer = discovery.ChainingDiscoverer([discoverer1, discoverer2])
 
     result = discoverer.get_oembed_urls('http://example.com')
-    assert_that(result, equal_to([
+    assert result == [
         'http://example.com/oembed?format=json',
         'http://example.com/oembed?format=xml'
-    ]))
+    ]
 
     discoverer1.get_oembed_urls.assert_called_with('http://example.com', None)
     discoverer2.get_oembed_urls.assert_called_with('http://example.com', None)
@@ -81,7 +80,7 @@ def test_should_continue_if_first_throws():
     discoverer = discovery.ChainingDiscoverer([discoverer1, discoverer2])
 
     result = discoverer.get_oembed_urls('http://example.com')
-    assert_that(result, equal_to(['http://example.com/oembed?format=json']))
+    assert result == ['http://example.com/oembed?format=json']
 
     discoverer1.get_oembed_urls.assert_called_with('http://example.com', None)
     discoverer2.get_oembed_urls.assert_called_with('http://example.com', None)
@@ -97,7 +96,7 @@ def test_should_return_empty_if_all_throw():
     discoverer = discovery.ChainingDiscoverer([discoverer1, discoverer2])
 
     result = discoverer.get_oembed_urls('http://example.com')
-    assert_that(result, equal_to([]))
+    assert result == []
 
     discoverer1.get_oembed_urls.assert_called_with('http://example.com', None)
     discoverer2.get_oembed_urls.assert_called_with('http://example.com', None)

@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, equal_to
 import pytest
 
 from pyembed.core import render, response
@@ -35,10 +34,8 @@ def test_should_embed_photo():
 
     oembed_response = response.OEmbedPhotoResponse(
         create_value_function(values))
-    assert_that(
-        render.DefaultRenderer().render('http://example.com', oembed_response),
-        equal_to('<img src="http://example.com/bees.jpg" ' +
-                 'width="300" height="200" />'))
+    assert render.DefaultRenderer().render('http://example.com', oembed_response) == \
+        '<img src="http://example.com/bees.jpg" width="300" height="200" />'
 
 
 def test_should_embed_video():
@@ -49,9 +46,8 @@ def test_should_embed_video():
 
     oembed_response = response.OEmbedVideoResponse(
         create_value_function(values))
-    assert_that(
-        render.DefaultRenderer().render('http://example.com', oembed_response),
-        equal_to(embedding))
+    assert render.DefaultRenderer().render('http://example.com', oembed_response) == \
+        embedding
 
 
 def test_should_embed_rich():
@@ -62,9 +58,8 @@ def test_should_embed_rich():
 
     oembed_response = response.OEmbedRichResponse(
         create_value_function(values))
-    assert_that(
-        render.DefaultRenderer().render('http://example.com', oembed_response),
-        equal_to(embedding))
+    assert render.DefaultRenderer().render('http://example.com', oembed_response) == \
+        embedding
 
 
 def test_should_embed_link():
@@ -73,9 +68,8 @@ def test_should_embed_link():
 
     oembed_response = response.OEmbedLinkResponse(
         create_value_function(values))
-    assert_that(
-        render.DefaultRenderer().render('http://example.com', oembed_response),
-        equal_to('<a href="http://example.com">Bees!</a>'))
+    assert render.DefaultRenderer().render('http://example.com', oembed_response) == \
+        '<a href="http://example.com">Bees!</a>'
 
 
 def test_must_override_render():

@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, equal_to
 from mock import patch, Mock
 import pytest
 
@@ -33,47 +32,44 @@ def test_should_find_oembed_urls():
         'http://example.com/oembed?format=xml'
     ]
 
-    assert_that(get_oembed_urls(), equal_to(expected_urls))
+    assert get_oembed_urls() == expected_urls
 
 
 def test_should_find_oembed_urls_using_json_when_specified():
     expected_url = 'http://example.com/oembed?format=json'
-    assert_that(get_oembed_urls(oembed_format='json'), equal_to([expected_url]))
+    assert get_oembed_urls(oembed_format='json') == [expected_url]
 
 
 def test_should_find_oembed_urls_using_xml_when_specified():
     expected_url = 'http://example.com/oembed?format=xml'
-    assert_that(get_oembed_urls(oembed_format='xml'), equal_to([expected_url]))
+    assert get_oembed_urls(oembed_format='xml') == [expected_url]
 
 
 def test_should_return_xml_if_json_not_present():
     expected_url = 'http://example.com/oembed?format=xml'
-    assert_that(get_oembed_urls(fixture='no_json_oembed.html'),
-                equal_to([expected_url]))
+    assert get_oembed_urls(fixture='no_json_oembed.html') == [expected_url]
 
 
 def test_should_find_oembed_urls_using_json_with_relative_url():
     expected_url = 'http://example.com/oembed?format=json'
-    assert_that(get_oembed_urls(fixture='relative_url.html', oembed_format='json'),
-                equal_to([expected_url]))
+    assert get_oembed_urls(fixture='relative_url.html', oembed_format='json') == [expected_url]
 
 
 def test_should_find_oembed_urls_using_xml_with_relative_url():
     expected_url = 'http://example.com/oembed?format=xml'
-    assert_that(get_oembed_urls(fixture='relative_url.html', oembed_format='xml'),
-                equal_to([expected_url]))
+    assert get_oembed_urls(fixture='relative_url.html', oembed_format='xml') == [expected_url]
 
 
 def test_should_return_empty_if_href_not_present():
-    assert_that(get_oembed_urls(fixture='json_oembed_no_href.html'), equal_to([]))
+    assert get_oembed_urls(fixture='json_oembed_no_href.html') == []
 
 
 def test_should_return_empty_for_invalid_html():
-    assert_that(get_oembed_urls(fixture='invalid.html'), equal_to([]))
+    assert get_oembed_urls(fixture='invalid.html') == []
 
 
 def test_should_return_empty_on_error_response():
-    assert_that(get_oembed_urls(ok=False), equal_to([]))
+    assert get_oembed_urls(ok=False) == []
 
 
 def test_should_throw_error_when_invalid_oembed_format_specified():

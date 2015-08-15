@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, equal_to
 from mock import patch, Mock
 import pytest
 
@@ -40,10 +39,10 @@ def test_should_find_oembed_urls():
 
         discoverer = discovery.UrlDiscoverer('http://example.com/providers.json')
         result = discoverer.get_oembed_urls('http://example.com/simple/123')
-        assert_that(set(result), equal_to({
+        assert set(result) == {
             'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=xml',
             'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=json'
-        }))
+        }
 
         mock_get.assert_called_with('http://example.com/providers.json')
 
