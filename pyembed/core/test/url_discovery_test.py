@@ -57,4 +57,5 @@ def test_should_raise_if_error_reading_url():
         pytest.raises(discovery.PyEmbedDiscoveryError):
         mock_get.return_value = response
 
-        discovery.UrlDiscoverer('http://example.com/providers.json')
+        discoverer = discovery.UrlDiscoverer('http://example.com/providers.json')
+        discoverer.get_oembed_urls('http://example.com/simple/123')
