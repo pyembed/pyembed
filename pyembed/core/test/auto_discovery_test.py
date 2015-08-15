@@ -87,8 +87,8 @@ def get_oembed_urls(fixture='valid_oembed.html',
             'pyembed/core/test/fixtures/auto_discovery/' + fixture).read()
         mock_get.return_value = response
 
-        result = discovery.AutoDiscoverer().get_oembed_urls(
-            'http://example.com', oembed_format)
+        result = list(discovery.AutoDiscoverer().get_oembed_urls(
+            'http://example.com', oembed_format))
 
         mock_get.assert_called_with('http://example.com')
         return result

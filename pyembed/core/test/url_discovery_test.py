@@ -39,10 +39,10 @@ def test_should_find_oembed_urls():
 
         discoverer = discovery.UrlDiscoverer('http://example.com/providers.json')
         result = discoverer.get_oembed_urls('http://example.com/simple/123')
-        assert set(result) == {
-            'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=xml',
-            'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=json'
-        }
+        assert list(result) == [
+            'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=json',
+            'http://example.com/simple/oembed?url=http%3A%2F%2Fexample.com%2Fsimple%2F123&format=xml'
+        ]
 
         mock_get.assert_called_with('http://example.com/providers.json')
 
