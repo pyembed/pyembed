@@ -104,7 +104,7 @@ class AutoDiscoverer(PyEmbedDiscoverer):
         if not response.ok:
             return []
 
-        soup = BeautifulSoup(response.text)
+        soup = BeautifulSoup(response.text, 'html.parser')
         links = soup.find_all('link', type=media_type, href=True)
 
         return [urljoin(url, link['href']) for link in links]
