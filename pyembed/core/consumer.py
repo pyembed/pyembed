@@ -42,7 +42,7 @@ def get_first_oembed_response(oembed_urls, max_width=None, max_height=None):
     """Fetches an OEmbed response from a list of OEmbed URLs.  The URLs will be
     tried in turn until one returns successfully.
 
-    :param oembed_urls: a list of OEmbed URLs.
+    :param oembed_urls: an iterable of OEmbed URLs.
     :param max_width: (optional) the maximum width of the embedded resource.
     :param max_height: (optional) the maximum height of the embedded resource.
     :returns: an PyEmbedResponse, representing the resource to embed.

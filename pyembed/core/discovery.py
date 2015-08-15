@@ -23,7 +23,6 @@
 import functools
 import json
 import re
-from collections import OrderedDict
 
 from bs4 import BeautifulSoup
 from pkg_resources import resource_filename
@@ -40,13 +39,11 @@ except ImportError:  # pragma: no cover
 
 from itertools import product
 
-MEDIA_TYPES = {
-    'json': 'application/json+oembed',
-    'xml': 'text/xml+oembed'
-}
-
-FORMATS = {MEDIA_TYPES[oembed_format]: oembed_format for oembed_format in MEDIA_TYPES}
-
+MEDIA_TYPES = [
+    {'format': 'json', 'media_type': 'application/json+oembed'},
+    {'format': 'xml', 'media_type': 'text/xml+oembed'}
+]
+FORMATS = [media_type['format'] for media_type in MEDIA_TYPES]
 
 class PyEmbedDiscoveryError(PyEmbedError):
     """Thrown if there is an error discovering an OEmbed URL."""
@@ -98,26 +95,27 @@ class AutoDiscoverer(PyEmbedDiscoverer):
 
     def get_oembed_urls(self, url, oembed_format=None):
         media_type = self.__get_type(oembed_format)
-
         response = requests.get(url)
 
-        if not response.ok:
-            return []
+        if response.ok:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            links = soup.find_all('link', type=media_type, href=True)
 
-        soup = BeautifulSoup(response.text, 'html.parser')
-        links = soup.find_all('link', type=media_type, href=True)
-
-        return [urljoin(url, link['href']) for link in links]
+            for link in links:
+                yield urljoin(url, link['href'])
 
     @staticmethod
     def __get_type(oembed_format):
         if not oembed_format:
-            return list(MEDIA_TYPES.values())
-        elif oembed_format in MEDIA_TYPES:
-            return MEDIA_TYPES[oembed_format]
+            return [media_type['media_type'] for media_type in MEDIA_TYPES]
 
-        raise PyEmbedDiscoveryError(
-            'Invalid format %s specified (must be json or xml)' % oembed_format)
+        media_types = [media_type['media_type'] for media_type in MEDIA_TYPES if media_type['format'] == oembed_format]
+
+        if not media_types:
+            raise PyEmbedDiscoveryError(
+                'Invalid format %s specified (must be json or xml)' % oembed_format)
+
+        return media_types
 
 
 class StaticDiscoverer(PyEmbedDiscoverer):
@@ -129,15 +127,15 @@ class StaticDiscoverer(PyEmbedDiscoverer):
         self.endpoints = endpoints
 
     def get_oembed_urls(self, url, oembed_format=None):
-        if oembed_format and oembed_format not in MEDIA_TYPES:
+        if oembed_format and oembed_format not in FORMATS:
             raise PyEmbedDiscoveryError(
                 'Invalid format %s specified (must be json or xml)' % oembed_format)
 
-        formats = [oembed_format] if oembed_format else MEDIA_TYPES.keys()
+        formats = [oembed_format] if oembed_format else FORMATS
 
-        return [e.build_oembed_url(url, f)
-                for (e, f) in product(self.endpoints, formats)
-                if e.matches(url, f)]
+        for (endpoint, oembed_format) in product(self.endpoints, formats):
+            if endpoint.matches(url, oembed_format):
+                yield endpoint.build_oembed_url(url, oembed_format)
 
     @staticmethod
     def _build_endpoints_from_providers(providers):
@@ -239,13 +237,14 @@ class ChainingDiscoverer(PyEmbedDiscoverer):
         self.delegates = delegates
 
     def get_oembed_urls(self, url, oembed_format=None):
-        return list(OrderedDict.fromkeys(self.__generate(url, oembed_format)))
+        seen_oembed_urls = set()
 
-    def __generate(self, url, oembed_format):
         for delegate in self.delegates:
             try:
                 for oembed_url in delegate.get_oembed_urls(url, oembed_format):
-                    yield oembed_url
+                    if oembed_url not in seen_oembed_urls:
+                        seen_oembed_urls.add(oembed_url)
+                        yield oembed_url
             except PyEmbedDiscoveryError:
                 pass
 
