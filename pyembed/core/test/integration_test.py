@@ -21,6 +21,7 @@
 # THE SOFTWARE.
 
 import pytest
+import vcr
 
 from pyembed.core import PyEmbed
 from pyembed.core.render import PyEmbedRenderer
@@ -32,24 +33,28 @@ class DummyRenderer(PyEmbedRenderer):
                (response.title, response.author_name, content_url)
 
 
+@vcr.use_cassette('pyembed/core/test/fixtures/cassettes/correct_embedding.yml')
 def test_should_get_correct_embedding():
     embedding = PyEmbed().embed(
         'https://twitter.com/BarackObama/status/266031293945503744')
     assert 'Four more years.' in embedding
 
 
+@vcr.use_cassette('pyembed/core/test/fixtures/cassettes/another_correct_embedding.yml')
 def test_should_get_another_correct_embedding():
     embedding = PyEmbed().embed(
         'http://www.flickr.com/photos/hansjuul/7899334594')
     assert '.jpg' in embedding
 
 
+@vcr.use_cassette('pyembed/core/test/fixtures/cassettes/maximum_height.yml')
 def test_should_embed_with_maximum_height():
     embedding = PyEmbed().embed(
         'http://www.youtube.com/watch?v=9bZkp7q19f0', max_height=200)
     assert 'height="200"' in embedding
 
 
+@vcr.use_cassette('pyembed/core/test/fixtures/cassettes/custom_renderer.yml')
 def test_should_embed_with_custom_renderer():
     embedding = PyEmbed(renderer=DummyRenderer()).embed(
         'http://www.youtube.com/watch?v=qrO4YZeyl0I')
@@ -58,12 +63,14 @@ def test_should_embed_with_custom_renderer():
         'http://www.youtube.com/watch?v=qrO4YZeyl0I'
 
 
+@vcr.use_cassette('pyembed/core/test/fixtures/cassettes/no_discovery.yml')
 def test_should_embed_when_no_discovery():
     embedding = PyEmbed().embed(
         'http://www.rdio.com/artist/Mike_Oldfield/album/Amarok/')
     assert 'rd.io' in embedding
 
 
+@vcr.use_cassette('pyembed/core/test/fixtures/cassettes/text_xml.yml')
 def test_should_embed_when_text_xml_returned():
     embedding = PyEmbed().embed('https://soundcloud.com/coltonprovias/rush')
     assert 'soundcloud.com' in embedding

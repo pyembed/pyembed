@@ -1,0 +1,833 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.7.0 CPython/2.7.9 Linux/3.19.0-25-generic]
+    method: GET
+    uri: http://www.rdio.com/artist/Mike_Oldfield/album/Amarok/
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [en]
+      content-type: [text/html; charset=utf-8]
+      date: ['Sat, 15 Aug 2015 12:46:35 GMT']
+      p3p: ['CP="This is not a P3P policy. See http://www.rdio.com/legal/privacy-policy
+          for more info."']
+      server: [nginx/1.2.4]
+      set-cookie: [r=eyJfZSI6IDB9.TntV3ezgjIEgu4PtxiO8mTYQsJM; Domain=.rdio.com; Path=/,
+        '_a=eyJkYXRlX2Nvb2tpZWQiOiAxNDM5NjY3OTk1LCAicmVmIjogIiIsICJyZXEiOiAiaHR0cDovL3d3dy5yZGlvLmNvbS9hcnRpc3QvTWlrZV9PbGRmaWVsZC9hbGJ1bS9BbWFyb2svIiwgInR5cGUiOiAib3JnYW5pYyIsICJ1YSI6ICJkZXNrdG9wIiwgIm11aWQiOiAiY2YwNzcyNWE2NDQ4Yzk1NTUxODhkZjVmNzRlYTBiYWE4YWY5OGRmNiJ9;
+          Domain=.rdio.com; expires=Mon, 14-Sep-2015 12:46:35 GMT; Max-Age=2592000;
+          Path=/']
+      vary: [Accept-Encoding, 'Accept-Language, Cookie']
+      x-srv: [srv-211-01]
+      x-version: ['720']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.7.0 CPython/2.7.9 Linux/3.19.0-25-generic]
+    method: GET
+    uri: http://oembed.com/providers.json
+  response:
+    body: {string: !!python/unicode "[\n    {\n        \"provider_name\": \"IFTTT\",\n
+        \       \"provider_url\": \"http:\\/\\/www.ifttt.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/ifttt.com\\/recipes\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.ifttt.com\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"YouTube\",\n        \"provider_url\": \"http:\\/\\/www.youtube.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"url\": \"http:\\/\\/www.youtube.com\\/oembed\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"Flickr\",\n        \"provider_url\": \"http:\\/\\/www.flickr.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/*.flickr.com\\/photos\\/*\",\n                    \"http:\\/\\/flic.kr\\/p\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.flickr.com\\/services\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"Viddler\",\n        \"provider_url\": \"http:\\/\\/www.viddler.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/www.viddler.com\\/v\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/www.viddler.com\\/oembed\\/\"\n            }\n
+        \       ]\n    },\n    {\n        \"provider_name\": \"Hulu\",\n        \"provider_url\":
+        \"http:\\/\\/www.hulu.com\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/www.hulu.com\\/watch\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.hulu.com\\/api\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Vimeo\",\n
+        \       \"provider_url\": \"http:\\/\\/vimeo.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/vimeo.com\\/*\",\n
+        \                   \"http:\\/\\/vimeo.com\\/groups\\/*\\/videos\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/vimeo.com\\/api\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"CollegeHumor\",\n
+        \       \"provider_url\": \"http:\\/\\/www.collegehumor.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/www.collegehumor.com\\/video\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.collegehumor.com\\/oembed.{format}\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"Poll Everywhere\",\n        \"provider_url\":
+        \"http:\\/\\/www.polleverywhere.com\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/www.polleverywhere.com\\/polls\\/*\",\n
+        \                   \"http:\\/\\/www.polleverywhere.com\\/multiple_choice_polls\\/*\",\n
+        \                   \"http:\\/\\/www.polleverywhere.com\\/free_text_polls\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.polleverywhere.com\\/services\\/oembed\\/\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Embedly\",\n
+        \       \"provider_url\": \"http:\\/\\/api.embed.ly\\/\",\n        \"endpoints\":
+        [\n            {\n                \"url\": \"http:\\/\\/api.embed.ly\\/1\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Portfolium\",\n
+        \       \"provider_url\": \"https:\\/\\/portfolium.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"https:\\/\\/portfolium.com\\/entry\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/api.portfolium.com\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"iFixit\",\n
+        \       \"provider_url\": \"http:\\/\\/www.iFixit.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/www.ifixit.com\\/Guide\\/View\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.ifixit.com\\/Embed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"SmugMug\",\n
+        \       \"provider_url\": \"http:\\/\\/www.smugmug.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/*.smugmug.com\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/api.smugmug.com\\/services\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"Deviantart.com\",\n        \"provider_url\":
+        \"http:\\/\\/www.deviantart.com\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/*.deviantart.com\\/art\\/*\",\n
+        \                   \"http:\\/\\/*.deviantart.com\\/*#\\/d*\",\n                    \"http:\\/\\/fav.me\\/*\",\n
+        \                   \"http:\\/\\/sta.sh\\/*\"\n                ],\n                \"url\":
+        \"http:\\/\\/backend.deviantart.com\\/oembed\"\n            }\n        ]\n
+        \   },\n    {\n        \"provider_name\": \"SlideShare\",\n        \"provider_url\":
+        \"http:\\/\\/www.slideshare.net\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/www.slideshare.net\\/*\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.slideshare.net\\/api\\/oembed\\/2\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"WordPress.com\",\n        \"provider_url\": \"http:\\/\\/wordpress.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"url\": \"http:\\/\\/public-api.wordpress.com\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"chirbit.com\",\n        \"provider_url\": \"http:\\/\\/www.chirbit.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/chirb.it\\/*\"\n                ],\n                \"url\":
+        \"http:\\/\\/chirb.it\\/oembed.{format}\",\n                \"discovery\":
+        true\n            }\n        ]\n    },\n    {\n        \"provider_name\":
+        \"nfb.ca\",\n        \"provider_url\": \"http:\\/\\/www.nfb.ca\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/*.nfb.ca\\/film\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.nfb.ca\\/remote\\/services\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"Scribd\",\n        \"provider_url\": \"http:\\/\\/www.scribd.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/www.scribd.com\\/doc\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/www.scribd.com\\/services\\/oembed\\/\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Dotsub\",\n
+        \       \"provider_url\": \"http:\\/\\/dotsub.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/dotsub.com\\/view\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/dotsub.com\\/services\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Animoto\",\n
+        \       \"provider_url\": \"http:\\/\\/animoto.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/animoto.com\\/play\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/animoto.com\\/oembeds\\/create\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Rdio\",\n
+        \       \"provider_url\": \"http:\\/\\/rdio.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/*.rdio.com\\/artist\\/*\",\n
+        \                   \"http:\\/\\/*.rdio.com\\/people\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/www.rdio.com\\/api\\/oembed\\/\"\n            }\n
+        \       ]\n    },\n    {\n        \"provider_name\": \"MixCloud\",\n        \"provider_url\":
+        \"http:\\/\\/mixcloud.com\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/www.mixcloud.com\\/*\\/*\\/\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.mixcloud.com\\/oembed\\/\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Clyp\",\n
+        \       \"provider_url\": \"http:\\/\\/clyp.it\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/clyp.it\\/*\",\n
+        \                   \"http:\\/\\/clyp.it\\/playlist\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/api.clyp.it\\/oembed\\/\",\n                \"discovery\":
+        true\n            }\n        ]\n    },\n    {\n        \"provider_name\":
+        \"Screenr\",\n        \"provider_url\": \"http:\\/\\/www.screenr.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/www.screenr.com\\/*\\/\"\n                ],\n
+        \               \"url\": \"http:\\/\\/www.screenr.com\\/api\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"FunnyOrDie\",\n
+        \       \"provider_url\": \"http:\\/\\/www.funnyordie.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/www.funnyordie.com\\/videos\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.funnyordie.com\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Poll
+        Daddy\",\n        \"provider_url\": \"http:\\/\\/polldaddy.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/*.polldaddy.com\\/s\\/*\",\n
+        \                   \"http:\\/\\/*.polldaddy.com\\/poll\\/*\",\n                    \"http:\\/\\/*.polldaddy.com\\/ratings\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/polldaddy.com\\/oembed\\/\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Ted\",\n
+        \       \"provider_url\": \"http:\\/\\/ted.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/ted.com\\/talks\\/*\"\n
+        \               ]\n            }\n        ]\n    },\n    {\n        \"provider_name\":
+        \"VideoJug\",\n        \"provider_url\": \"http:\\/\\/www.videojug.com\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/www.videojug.com\\/film\\/*\",\n                    \"http:\\/\\/www.videojug.com\\/interview\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.videojug.com\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Sapo
+        Videos\",\n        \"provider_url\": \"http:\\/\\/videos.sapo.pt\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/videos.sapo.pt\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/videos.sapo.pt\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Official
+        FM\",\n        \"provider_url\": \"http:\\/\\/official.fm\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/official.fm\\/tracks\\/*\",\n
+        \                   \"http:\\/\\/official.fm\\/playlists\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/official.fm\\/services\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"HuffDuffer\",\n
+        \       \"provider_url\": \"http:\\/\\/huffduffer.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/huffduffer.com\\/*\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/huffduffer.com\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Shoudio\",\n
+        \       \"provider_url\": \"http:\\/\\/shoudio.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/shoudio.com\\/*\",\n
+        \                   \"http:\\/\\/shoud.io\\/*\"\n                ],\n                \"url\":
+        \"http:\\/\\/shoudio.com\\/api\\/oembed\"\n            }\n        ]\n    },\n
+        \   {\n        \"provider_name\": \"Moby Picture\",\n        \"provider_url\":
+        \"http:\\/\\/www.mobypicture.com\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/www.mobypicture.com\\/user\\/*\\/view\\/*\",\n
+        \                   \"http:\\/\\/moby.to\\/*\"\n                ],\n                \"url\":
+        \"http:\\/\\/api.mobypicture.com\\/oEmbed\"\n            }\n        ]\n    },\n
+        \   {\n        \"provider_name\": \"23HQ\",\n        \"provider_url\": \"http:\\/\\/www.23hq.com\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/www.23hq.com\\/*\\/photo\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/www.23hq.com\\/23\\/oembed\"\n            }\n
+        \       ]\n    },\n    {\n        \"provider_name\": \"Cacoo\",\n        \"provider_url\":
+        \"https:\\/\\/cacoo.com\",\n        \"endpoints\": [\n            {\n                \"schemes\":
+        [\n                    \"https:\\/\\/cacoo.com\\/diagrams\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/cacoo.com\\/oembed.{format}\"\n            }\n
+        \       ]\n    },\n    {\n        \"provider_name\": \"Dipity\",\n        \"provider_url\":
+        \"http:\\/\\/www.dipity.com\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/www.dipity.com\\/*\\/*\\/\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.dipity.com\\/oembed\\/timeline\\/\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Roomshare\",\n
+        \       \"provider_url\": \"http:\\/\\/roomshare.jp\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/roomshare.jp\\/post\\/*\",\n
+        \                   \"http:\\/\\/roomshare.jp\\/en\\/post\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/roomshare.jp\\/en\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Dailymotion\",\n
+        \       \"provider_url\": \"http:\\/\\/www.dailymotion.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/www.dailymotion.com\\/video\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.dailymotion.com\\/services\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Crowd
+        Ranking\",\n        \"provider_url\": \"http:\\/\\/crowdranking.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/crowdranking.com\\/*\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/crowdranking.com\\/api\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"CircuitLab\",\n
+        \       \"provider_url\": \"https:\\/\\/www.circuitlab.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"https:\\/\\/www.circuitlab.com\\/circuit\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/www.circuitlab.com\\/circuit\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"Geograph Britain and Ireland\",\n        \"provider_url\":
+        \"https:\\/\\/www.geograph.org.uk\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/*.geograph.org.uk\\/*\",\n
+        \                   \"http:\\/\\/*.geograph.co.uk\\/*\",\n                    \"http:\\/\\/*.geograph.ie\\/*\",\n
+        \                   \"http:\\/\\/*.wikimedia.org\\/*_geograph.org.uk_*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/api.geograph.org.uk\\/api\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Geograph
+        Germany\",\n        \"provider_url\": \"http:\\/\\/geo-en.hlipp.de\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/geo-en.hlipp.de\\/*\",\n                    \"http:\\/\\/geo.hlipp.de\\/*\",\n
+        \                   \"http:\\/\\/germany.geograph.org\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/geo.hlipp.de\\/restapi.php\\/api\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Geograph
+        Channel Islands\",\n        \"provider_url\": \"http:\\/\\/channel-islands.geograph.org\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/*.geograph.org.gg\\/*\",\n                    \"http:\\/\\/*.geograph.org.je\\/*\",\n
+        \                   \"http:\\/\\/channel-islands.geograph.org\\/*\",\n                    \"http:\\/\\/channel-islands.geographs.org\\/*\",\n
+        \                   \"http:\\/\\/*.channel.geographs.org\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/www.geograph.org.gg\\/api\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Quiz.biz\",\n
+        \       \"provider_url\": \"http:\\/\\/www.quiz.biz\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/www.quiz.biz\\/quizz-*.html\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.quiz.biz\\/api\\/oembed\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"Quizz.biz\",\n        \"provider_url\": \"http:\\/\\/www.quizz.biz\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/www.quizz.biz\\/quizz-*.html\"\n                ],\n
+        \               \"url\": \"http:\\/\\/www.quizz.biz\\/api\\/oembed\",\n                \"discovery\":
+        true\n            }\n        ]\n    },\n    {\n        \"provider_name\":
+        \"Coub\",\n        \"provider_url\": \"http:\\/\\/coub.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/coub.com\\/view\\/*\",\n
+        \                   \"http:\\/\\/coub.com\\/embed\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/coub.com\\/api\\/oembed.{format}\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"SpeakerDeck\",\n
+        \       \"provider_url\": \"https:\\/\\/speakerdeck.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/speakerdeck.com\\/*\\/*\",\n
+        \                   \"https:\\/\\/speakerdeck.com\\/*\\/*\"\n                ],\n
+        \               \"url\": \"https:\\/\\/speakerdeck.com\\/oembed.json\",\n
+        \               \"discovery\": true,\n                \"formats\": [\n                    \"json\"\n
+        \               ]\n            }\n        ]\n    },\n    {\n        \"provider_name\":
+        \"Alpha App Net\",\n        \"provider_url\": \"https:\\/\\/alpha.app.net\\/browse\\/posts\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"https:\\/\\/alpha.app.net\\/*\\/post\\/*\",\n                    \"https:\\/\\/photos.app.net\\/*\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/alpha-api.app.net\\/oembed\",\n
+        \               \"formats\": [\n                    \"json\"\n                ]\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"BlipTV\",\n
+        \       \"provider_url\": \"http:\\/\\/blip.tv\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/*.blip.tv\\/*\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/blip.tv\\/oembed\\/\",\n
+        \               \"formats\": [\n                    \"json\"\n                ]\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"YFrog\",\n
+        \       \"provider_url\": \"http:\\/\\/yfrog.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/*.yfrog.com\\/*\",\n
+        \                   \"http:\\/\\/yfrog.us\\/*\"\n                ],\n                \"url\":
+        \"http:\\/\\/www.yfrog.com\\/api\\/oembed\",\n                \"formats\":
+        [\n                    \"json\"\n                ]\n            }\n        ]\n
+        \   },\n    {\n        \"provider_name\": \"Instagram\",\n        \"provider_url\":
+        \"http:\\/\\/instagram.com\",\n        \"endpoints\": [\n            {\n                \"schemes\":
+        [\n                    \"http:\\/\\/instagram.com\\/p\\/*\",\n                    \"http:\\/\\/instagr.am\\/p\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/api.instagram.com\\/oembed\",\n
+        \               \"formats\": [\n                    \"json\"\n                ]\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"SoundCloud\",\n
+        \       \"provider_url\": \"http:\\/\\/soundcloud.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/soundcloud.com\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/soundcloud.com\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"On Aol\",\n
+        \       \"provider_url\": \"http:\\/\\/on.aol.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/on.aol.com\\/video\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/on.aol.com\\/api\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Kickstarter\",\n
+        \       \"provider_url\": \"http:\\/\\/www.kickstarter.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/www.kickstarter.com\\/projects\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.kickstarter.com\\/services\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Ustream\",\n
+        \       \"provider_url\": \"http:\\/\\/www.ustream.tv\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/*.ustream.tv\\/*\",\n
+        \                   \"http:\\/\\/*.ustream.com\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/www.ustream.tv\\/oembed\",\n                \"formats\":
+        [\n                    \"json\"\n                ]\n            }\n        ]\n
+        \   },\n    {\n        \"provider_name\": \"GMEP\",\n        \"provider_url\":
+        \"https:\\/\\/gmep.org\",\n        \"endpoints\": [\n            {\n                \"schemes\":
+        [\n                    \"https:\\/\\/gmep.org\\/media\\/*\"\n                ],\n
+        \               \"url\": \"https:\\/\\/gmep.org\\/oembed.{format}\"\n            }\n
+        \       ]\n    },\n    {\n        \"provider_name\": \"Daily Mile\",\n        \"provider_url\":
+        \"http:\\/\\/www.dailymile.com\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/www.dailymile.com\\/people\\/*\\/entries\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/api.dailymile.com\\/oembed?format=json\",\n
+        \               \"formats\": [\n                    \"json\"\n                ]\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Sketchfab\",\n
+        \       \"provider_url\": \"http:\\/\\/sketchfab.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/sketchfab.com\\/models\\/*\",\n
+        \                   \"https:\\/\\/sketchfab.com\\/models\\/*\",\n                    \"https:\\/\\/sketchfab.com\\/*\\/folders\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/sketchfab.com\\/oembed\",\n
+        \               \"formats\": [\n                    \"json\"\n                ]\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Meetup\",\n
+        \       \"provider_url\": \"http:\\/\\/www.meetup.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/meetup.com\\/*\",\n
+        \                   \"http:\\/\\/meetu.ps\\/*\"\n                ],\n                \"url\":
+        \"https:\\/\\/api.meetup.com\\/oembed\",\n                \"formats\": [\n
+        \                   \"json\"\n                ]\n            }\n        ]\n
+        \   },\n    {\n        \"provider_name\": \"VideoFork\",\n        \"provider_url\":
+        \"http:\\/\\/videofork.com\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/videofork.com\\/oembed\\/([0-9]+)\"\n
+        \               ],\n                \"url\": \"http:\\/\\/videofork.com\\/oembed\",\n
+        \               \"formats\": [\n                    \"json\"\n                ]\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"AudioSnaps\",\n
+        \       \"provider_url\": \"http:\\/\\/audiosnaps.com\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/audiosnaps.com\\/k\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/audiosnaps.com\\/service\\/oembed\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"edocr\",\n        \"provider_url\": \"http:\\/\\/www.edocr.com\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/edocr.com\\/docs\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/edocr.com\\/api\\/oembed\"\n            }\n
+        \       ]\n    },\n    {\n        \"provider_name\": \"RapidEngage\",\n        \"provider_url\":
+        \"https:\\/\\/rapidengage.com\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"https:\\/\\/rapidengage.com\\/s\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/rapidengage.com\\/api\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Ora
+        TV\",\n        \"provider_url\": \"http:\\/\\/www.ora.tv\\/\",\n        \"endpoints\":
+        [\n            {\n                \"discovery\": true,\n                \"url\":
+        \"https:\\/\\/www.ora.tv\\/oembed\\/*?format={format}\"\n            }\n        ]\n
+        \   },\n    {\n        \"provider_name\": \"Getty Images\",\n        \"provider_url\":
+        \"http:\\/\\/www.gettyimages.com\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/gty.im\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/embed.gettyimages.com\\/oembed\",\n
+        \               \"formats\": [\n                    \"json\"\n                ]\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"amCharts
+        Live Editor\",\n        \"provider_url\": \"http:\\/\\/live.amcharts.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"http:\\/\\/live.amcharts.com\\/*\"\n                ],\n
+        \               \"url\": \"http:\\/\\/live.amcharts.com\\/oembed\"\n            }\n
+        \       ]\n    },\n    {\n        \"provider_name\": \"iSnare Articles\",\n
+        \       \"provider_url\": \"https:\\/\\/www.isnare.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"https:\\/\\/www.isnare.com\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/www.isnare.com\\/oembed\\/\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Infogram\",\n
+        \       \"provider_url\": \"https:\\/\\/infogr.am\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"https:\\/\\/infogr.am\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/infogr.am\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"ChartBlocks\",\n
+        \       \"provider_url\": \"http:\\/\\/www.chartblocks.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/public.chartblocks.com\\/c\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/embed.chartblocks.com\\/1.0\\/oembed\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"ReleaseWire\",\n
+        \       \"provider_url\": \"http:\\/\\/www.releasewire.com\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/rwire.com\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/publisher.releasewire.com\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"They Said So\",\n        \"provider_url\": \"https:\\/\\/theysaidso.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"https:\\/\\/theysaidso.com\\/image\\/*\"\n                ],\n
+        \               \"url\": \"https:\\/\\/theysaidso.com\\/extensions\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"LearningApps.org\",\n        \"provider_url\":
+        \"http:\\/\\/learningapps.org\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/learningapps.org\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/learningapps.org\\/oembed.php\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"ShortNote\",\n        \"provider_url\": \"https:\\/\\/www.shortnote.jp\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"https:\\/\\/www.shortnote.jp\\/view\\/notes\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/www.shortnote.jp\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"Embed Articles\",\n        \"provider_url\":
+        \"http:\\/\\/embedarticles.com\\/\",\n        \"endpoints\": [\n            {\n
+        \               \"schemes\": [\n                    \"http:\\/\\/embedarticles.com\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/embedarticles.com\\/oembed\\/\"\n
+        \           }\n        ]\n    },\n    {\n        \"provider_name\": \"Topy\",\n
+        \       \"provider_url\": \"http:\\/\\/www.topy.se\\/\",\n        \"endpoints\":
+        [\n            {\n                \"schemes\": [\n                    \"http:\\/\\/www.topy.se\\/image\\/*\"\n
+        \               ],\n                \"url\": \"http:\\/\\/www.topy.se\\/oembed\\/\",\n
+        \               \"discovery\": true\n            }\n        ]\n    },\n    {\n
+        \       \"provider_name\": \"ReverbNation\",\n        \"provider_url\": \"https:\\/\\/www.reverbnation.com\\/\",\n
+        \       \"endpoints\": [\n            {\n                \"schemes\": [\n
+        \                   \"https:\\/\\/www.reverbnation.com\\/*\",\n                    \"https:\\/\\/www.reverbnation.com\\/*\\/songs\\/*\"\n
+        \               ],\n                \"url\": \"https:\\/\\/www.reverbnation.com\\/oembed\",\n
+        \               \"discovery\": true\n            }\n        ]\n    }\n]"}
+    headers:
+      connection: [close]
+      content-type: [text/plain; charset=utf-8]
+      date: ['Sat, 15 Aug 2015 12:46:35 GMT']
+      server: [Apache]
+      x-powered-by: [PleskLin]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.7.0 CPython/2.7.9 Linux/3.19.0-25-generic]
+    method: GET
+    uri: http://www.rdio.com/api/oembed/?url=http%3A%2F%2Fwww.rdio.com%2Fartist%2FMike_Oldfield%2Falbum%2FAmarok%2F&format=json
+  response:
+    body: {string: !!python/unicode '{"provider_url": "http://www.rdio.com", "version":
+        "1.0", "thumbnail_width": 200, "height": 400, "thumbnail_height": 200, "title":
+        "Amarok", "html": "<iframe width=\"400\" height=\"400\" src=\"https://rd.io/i/Qj5BbBc//?source=oembed\"
+        frameborder=\"0\"></iframe>", "width": 400, "thumbnail_url": "http://img00.cdn2-rdio.com/album/4/5/3/0000000000033354/square-400.jpg",
+        "provider_name": "Rdio", "type": "rich"}'}
+    headers:
+      connection: [keep-alive]
+      content-language: [en]
+      content-length: ['410']
+      content-type: [application/json]
+      date: ['Sat, 15 Aug 2015 12:46:36 GMT']
+      p3p: ['CP="This is not a P3P policy. See http://www.rdio.com/legal/privacy-policy
+          for more info."']
+      server: [nginx/1.2.4]
+      set-cookie: [r=eyJfZSI6IDB9.TntV3ezgjIEgu4PtxiO8mTYQsJM; Domain=.rdio.com; Path=/]
+      vary: ['Accept-Language, Cookie']
+      x-srv: [srv-208-16]
+      x-version: ['720']
+    status: {code: 200, message: OK}
+version: 1
