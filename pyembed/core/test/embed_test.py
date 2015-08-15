@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, equal_to
 from mock import patch, Mock
 import pytest
 
@@ -42,7 +41,7 @@ def test_should_embed():
         renderer.render.return_value = '<h1>hi</h1>'
 
         result = PyEmbed(discoverer, renderer).embed('http://example.com/')
-        assert_that(result, equal_to('<h1>hi</h1>'))
+        assert result == '<h1>hi</h1>'
 
         discoverer.get_oembed_urls.assert_called_with('http://example.com/')
         mock_get.assert_called_with(
@@ -62,7 +61,7 @@ def test_should_embed_xml():
         renderer.render.return_value = '<h1>hi</h1>'
 
         result = PyEmbed(discoverer, renderer).embed('http://example.com/')
-        assert_that(result, equal_to('<h1>hi</h1>'))
+        assert result == '<h1>hi</h1>'
 
         discoverer.get_oembed_urls.assert_called_with('http://example.com/')
         mock_get.assert_called_with(
@@ -83,7 +82,7 @@ def test_should_embed_with_max_width_and_height():
 
         result = PyEmbed(discoverer, renderer).embed(
             'http://example.com/', 100, 200)
-        assert_that(result, equal_to('<h1>hi</h1>'))
+        assert result == '<h1>hi</h1>'
 
         discoverer.get_oembed_urls.assert_called_with('http://example.com/')
         mock_get.assert_called_with(

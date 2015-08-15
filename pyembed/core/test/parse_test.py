@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from hamcrest import assert_that, contains_string, equal_to, none
 import pytest
 
 from pyembed.core import parse
@@ -33,95 +32,87 @@ pytestmark = pytest.mark.parametrize(('oembed_format', 'function'), [
 
 
 def test_should_parse_type(oembed_format, function):
-    assert_that(get_response(oembed_format, function).type, equal_to('link'))
+    assert get_response(oembed_format, function).type == 'link'
 
 
 def test_should_parse_version(oembed_format, function):
-    assert_that(get_response(oembed_format, function).version, equal_to('1.0'))
+    assert get_response(oembed_format, function).version == '1.0'
 
 
 def test_should_parse_title(oembed_format, function):
-    assert_that(get_response(oembed_format, function).title, equal_to('Lots of Bees'))
+    assert get_response(oembed_format, function).title == 'Lots of Bees'
 
 
 def test_should_parse_author_name(oembed_format, function):
-    assert_that(get_response(
-        oembed_format, function).author_name, equal_to('Ian Bees'))
+    assert get_response(oembed_format, function).author_name == 'Ian Bees'
 
 
 def test_should_parse_author_url(oembed_format, function):
-    assert_that(get_response(oembed_format, function).author_url, equal_to(
-        'http://www.example.com/ianbees/'))
+    assert get_response(oembed_format, function).author_url == 'http://www.example.com/ianbees/'
 
 
 def test_should_parse_provider_name(oembed_format, function):
-    assert_that(get_response(
-        oembed_format, function).provider_name, equal_to('Example'))
+    assert get_response(oembed_format, function).provider_name == 'Example'
 
 
 def test_should_parse_provider_url(oembed_format, function):
-    assert_that(get_response(oembed_format, function).provider_url, equal_to(
-        'http://www.example.com/'))
+    assert get_response(oembed_format, function).provider_url == 'http://www.example.com/'
 
 
 def test_should_parse_cache_age(oembed_format, function):
-    assert_that(get_response(oembed_format, function).cache_age, equal_to(3600))
+    assert get_response(oembed_format, function).cache_age == 3600
 
 
 def test_should_parse_thumbnail_url(oembed_format, function):
-    assert_that(get_response(oembed_format, function).thumbnail_url, equal_to(
-        'http://www.example.com/bees/thumb.jpg'))
+    assert get_response(oembed_format, function).thumbnail_url == 'http://www.example.com/bees/thumb.jpg'
 
 
 def test_should_parse_thumbnail_width(oembed_format, function):
-    assert_that(get_response(oembed_format, function).thumbnail_width, equal_to(360))
+    assert get_response(oembed_format, function).thumbnail_width == 360
 
 
 def test_should_parse_thumbnail_height(oembed_format, function):
-    assert_that(get_response(oembed_format, function).thumbnail_height, equal_to(240))
+    assert get_response(oembed_format, function).thumbnail_height == 240
 
 
 def test_should_parse_url_from_photo(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'photo').url, equal_to(
-        'http://www.example.com/bees.jpg'))
+    assert get_response(oembed_format, function, 'photo').url == 'http://www.example.com/bees.jpg'
 
 
 def test_should_parse_width_from_photo(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'photo').width, equal_to(600))
+    assert get_response(oembed_format, function, 'photo').width == 600
 
 
 def test_should_parse_height_from_photo(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'photo').height, equal_to(400))
+    assert get_response(oembed_format, function, 'photo').height == 400
 
 
 def test_should_parse_html_from_video(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'video').html,
-                contains_string('http://www.example.com/bees.mpg'))
+    assert 'http://www.example.com/bees.mpg' in get_response(oembed_format, function, 'video').html
 
 
 def test_should_parse_width_from_video(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'video').width, equal_to(600))
+    assert get_response(oembed_format, function, 'video').width == 600
 
 
 def test_should_parse_height_from_video(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'video').height, equal_to(400))
+    assert get_response(oembed_format, function, 'video').height == 400
 
 
 def test_should_parse_html_from_rich(oembed_format, function):
-    assert_that(get_response(
-        oembed_format, function, 'rich').html, contains_string('Bees!'))
+    assert 'Bees!' in get_response(oembed_format, function, 'rich').html
 
 
 def test_should_parse_width_from_rich(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'rich').width, equal_to(600))
+    assert get_response(oembed_format, function, 'rich').width == 600
 
 
 def test_should_parse_height_from_rich(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'rich').height, equal_to(400))
+    assert get_response(oembed_format, function, 'rich').height == 400
 
 
 def test_should_get_none_for_missing_element(oembed_format, function):
-    assert_that(get_response(oembed_format, function, 'minimal').title, none())
+    assert not get_response(oembed_format, function, 'minimal').title
 
 
 def test_should_raise_error_for_unknown_type(oembed_format, function):
@@ -133,7 +124,7 @@ def test_should_select_parse_function(oembed_format, function):
     filename = 'pyembed/core/test/fixtures/parse/link.%s' % oembed_format
     content_type = {'json': 'application/json', 'xml': 'text/xml'}.get(oembed_format)
 
-    assert_that(parse.parse_oembed(open(filename).read(), content_type).title, equal_to('Lots of Bees'))
+    assert parse.parse_oembed(open(filename).read(), content_type).title == 'Lots of Bees'
 
 
 def test_should_raise_on_invalid_format(oembed_format, function):

@@ -70,7 +70,6 @@ setup(
     ],
     tests_require=[
         'mock',
-        'PyHamcrest',
         'pytest'
     ],
 
