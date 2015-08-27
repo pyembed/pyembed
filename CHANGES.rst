@@ -3,6 +3,13 @@
 Changes
 =======
 
+v1.2.3, 2015-08-27
+------------------
+
+Bug fixes:
+
+- #53: Don't hit provider list until necessary.
+
 v1.2.2, 2015-08-15
 ------------------
 

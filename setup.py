@@ -43,7 +43,7 @@ class PyTest(TestCommand):
 
 setup(
     name='pyembed',
-    version='1.2.2',
+    version='1.2.3',
     author='Matt Thomson',
     author_email='mattjohnthomson@gmail.com',
     url='http://pyembed.github.io',
