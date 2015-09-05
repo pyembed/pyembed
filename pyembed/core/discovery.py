@@ -255,8 +255,8 @@ class DefaultDiscoverer(ChainingDiscoverer):
 
     def __init__(self):
         super(DefaultDiscoverer, self).__init__([
-            AutoDiscoverer(),
-            UrlDiscoverer('http://oembed.com/providers.json'),
             FileDiscoverer(
-                resource_filename(__name__, 'config/providers.json'))
+                resource_filename(__name__, 'config/providers.json')),
+            UrlDiscoverer('http://oembed.com/providers.json'),
+            AutoDiscoverer()
         ])
