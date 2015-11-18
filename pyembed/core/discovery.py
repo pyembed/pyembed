@@ -219,12 +219,16 @@ class UrlDiscoverer(StaticDiscoverer):
     def get_oembed_urls(self, url, oembed_format=None):
         if not self.endpoints:
             response = requests.get(self.url)
+            try:
+                providers = response.json()
+            except ValueError:
+                providers = None
 
-            if not response.ok:
+            if not response.ok or not providers:
                 raise PyEmbedDiscoveryError('Failed to get %s (status code %s)' % (
                     self.url, response.status_code))
 
-            self.endpoints = StaticDiscoverer._build_endpoints_from_providers(response.json())
+            self.endpoints = StaticDiscoverer._build_endpoints_from_providers(providers)
 
         return super(UrlDiscoverer, self).get_oembed_urls(url, oembed_format)
 
