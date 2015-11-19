@@ -3,6 +3,13 @@
 Changes
 =======
 
+v1.3.1, 2015-11-19
+------------------
+
+Bug fixes:
+
+- #61: Handle downtime of provider list.
+
 v1.3.0, 2015-09-05
 ------------------
 
