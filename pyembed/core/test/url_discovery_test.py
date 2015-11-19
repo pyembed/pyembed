@@ -58,3 +58,16 @@ def test_should_raise_if_error_reading_url():
 
         discoverer = discovery.UrlDiscoverer('http://example.com/providers.json')
         discoverer.get_oembed_urls('http://example.com/simple/123')
+
+
+def test_should_raise_if_error_processing_response():
+    response = Mock()
+    response.json = Mock()
+    response.json.side_effect = ValueError
+
+    with patch('requests.get') as mock_get, \
+        pytest.raises(discovery.PyEmbedDiscoveryError):
+        mock_get.return_value = response
+
+        discoverer = discovery.UrlDiscoverer('http://example.com/providers.json')
+        discoverer.get_oembed_urls('http://example.com/simple/123')

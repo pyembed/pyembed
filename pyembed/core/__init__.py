@@ -29,18 +29,21 @@ from pyembed.core.render import DefaultRenderer
 
 
 class PyEmbed(object):
-    def __init__(self, discoverer=DefaultDiscoverer(), renderer=DefaultRenderer()):
+    def __init__(self, discoverer=None, renderer=None):
         """OEmbed consumer with automatic discovery.
 
         :param renderer: (optional) renderer to render the response.
         """
+        if not discoverer:
+            discoverer = DefaultDiscoverer()
+
+        if not renderer:
+            renderer = DefaultRenderer()
+
         self.discoverer = discoverer
         self.renderer = renderer
 
-    def embed(self,
-              url,
-              max_width=None,
-              max_height=None):
+    def embed(self, url, max_width=None, max_height=None):
         """Returns an HTML representation of a resource, given a URL.  This
            can be directly embedded in a web page.
 
