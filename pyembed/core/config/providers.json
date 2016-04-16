@@ -17,6 +17,9 @@
         "provider_url": "http:\/\/www.youtube.com\/",
         "endpoints": [
             {
+                "schemes": [
+                    "http:\/\/*.youtube.com\/watch"
+                ],
                 "url": "http:\/\/www.youtube.com\/oembed",
                 "discovery": true
             }
