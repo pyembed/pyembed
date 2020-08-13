@@ -1,6 +1,13 @@
 PyEmbed
 =======
 
+Project status: unmaintained
+----------------------------
+
+This project is no longer updated.  The code is here for historic purposes only.
+
+----
+
 .. image:: https://secure.travis-ci.org/pyembed/pyembed.png?branch=master
   :target: http://travis-ci.org/pyembed/pyembed
 .. image:: https://coveralls.io/repos/pyembed/pyembed/badge.png
